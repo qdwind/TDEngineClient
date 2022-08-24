@@ -118,6 +118,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="db.ico" />
+    <Content Include="Images\schema.ico" />
+    <Content Include="Images\stable.ico" />
     <Content Include="Images\table.ico" />
     <Content Include="Images\db.ico" />
     <Content Include="Images\server.ico" />

@@ -157,6 +157,7 @@ namespace TDEngineClient
             this.treeView1.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.treeView1.ImageIndex = 0;
             this.treeView1.ImageList = this.imageList1;
+            this.treeView1.ItemHeight = 24;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
             this.treeView1.SelectedImageIndex = 0;
@@ -245,7 +246,9 @@ namespace TDEngineClient
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "server.ico");
             this.imageList1.Images.SetKeyName(1, "db.ico");
-            this.imageList1.Images.SetKeyName(2, "table.ico");
+            this.imageList1.Images.SetKeyName(2, "stable.ico");
+            this.imageList1.Images.SetKeyName(3, "table.ico");
+            this.imageList1.Images.SetKeyName(4, "systable.ico");
             // 
             // tabControl1
             // 

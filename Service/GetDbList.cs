@@ -25,6 +25,15 @@ namespace TDEngineClient.Services
             var response = THelper.QueryObjectsAsync(account.TUrl, _base64Str, sql);
             if (response!=null  && response.data.Count > 0) //获取成功&& response.status == "succ"
             {
+                if (response.column_meta.Count > 1)
+                {
+                    account.Version = 20;
+                }
+                else
+                {
+                    account.Version = 30;
+                }
+
                 foreach (var db in response.data)
                 {
                     var tempArr = db.ToArray();

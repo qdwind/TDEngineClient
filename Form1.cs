@@ -72,7 +72,7 @@ namespace TDEngineClient
             InitailForm();
         }
 
-        private async Task AddDbs(TreeNode node, List<DataBaseDto> dbs, TAccount account)
+        private async Task AddDbsV20(TreeNode node, List<DataBaseDto> dbs, TAccount account)
         {
             foreach (var db in dbs)
             {
@@ -82,22 +82,108 @@ namespace TDEngineClient
                 item.ImageIndex = 1;
                 item.SelectedImageIndex = 1;
 
-                var result = await MyService.GetStables(account, db.name);
-                if (result != null)
+                var tabs = await MyService.GetTables(account, db.name);//所有表
+                var mystabs = await MyService.GetStables(account,db.name);//添加超级表
+                foreach (var ms in mystabs)
                 {
-                    foreach (var st in result)
+                    var stabItem = new TreeNode();
+                    var mytabs = tabs.Where(t => t.db_name == db.name && t.stable_name == ms.stable_name).ToList();//超级表下的子表
+                    foreach (var mt in mytabs)
                     {
-                        var subitem = new TreeNode();
-                        subitem.Tag = st;
-                        subitem.Text = $"{st.name}({st.tables.ToString()})";
-                        subitem.ImageIndex = 2;
-                        subitem.SelectedImageIndex = 2;
-                        item.Nodes.Add(subitem);
+                        var tabItem = new TreeNode();
+                        tabItem.Tag = mt;
+                        tabItem.Text = $"{mt.table_name}";
+                        tabItem.ImageIndex = 3;
+                        tabItem.SelectedImageIndex = 3;
+                        stabItem.Nodes.Add(tabItem);
                     }
+
+
+                    stabItem.Tag = ms;
+                    stabItem.Text = $"{ms.stable_name}({mytabs.Count.ToString()})";
+                    stabItem.ImageIndex = 2;
+                    stabItem.SelectedImageIndex = 2;
+                    item.Nodes.Add(stabItem);
                 }
+
+                var nortabs = tabs.Where(t => t.db_name == db.name && t.stable_name=="").ToList();//普通表
+                foreach (var tab in nortabs)
+                {
+                    var tabItem = new TreeNode();
+                    tabItem.Tag = tab;
+                    tabItem.Text = $"{tab.table_name}";
+                    tabItem.ImageIndex = 3;
+                    tabItem.SelectedImageIndex = 3;
+                    item.Nodes.Add(tabItem);
+                }
+
+
                 node.Nodes.Add(item);
             }
         }
+
+        private async Task AddDbsV30(TreeNode node, List<DataBaseDto> dbs, TAccount account)
+        {
+            var tabs = await MyService.GetTables(account);
+            var stabs = await MyService.GetStables(account);
+
+            foreach (var db in dbs)
+            {
+                var item = new TreeNode();
+                item.Tag = db;
+                item.Text = db.name;
+                item.ImageIndex = 1;
+                item.SelectedImageIndex = 1;
+
+                var mystabs = stabs.Where(t => t.db_name == db.name).ToList();//添加超级表
+                foreach (var ms in mystabs)
+                {
+                    var stabItem = new TreeNode();
+                    var mytabs = tabs.Where(t => t.db_name == db.name && t.stable_name == ms.stable_name).ToList();//超级表下的子表
+                    foreach (var mt in mytabs)
+                    {
+                        var tabItem = new TreeNode();
+                        tabItem.Tag = mt;
+                        tabItem.Text = $"{mt.table_name}";
+                        tabItem.ImageIndex = 3;
+                        tabItem.SelectedImageIndex = 3;
+                        stabItem.Nodes.Add(tabItem);
+                    }
+
+
+                    stabItem.Tag = ms;
+                    stabItem.Text = $"{ms.stable_name}({mytabs.Count.ToString()})";
+                    stabItem.ImageIndex = 2;
+                    stabItem.SelectedImageIndex = 2;
+                    item.Nodes.Add(stabItem);
+                }
+
+                var systabs = tabs.Where(t => t.db_name == db.name && t.type == TableType.SYSTEM_TABLE.ToString()).ToList();//系统表
+                foreach (var tab in systabs)
+                {
+                    var tabItem = new TreeNode();
+                    tabItem.Tag = tab;
+                    tabItem.Text = $"{tab.table_name}";
+                    tabItem.ImageIndex = 4;
+                    tabItem.SelectedImageIndex = 4;
+                    item.Nodes.Add(tabItem);
+                }
+                var nortabs = tabs.Where(t => t.db_name == db.name && t.type == TableType.NORMAL_TABLE.ToString()).ToList();//普通表
+                foreach (var tab in nortabs)
+                {
+                    var tabItem = new TreeNode();
+                    tabItem.Tag = tab;
+                    tabItem.Text = $"{tab.table_name}";
+                    tabItem.ImageIndex = 3;
+                    tabItem.SelectedImageIndex = 3;
+                    item.Nodes.Add(tabItem);
+                }
+
+
+                node.Nodes.Add(item);
+            }
+        }
+
 
         private void AddRecords(DataGridView dgv, RecordDto record)
         {
@@ -241,7 +327,7 @@ namespace TDEngineClient
             }
             else if (db != null && stable != null)
             {
-                myText.Text = $"select * from {db.name}.{stable.name} limit 20";
+                myText.Text = $"select * from {db.name}.{stable.stable_name} limit 20";
             }
             myText.Tag = account;
             myText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
@@ -307,7 +393,7 @@ namespace TDEngineClient
             else if (tpType == TabPageType.Describe)
             {
                 caption = "Describe";
-                sql = $"describe {db.name}.{stable.name}";
+                sql = $"describe {db.name}.{stable.stable_name}";
             }
             else if (tpType == TabPageType.Variables)
             {
@@ -419,11 +505,33 @@ namespace TDEngineClient
                     if (svrNode != null && svrNode.Tag is TAccount)
                         account = (svrNode.Tag as TAccount);
                 }
-                var tableName = $"{dbName}.{stable.name}";
+                var tableName = $"{dbName}.{stable.stable_name}";
 
                 CreateTable(account, tableName);
+            }
+            else if (node.Tag is TableDto)
+            {
+                var table = (node.Tag as TableDto);
+                string dbName = "";
+                var account = new TAccount();
 
+                if (node.Parent != null && node.Parent.Tag is DataBaseDto)
+                {
+                    dbName = (node.Parent.Tag as DataBaseDto).name;
+                    var svrNode = node.Parent.Parent;
+                    if (svrNode != null && svrNode.Tag is TAccount)
+                        account = (svrNode.Tag as TAccount);
+                }
+                else if (node.Parent?.Parent != null && node.Parent.Parent.Tag is DataBaseDto)
+                {
+                    dbName = (node.Parent.Parent.Tag as DataBaseDto).name;
+                    var svrNode = node.Parent.Parent.Parent;
+                    if (svrNode != null && svrNode.Tag is TAccount)
+                        account = (svrNode.Tag as TAccount);
+                }
+                var tableName = $"{dbName}.{table.table_name}";
 
+                CreateTable(account, tableName);
             }
         }
 
@@ -513,7 +621,15 @@ namespace TDEngineClient
             if (result != null)
             {
                 dbNode.Nodes.Clear();
-                await AddDbs(dbNode, result, account);
+                if (account.Version == 30)
+                {
+                    await AddDbsV30(dbNode, result, account);
+                }
+                else
+                {
+                    await AddDbsV20(dbNode, result, account);
+                }
+                
                 dbNode.Expand();
             }
             else

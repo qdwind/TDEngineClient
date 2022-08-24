@@ -14,5 +14,6 @@ namespace TDEngineClient.Entity
         public string TDatabase { get; set; } = "";
         public string AliasName { get; set; } = "";
         public string Info { get; set; } = "";
+        public int Version { get; set; }
     }
 }

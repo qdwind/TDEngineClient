@@ -23,7 +23,7 @@ namespace TDEngineClient.Services
             public string rollup { get; set; }
         }
 
-        public static async Task<List<StableDto>> GetStables(TAccount account,string dbName="")
+        public static List<StableDto> GetStables(TAccount account,string dbName="")
         {
             var dto = new List<StableDto>();
             string _base64Str = THelper.GetBase64Str(account.TUsername, account.TPassword);
@@ -38,7 +38,7 @@ namespace TDEngineClient.Services
                 sql = $"show {dbName}.stables;";
             }
 
-            var response = THelper.QueryObjectsAsync(account.TUrl, _base64Str, sql);
+            var response = THelper.QueryObjects(account.TUrl, _base64Str, sql);
             if (response.code == 0 && response.data.Count > 0) //获取成功
             {
                 foreach (var db in response.data)

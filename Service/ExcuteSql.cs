@@ -10,7 +10,7 @@ namespace TDEngineClient.Services
 {
     public static partial class MyService
     {
-        public static async Task<RecordDto> ExcuteSql(TAccount account, string sql, long page = 1, int pageSize = 10)
+        public static RecordDto ExcuteSql(TAccount account, string sql, long page = 1, int pageSize = 10)
         {
 
             //var offset = (page - 1) * pageSize + 1;//起始记录位置(下标从1开始)
@@ -22,8 +22,8 @@ namespace TDEngineClient.Services
             dto.CurrentPage = page;
             string _base64Str = THelper.GetBase64Str(account.TUsername, account.TPassword);
 
-            var response =  THelper.QueryAsync(account.TUrl, _base64Str, sql);
-            if (response.code==0 && response.data.Count > 0) //获取成功
+            var response =  THelper.Query(account.TUrl, _base64Str, sql);
+            if (response.code==0) //获取成功
             {
                 foreach (var meta in response.column_meta)
                 {
@@ -31,17 +31,19 @@ namespace TDEngineClient.Services
                     dto.FieldList.Add(meta[0].ToString());
                 }
 
-
-                foreach (var record in response.data)
+                if (response.data.Count > 0)
                 {
-                    var itemList = new List<string>();
-                    foreach (var item in record)
+                    foreach (var record in response.data)
                     {
+                        var itemList = new List<string>();
+                        foreach (var item in record)
+                        {
 
-                        itemList.Add(Convert.ToString(item));
+                            itemList.Add(Convert.ToString(item));
+                        }
+
+                        dto.RecordList.Add(itemList);
                     }
-
-                    dto.RecordList.Add(itemList);
                 }
 
                 return dto;

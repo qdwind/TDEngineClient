@@ -30,7 +30,7 @@ namespace TDEngineClient.Services
             public string type { get; set; }
         }
 
-        public static async Task<List<TableDto>> GetTables(TAccount account, string dbName="")
+        public static List<TableDto> GetTables(TAccount account, string dbName="")
         {
             var dto = new List<TableDto>();
             string _base64Str = THelper.GetBase64Str(account.TUsername, account.TPassword);
@@ -45,7 +45,7 @@ namespace TDEngineClient.Services
                 sql = $"show {dbName}.tables;";
             }
 
-            var response = THelper.QueryObjectsAsync(account.TUrl, _base64Str, sql);
+            var response = THelper.QueryObjects(account.TUrl, _base64Str, sql);
             if (response.code == 0 && response.data.Count > 0) //获取成功
             {
                 foreach (var db in response.data)
@@ -82,7 +82,7 @@ namespace TDEngineClient.Services
                             vgroup_id = tempArr[6] == null ? 0 : (Int32)tempArr[6],
                             ttl = tempArr[5] == null ? 0 : (Int32)tempArr[5],
                             //table_comment = tempArr[8]?.ToString(),
-                            //type = tempArr[9]?.ToString()
+                            type = tempArr[3] == null? TableType.NORMAL_TABLE.ToString(): TableType.CHILD_TABLE.ToString()
                         };
                         dto.Add(dbItem);
                     }

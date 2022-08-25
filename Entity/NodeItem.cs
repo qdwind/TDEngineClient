@@ -9,11 +9,9 @@ namespace TDEngineClient.Entity
 {
     public class NodeItem
     {
-
-        public NodeItemType Type { get; set; }
         public TAccount Server { get; set; }
         public DataBaseDto Db { get; set; }
         public StableDto STable { get; set; }
-
+        public TableDto Table { get; set; }
     }
 }

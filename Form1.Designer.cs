@@ -249,6 +249,8 @@ namespace TDEngineClient
             this.imageList1.Images.SetKeyName(2, "stable.ico");
             this.imageList1.Images.SetKeyName(3, "table.ico");
             this.imageList1.Images.SetKeyName(4, "systable.ico");
+            this.imageList1.Images.SetKeyName(5, "serveropen.ico");
+            this.imageList1.Images.SetKeyName(6, "dbopen.ico");
             // 
             // tabControl1
             // 

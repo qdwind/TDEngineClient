@@ -65,7 +65,7 @@ namespace TDEngineClient.Helper
             }
         }
 
-        public static TSuccessResponseBase<List<object>> QueryObjectsAsync(string url, string base64Str, string sql)
+        public static TSuccessResponseBase<List<object>> QueryObjects(string url, string base64Str, string sql)
         {
             try
             {
@@ -97,101 +97,7 @@ namespace TDEngineClient.Helper
 
 
 
-
-        ///// <summary>
-        ///// 提交sql语句
-        ///// </summary>
-        ///// <param name="url">时序数据库地址</param>
-        ///// <param name="base64Str">用户密码经Base64加密后的值</param>
-        ///// <param name="sql">sql语句</param>
-        ///// <returns></returns>
-        //public static async Task<bool> PostSqlAsync(string url, string base64Str, string sql)
-        //{
-        //    try
-        //    {
-        //        var response = await url
-        //           .WithHeader("Authorization", $"Basic {base64Str}")
-        //           .PostStringAsync(sql);
-
-        //        return response.ResponseMessage.IsSuccessStatusCode;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        var e = ex.Message;
-        //        return false;
-        //    }
-        //}
-
-
-
-        /// <summary>
-        /// 判断表是否存在
-        /// </summary>
-        /// <param name="url"></param>
-        /// <param name="base64Str"></param>
-        /// <param name="sql"></param>
-        /// <returns></returns>
-        //public static async Task<bool> IsTableExists(string url, string base64Str, string sql)
-        //{
-        //    var response = await url
-        //           .WithHeader("Authorization", $"Basic {base64Str}")
-        //           .PostStringAsync(sql)
-        //           .ReceiveJson<TSuccessResponseBase<List<object>>>();
-
-
-        //    return response.data.Count > 0;
-        //}
-
-
-
-        /// <summary>
-        /// 获取对象
-        /// </summary>
-        /// <param name="url">时序数据库地址</param>
-        /// <param name="base64Str">用户密码经Base64加密后的值</param>
-        /// <param name="sql">sql语句</param>
-        /// <returns></returns>
-        //public static async Task<TSuccessResponseBase<List<object>>> QueryObjectsAsync(string url, string base64Str, string sql)
-        //{
-        //    //如果表不存在会报错,在执行本操作之前需要判断表是否存在
-        //    var response = new TSuccessResponseBase<List<object>>();
-        //    try
-        //    {
-        //        response = await url
-        //                .WithHeader("Authorization", $"Basic {base64Str}")
-        //                .PostStringAsync(sql)
-        //                .ReceiveJson<TSuccessResponseBase<List<object>>>();
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.status = ex.Message;
-        //    }
-        //    return response;
-        //}
-
-
-        //public static async Task<TResponse> QueryAsync(string url, string base64Str, string sql)
-        //{
-        //    //如果表不存在会报错,在执行本操作之前需要判断表是否存在
-        //    var response = new TResponse();
-        //    try
-        //    {
-        //        response = await url
-        //                .WithHeader("Authorization", $"Basic {base64Str}")
-        //                .PostStringAsync(sql)
-        //                .ReceiveJson<TResponse>();
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.status = ex.Message;
-        //    }
-        //    return response;
-        //}
-
-
-        public static TResponse QueryAsync(string url, string base64Str, string sql)
+        public static TResponse Query(string url, string base64Str, string sql)
         {
             var result = new TResponse();
             try

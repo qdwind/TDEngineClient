@@ -16,22 +16,22 @@ namespace TDEngineClient.Services
 
         }
 
-        public static async Task<List<DataBaseDto>> GetDbList(TAccount account)
+        public static List<DataBaseDto> GetDbList(TAccount account)
         {
             var dto = new List<DataBaseDto>();
             string _base64Str = THelper.GetBase64Str(account.TUsername, account.TPassword);
             string sql = $"show databases";
             //var response = await THelper.QueryObjectsAsync(account.TUrl, _base64Str, sql);
-            var response = THelper.QueryObjectsAsync(account.TUrl, _base64Str, sql);
+            var response = THelper.QueryObjects(account.TUrl, _base64Str, sql);
             if (response!=null  && response.data.Count > 0) //获取成功&& response.status == "succ"
             {
                 if (response.column_meta.Count > 1)
                 {
-                    account.Version = 20;
+                    account.Version = 20; //2.x版本
                 }
                 else
                 {
-                    account.Version = 30;
+                    account.Version = 30; //3.x版本
                 }
 
                 foreach (var db in response.data)

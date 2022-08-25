@@ -54,7 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\NodeItem.cs" />
-    <Compile Include="Entity\NodeItemType.cs" />
     <Compile Include="Entity\SqlValueDataType.cs" />
     <Compile Include="Entity\SqlValueItem.cs" />
     <Compile Include="Entity\SqlValueModeType.cs" />

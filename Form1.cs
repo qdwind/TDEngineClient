@@ -17,7 +17,7 @@ namespace TDEngineClient
     public partial class Form1 : Form
     {
 
-        private int PageSize = 30;
+        private int PageSize = 100;
 
         //private int CurrentPage = 1;
 
@@ -36,6 +36,7 @@ namespace TDEngineClient
             this.tabControl1.DrawItem += new DrawItemEventHandler(FormHelper.tabControl_DrawItem);
             this.tabControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(FormHelper.tabControl_MouseDown);
             this.Text = $"{Application.ProductName} {Application.ProductVersion}";
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void InitailForm()
@@ -59,7 +60,7 @@ namespace TDEngineClient
                 var account= ServerList.Where(t => t.TDatabase == query.AccountDB).FirstOrDefault();
                 if (account != null)
                 {
-                    CreateQueryWindow(account, null, null, query);
+                    CreateQueryWindow(account, null, null,null, query);
                 }
             }
 
@@ -72,7 +73,7 @@ namespace TDEngineClient
             InitailForm();
         }
 
-        private async Task AddDbsV20(TreeNode node, List<DataBaseDto> dbs, TAccount account)
+        private void AddDbsV20(TreeNode node, List<DataBaseDto> dbs, TAccount account)
         {
             foreach (var db in dbs)
             {
@@ -82,8 +83,8 @@ namespace TDEngineClient
                 item.ImageIndex = 1;
                 item.SelectedImageIndex = 1;
 
-                var tabs = await MyService.GetTables(account, db.name);//所有表
-                var mystabs = await MyService.GetStables(account,db.name);//添加超级表
+                var tabs = MyService.GetTables(account, db.name);//所有表
+                var mystabs = MyService.GetStables(account,db.name);//添加超级表
                 foreach (var ms in mystabs)
                 {
                     var stabItem = new TreeNode();
@@ -122,10 +123,10 @@ namespace TDEngineClient
             }
         }
 
-        private async Task AddDbsV30(TreeNode node, List<DataBaseDto> dbs, TAccount account)
+        private void AddDbsV30(TreeNode node, List<DataBaseDto> dbs, TAccount account)
         {
-            var tabs = await MyService.GetTables(account);
-            var stabs = await MyService.GetStables(account);
+            var tabs =  MyService.GetTables(account);
+            var stabs =  MyService.GetStables(account);
 
             foreach (var db in dbs)
             {
@@ -211,7 +212,7 @@ namespace TDEngineClient
 
         }
 
-        private async void CreateTable(TAccount account, string tableName)
+        private void CreateTable(TAccount account, string tableName)
         {
             if (tabControl1.TabPages.ContainsKey(tableName))
             {
@@ -228,9 +229,10 @@ namespace TDEngineClient
                 //dgv.Dock = DockStyle.None;
                 dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                 dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
                 //dgv.ReadOnly = true;
 
-                var result = await MyService.GetRecords(account, tableName, 1, PageSize);
+                var result = MyService.GetRecords(account, tableName, 1, PageSize);
                 if (result != null)
                 {
                     AddRecords(dgv, result);
@@ -242,7 +244,7 @@ namespace TDEngineClient
 
         }
 
-        private async void TurnPage(TabPage tp, TurnPageType type, long toPage = 0)
+        private void TurnPage(TabPage tp, TurnPageType type, long toPage = 0)
         {
             if (tp == null) return;
             if (tp.Tag is RecordDto)
@@ -275,7 +277,7 @@ namespace TDEngineClient
 
                 var currentPage = targetPage;
 
-                var result = await MyService.GetRecords(account, tableName, currentPage, PageSize);
+                var result = MyService.GetRecords(account, tableName, currentPage, PageSize);
                 if (result != null)
                 {
                     foreach (var ctl in tp.Controls)
@@ -305,7 +307,7 @@ namespace TDEngineClient
             ts3.Text = info;
         }
 
-        private void CreateQueryWindow(TAccount account, DataBaseDto db, StableDto stable,TQueryBox box=null)
+        private void CreateQueryWindow(TAccount account, DataBaseDto db, StableDto stable,TableDto table, TQueryBox box=null)
         {
             //if (db == null) return;
             var tab = new TabPage(box == null ? db.name + "->Query" : box.Caption);
@@ -325,10 +327,15 @@ namespace TDEngineClient
                 var lines = box.Text.Split(new string[] { "\\r\\n"}, StringSplitOptions.None);
                 myText.Lines = lines;
             }
+            else if (db != null && table != null)
+            {
+                myText.Text = $"select * from {db.name}.{table.table_name} limit 20";
+            }
             else if (db != null && stable != null)
             {
                 myText.Text = $"select * from {db.name}.{stable.stable_name} limit 20";
             }
+
             myText.Tag = account;
             myText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
             myText.ContextMenuStrip = menuText;
@@ -346,10 +353,10 @@ namespace TDEngineClient
             dgv.BringToFront();
         }
 
-        private async void ExcuteQuery(TAccount account, string sql, DataGridView dgv)
+        private void ExcuteQuery(TAccount account, string sql, DataGridView dgv)
         {
             dgv.Rows.Clear();
-            var result = await MyService.ExcuteSql(account, sql);
+            var result = MyService.ExcuteSql(account, sql);
             if (result != null)
             {
                 AddRecords(dgv, result);
@@ -359,7 +366,7 @@ namespace TDEngineClient
         }
 
 
-        private async void CreateQueryResult(TabPageType tpType)
+        private void CreateQueryResult(TabPageType tpType)
         {
             string sql = "";
             string caption = "";
@@ -413,7 +420,7 @@ namespace TDEngineClient
             //dgv.ReadOnly = true;
             tab.Controls.Add(dgv);
 
-            var result = await MyService.ExcuteSql(account, sql);
+            var result = MyService.ExcuteSql(account, sql);
             if (result != null)
             {
                 AddRecords(dgv, result);
@@ -480,7 +487,7 @@ namespace TDEngineClient
         }
 
 
-        private async void treeView1_DoubleClick(object sender, EventArgs e)
+        private void treeView1_DoubleClick(object sender, EventArgs e)
         {
             var item = GetCurrentNodeItem();
             //if(item.Type == NodeItemType.Server)
@@ -555,7 +562,7 @@ namespace TDEngineClient
         private void m3_Click(object sender, EventArgs e)
         {
             var item = GetCurrentNodeItem();
-            CreateQueryWindow(item.Server, item.Db, item.STable);
+            CreateQueryWindow(item.Server, item.Db, item.STable, item.Table);
         }
 
         private void m4_Click(object sender, EventArgs e)
@@ -567,24 +574,44 @@ namespace TDEngineClient
         {
             NodeItem item = new NodeItem();
             var node = treeView1.SelectedNode;
+            TreeNode svrNode=null, dbNode=null, sNode=null, tNode=null;
             if (node.Tag is TAccount)
             {
-                item.Server = (node.Tag as TAccount);
-                item.Type = NodeItemType.Server;
+                svrNode = node;
+            }
+            if (node.Tag is DataBaseDto)
+            {
+                svrNode = node.Parent;
+                dbNode = node;
             }
             else if (node.Tag is StableDto)
             {
-                item.STable = (node.Tag as StableDto);
-                item.Type = NodeItemType.Stable;
-
-                if (node.Parent != null && node.Parent.Tag is DataBaseDto)
+                svrNode = node.Parent?.Parent;
+                dbNode = node.Parent;
+                sNode = node;
+            }
+            else if (node.Tag is TableDto)
+            {
+                tNode = node;
+                item.Table = tNode?.Tag as TableDto;
+                if (item.Table.type == TableType.CHILD_TABLE.ToString())
                 {
-                    item.Db = (node.Parent.Tag as DataBaseDto);
-                    var svrNode = node.Parent.Parent;
-                    if (svrNode != null && svrNode.Tag is TAccount)
-                        item.Server = (svrNode.Tag as TAccount);
+                    svrNode = node.Parent?.Parent?.Parent;
+                    dbNode = node.Parent?.Parent;
+                    sNode = node.Parent;
+                }
+                else
+                {
+                    svrNode = node.Parent?.Parent;
+                    dbNode = node.Parent;
                 }
             }
+
+            item.Server = svrNode?.Tag as TAccount;
+            item.Db = dbNode?.Tag as DataBaseDto;
+            item.STable = sNode?.Tag as StableDto;
+            
+
             return item;
         }
 
@@ -601,7 +628,7 @@ namespace TDEngineClient
             }
         }
 
-        private async void m_opendb_Click(object sender, EventArgs e)
+        private void m_opendb_Click(object sender, EventArgs e)
         {
             var node = treeView1.SelectedNode;
             if (node.Tag is TAccount)
@@ -614,23 +641,25 @@ namespace TDEngineClient
         /// 连接数据库
         /// </summary>
         /// <param name="dbNode"></param>
-        private async void OpenDB(TreeNode dbNode)
+        private void OpenDB(TreeNode dbNode)
         {
             var account = (dbNode.Tag as TAccount);
-            var result = await MyService.GetDbList(account);
+            var result =  MyService.GetDbList(account);
             if (result != null)
             {
                 dbNode.Nodes.Clear();
                 if (account.Version == 30)
                 {
-                    await AddDbsV30(dbNode, result, account);
+                    AddDbsV30(dbNode, result, account);
                 }
                 else
                 {
-                    await AddDbsV20(dbNode, result, account);
+                    AddDbsV20(dbNode, result, account);
                 }
                 
                 dbNode.Expand();
+                dbNode.ImageIndex = 5;
+                dbNode.SelectedImageIndex = 5;
             }
             else
             {
@@ -645,6 +674,8 @@ namespace TDEngineClient
             if (node.Tag is TAccount)
             {
                 node.Nodes.Clear();
+                node.ImageIndex = 0;
+                node.SelectedImageIndex = 0;
             }
         }
 
@@ -675,7 +706,7 @@ namespace TDEngineClient
             RunSql();
         }
 
-        private async void ComputingMesuringPoints(TAccount account)
+        private void ComputingMesuringPoints(TAccount account)
         {
             string sql = "";
 
@@ -698,50 +729,55 @@ namespace TDEngineClient
             dgv.Columns.Add("Fields", "Fields");
             dgv.Columns.Add("Points", "Points");
 
-            sql = $"show databases";
-            var result1 = await MyService.ExcuteSql(account, sql);
-            if (result1 != null)
+            if (account.Version == 30)
             {
-                int totalTb = 0;
-                int totalFd = 0;
-                int totalPt = 0;
-
-                foreach (var rec in result1.RecordList)
-                {
-                    var row = new DataGridViewRow();
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value =rec[0]}); //库名
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = rec[2] }); //表个数
-                    totalTb += int.Parse(rec[2]);
-
-                    var fieldNum = "0";
-                    sql = $"show {rec[0]}.stables";
-                    var result2 = await MyService.ExcuteSql(account, sql);
-                    if (result2 != null)
-                    {
-                        fieldNum = result2.RecordList[0][2];
-                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = fieldNum}); //字段个数
-                        totalFd += int.Parse(fieldNum);
-                    }
-                    if (int.TryParse(rec[2], out int x) && int.TryParse(fieldNum, out int y))
-                    {
-                        var pt = x * (y - 1);
-                        row.Cells.Add(new DataGridViewTextBoxCell() { Value =pt}); //测点个数(不含ts)
-                        totalPt += pt;
-                    }
-
-                    dgv.Rows.Add(row);
-                }
-                //统计行
-                var row1 = new DataGridViewRow();
-                row1.Cells.Add(new DataGridViewTextBoxCell() { Value = "[Total]" }); 
-                row1.Cells.Add(new DataGridViewTextBoxCell() { Value = totalTb }); 
-                row1.Cells.Add(new DataGridViewTextBoxCell() { Value = totalFd });
-                row1.Cells.Add(new DataGridViewTextBoxCell() { Value = totalPt });
-                dgv.Rows.Add(row1);
+                //TODO
             }
+            else
+            {
+                sql = $"show databases";
+                var result1 = MyService.ExcuteSql(account, sql);
+                if (result1 != null)
+                {
+                    int totalTb = 0;
+                    int totalFd = 0;
+                    int totalPt = 0;
 
-            ts3.Text = result1.RecordList.Count.ToString() + " Records";
+                    foreach (var rec in result1.RecordList)
+                    {
+                        var row = new DataGridViewRow();
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = rec[0] }); //库名
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = rec[2] }); //表个数
+                        totalTb += int.Parse(rec[2]);
 
+                        var fieldNum = "0";
+                        sql = $"show {rec[0]}.stables";
+                        var result2 = MyService.ExcuteSql(account, sql);
+                        if (result2 == null || result2.RecordList.Count == 0) continue;
+
+                        fieldNum = result2.RecordList[0][2];
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = fieldNum }); //字段个数
+                        totalFd += int.Parse(fieldNum);
+
+                        if (int.TryParse(rec[2], out int x) && int.TryParse(fieldNum, out int y))
+                        {
+                            var pt = x * (y - 1);
+                            row.Cells.Add(new DataGridViewTextBoxCell() { Value = pt }); //测点个数(不含ts)
+                            totalPt += pt;
+                        }
+
+                        dgv.Rows.Add(row);
+                    }
+                    //统计行
+                    var row1 = new DataGridViewRow();
+                    row1.Cells.Add(new DataGridViewTextBoxCell() { Value = "[Total]" });
+                    row1.Cells.Add(new DataGridViewTextBoxCell() { Value = totalTb });
+                    row1.Cells.Add(new DataGridViewTextBoxCell() { Value = totalFd });
+                    row1.Cells.Add(new DataGridViewTextBoxCell() { Value = totalPt });
+                    dgv.Rows.Add(row1);
+                }
+                ts3.Text = result1.RecordList.Count.ToString() + " Records";
+            }
 
         }
 

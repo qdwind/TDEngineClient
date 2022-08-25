@@ -21,7 +21,7 @@ namespace TDEngineClient.Services
             public long PageCount { get; set; }
         }
 
-        public static async Task<RecordDto> GetRecords(TAccount account, string tableName,long page=1,int pageSize=10)
+        public static  RecordDto GetRecords(TAccount account, string tableName,long page=1,int pageSize=10)
         {
             
             var offset = (page - 1) * pageSize;//起始记录位置(下标从0开始)
@@ -36,7 +36,7 @@ namespace TDEngineClient.Services
 
 
             string tmpsql = $"select count(*) from {tableName}";
-            var tmpresponse =  THelper.QueryAsync(account.TUrl, _base64Str, tmpsql);
+            var tmpresponse =  THelper.Query(account.TUrl, _base64Str, tmpsql);
             if (tmpresponse.code == 0 && tmpresponse.data.Count > 0) //获取成功
             {
                 dto.Count = Convert.ToInt64(tmpresponse.data[0][0]);
@@ -46,8 +46,8 @@ namespace TDEngineClient.Services
 
 
             string sql = $"select * from {tableName} limit {limit} offset {offset}";
-            var response =  THelper.QueryAsync(account.TUrl, _base64Str, sql);
-            if (response.code == 0 && response.data.Count > 0) //获取成功
+            var response =  THelper.Query(account.TUrl, _base64Str, sql);
+            if (response.code == 0) //获取成功
             {
                 foreach (var meta in response.column_meta)
                 {
@@ -56,17 +56,19 @@ namespace TDEngineClient.Services
                     dto.FieldList.Add(meta[0].ToString());
                 }
 
-
-                foreach (var record in response.data)
+                if (response.data.Count > 0)
                 {
-                    var itemList = new List<string>();
-                    foreach (var item in record)
+                    foreach (var record in response.data)
                     {
-                        
-                        itemList.Add(Convert.ToString(item));
-                    }
+                        var itemList = new List<string>();
+                        foreach (var item in record)
+                        {
 
-                    dto.RecordList.Add(itemList);
+                            itemList.Add(Convert.ToString(item));
+                        }
+
+                        dto.RecordList.Add(itemList);
+                    }
                 }
 
                 return dto;

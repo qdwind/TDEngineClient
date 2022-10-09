@@ -30,19 +30,20 @@ namespace TDEngineClient.Services
             public string type { get; set; }
         }
 
-        public static List<TableDto> GetTables(TAccount account, string dbName="")
+        public static List<TableDto> GetTables(DataBaseDto database)
         {
             var dto = new List<TableDto>();
+            var account = database.Account;
             string _base64Str = THelper.GetBase64Str(account.TUsername, account.TPassword);
             string dbsql, sql;
             if (account.Version == 30)
             {
-                dbsql = string.IsNullOrEmpty(dbName) ? "" : $" where db_name='{dbName}'";
+                dbsql = string.IsNullOrEmpty(database.Name) ? "" : $" where db_name='{database.Name}'";
                 sql = $"select * from information_schema.ins_tables {dbsql};";
             }
             else
             {
-                sql = $"show {dbName}.tables;";
+                sql = $"show {database.Name}.tables;";
             }
 
             var response = THelper.QueryObjects(account.TUrl, _base64Str, sql);
@@ -74,7 +75,7 @@ namespace TDEngineClient.Services
                         var dbItem = new TableDto
                         {
                             table_name = tempArr[0]?.ToString(),
-                            db_name = dbName,
+                            db_name = database.Name,
                             create_time = tempArr[1]?.ToString(),
                             columns = tempArr[2] == null ? 0 : (Int32)tempArr[2],
                             stable_name = tempArr[3]?.ToString(),

@@ -1,7 +1,7 @@
 ﻿
 namespace TDEngineClient
 {
-    partial class Form2
+    partial class ftool
     {
         /// <summary>
         /// Required designer variable.

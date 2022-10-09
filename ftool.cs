@@ -11,14 +11,14 @@ using TDEngineClient.Entity;
 
 namespace TDEngineClient
 {
-    public partial class Form2 : Form
+    public partial class ftool : Form
     {
         public string Sql { get; set; } = "";
 
         private Random ran = new Random();
 
 
-        public Form2(string fields)
+        public ftool(string fields)
         {
             InitializeComponent();
             SetFieldGrid(fields);
@@ -28,7 +28,7 @@ namespace TDEngineClient
         {
             //GenValuesSql();
             Sql =  GenValuesSql();
-            if (Sql.Length > 300000)
+            if (Sql.Length > 500000)
             {
                 MessageBox.Show("Warning:Text Too Long:" + Sql.Length.ToString());
             }
@@ -85,25 +85,25 @@ namespace TDEngineClient
                     myField  = myField.Substring(1, myField.Length - 2);
                     if (myField.Contains(":"))
                     {
-                        dgv1.Rows[index].Cells[1].Value = SqlValueDataType.TimeStamp.ToString();//时间戳型
+                        dgv1.Rows[index].Cells[1].Value = SqlValueDataType.TIMESTAMP.ToString();//时间戳型
                         dgv1.Rows[index].Cells[2].Value = SqlValueModeType.Increasing.ToString();
                         dgv1.Rows[index].Cells[5].Value = "60";//默认一分钟
                     }
                     else
                     {
-                        dgv1.Rows[index].Cells[1].Value = SqlValueDataType.String.ToString();//字符型
+                        dgv1.Rows[index].Cells[1].Value = SqlValueDataType.BINARY.ToString();//字符型
                         dgv1.Rows[index].Cells[2].Value = SqlValueModeType.Fixed.ToString();
                     }
                 }
                 else if(myField.Contains("."))
                 {
-                    dgv1.Rows[index].Cells[1].Value = SqlValueDataType.Float.ToString();//浮点型
+                    dgv1.Rows[index].Cells[1].Value = SqlValueDataType.FLOAT.ToString();//浮点型
                     dgv1.Rows[index].Cells[3].Value = float.Parse(myField)-20;
                     dgv1.Rows[index].Cells[4].Value = myField;
                 }
                 else
                 {
-                    dgv1.Rows[index].Cells[1].Value = SqlValueDataType.Int.ToString();//整型
+                    dgv1.Rows[index].Cells[1].Value = SqlValueDataType.INT.ToString();//整型
                     dgv1.Rows[index].Cells[3].Value = int.Parse(myField)-200;
                     dgv1.Rows[index].Cells[4].Value = myField;
                 }
@@ -160,7 +160,7 @@ namespace TDEngineClient
                         value = GetIncreasingValue(f, i);
                     }
                    
-                    if (f.DataType == SqlValueDataType.String || f.DataType == SqlValueDataType.TimeStamp)
+                    if (f.DataType == SqlValueDataType.BINARY || f.DataType == SqlValueDataType.TIMESTAMP)
                     {
                         value = "'" + value + "'";
                     }
@@ -185,7 +185,7 @@ namespace TDEngineClient
             }
             else
             {
-                if (src.DataType == SqlValueDataType.Int)
+                if (src.DataType == SqlValueDataType.INT)
                 {
                     if (int.TryParse(src.Min, out int min) && int.TryParse(src.Max, out int max))
                     {
@@ -196,7 +196,7 @@ namespace TDEngineClient
                         value = ran.Next(100).ToString();
                     }
                 }
-                else if (src.DataType == SqlValueDataType.Float)
+                else if (src.DataType == SqlValueDataType.FLOAT)
                 {
                     var len = src.Text.Length - src.Text.IndexOf(".")-1;
                     if (float.TryParse(src.Min, out float min) && float.TryParse(src.Max, out float max))
@@ -208,11 +208,11 @@ namespace TDEngineClient
                         value = Math.Round(ran.NextDouble(),len).ToString();
                     }
                 }
-                else if (src.DataType == SqlValueDataType.String)
+                else if (src.DataType == SqlValueDataType.BINARY)
                 {
                     value = src.Text + ran.Next().ToString();
                 }
-                else if (src.DataType == SqlValueDataType.TimeStamp)
+                else if (src.DataType == SqlValueDataType.TIMESTAMP)
                 {
                     value = DateTime.Now.AddSeconds(-ran.Next()).ToString("yyyy-MM-dd HH:mm:ss");
                 }
@@ -231,21 +231,21 @@ namespace TDEngineClient
             var value = "";
 
 
-            if (src.DataType == SqlValueDataType.Int)
+            if (src.DataType == SqlValueDataType.INT)
             {
                 if (int.TryParse(src.Min, out int min) && int.TryParse(src.Step, out int step))
                 {
                     value = (min + step * num).ToString();
                 }
             }
-            else if (src.DataType == SqlValueDataType.Float)
+            else if (src.DataType == SqlValueDataType.FLOAT)
             {
                 if (float.TryParse(src.Min, out float min) && float.TryParse(src.Step, out float step))
                 {
                     value = (min + step * num).ToString();
                 }
             }
-            else if (src.DataType == SqlValueDataType.TimeStamp)
+            else if (src.DataType == SqlValueDataType.TIMESTAMP)
             {
                 if (DateTime.TryParse(src.Text, out DateTime dt) && int.TryParse(src.Step, out int step))
                 {

@@ -10,6 +10,5 @@ namespace TDEngineClient.Entity
     {
         Tables,
         Describe,
-        Variables
     }
 }

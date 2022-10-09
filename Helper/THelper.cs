@@ -13,18 +13,6 @@ using System.Runtime.Serialization.Json;
 
 namespace TDEngineClient.Helper
 {
-    public static class StringHelper
-    {
-        /// <summary>
-        /// 对字符串进行Base64加密
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        public static string Base64Encode(this string str)
-        {
-            return System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(str));
-        }
-    }
 
     public static class THelper
     {

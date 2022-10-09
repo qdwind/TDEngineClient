@@ -10,6 +10,6 @@ namespace TDEngineClient.Entity
     {
         public string Caption { get; set; } = "";
         public string Text { get; set; } = "";
-        public string AccountDB { get; set; } = "";
+        public string AccountServer { get; set; } = "";
     }
 }

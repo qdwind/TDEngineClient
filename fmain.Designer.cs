@@ -1,7 +1,7 @@
 ﻿
 namespace TDEngineClient
 {
-    partial class Form1
+    partial class fmain
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -30,7 +30,7 @@ namespace TDEngineClient
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ts2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -40,14 +40,18 @@ namespace TDEngineClient
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.menuTree = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.m_opendb = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_closedb = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_opensvr = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_closesvr = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_createdb = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_dropdb = new System.Windows.Forms.ToolStripMenuItem();
             this.sp1 = new System.Windows.Forms.ToolStripSeparator();
             this.m_table = new System.Windows.Forms.ToolStripMenuItem();
             this.m_field = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_variable = new System.Windows.Forms.ToolStripMenuItem();
             this.m_point = new System.Windows.Forms.ToolStripMenuItem();
             this.sp2 = new System.Windows.Forms.ToolStripSeparator();
+            this.m_createsuper = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_createtable = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_droptable = new System.Windows.Forms.ToolStripMenuItem();
             this.m_query = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -164,81 +168,109 @@ namespace TDEngineClient
             this.treeView1.Size = new System.Drawing.Size(300, 559);
             this.treeView1.TabIndex = 0;
             this.treeView1.DoubleClick += new System.EventHandler(this.treeView1_DoubleClick);
+            this.treeView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDown);
             // 
             // menuTree
             // 
             this.menuTree.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuTree.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.m_opendb,
-            this.m_closedb,
+            this.m_opensvr,
+            this.m_closesvr,
+            this.m_createdb,
+            this.m_dropdb,
             this.sp1,
             this.m_table,
             this.m_field,
-            this.m_variable,
             this.m_point,
+            this.m_createsuper,
+            this.m_createtable,
+            this.m_droptable,
             this.sp2,
             this.m_query});
             this.menuTree.Name = "menuTree";
-            this.menuTree.Size = new System.Drawing.Size(205, 184);
+            this.menuTree.Size = new System.Drawing.Size(214, 308);
             // 
-            // m_opendb
+            // m_opensvr
             // 
-            this.m_opendb.Name = "m_opendb";
-            this.m_opendb.Size = new System.Drawing.Size(204, 24);
-            this.m_opendb.Text = "Open Database";
-            this.m_opendb.Click += new System.EventHandler(this.m_opendb_Click);
+            this.m_opensvr.Name = "m_opensvr";
+            this.m_opensvr.Size = new System.Drawing.Size(213, 24);
+            this.m_opensvr.Text = "Open Server";
+            this.m_opensvr.Click += new System.EventHandler(this.m_opensvr_Click);
             // 
-            // m_closedb
+            // m_closesvr
             // 
-            this.m_closedb.Name = "m_closedb";
-            this.m_closedb.Size = new System.Drawing.Size(204, 24);
-            this.m_closedb.Text = "Close Database";
-            this.m_closedb.Click += new System.EventHandler(this.m_closedb_Click);
+            this.m_closesvr.Name = "m_closesvr";
+            this.m_closesvr.Size = new System.Drawing.Size(213, 24);
+            this.m_closesvr.Text = "Close Server";
+            this.m_closesvr.Click += new System.EventHandler(this.m_closesvr_Click);
+            // 
+            // m_createdb
+            // 
+            this.m_createdb.Name = "m_createdb";
+            this.m_createdb.Size = new System.Drawing.Size(213, 24);
+            this.m_createdb.Text = "Create Database";
+            // 
+            // m_dropdb
+            // 
+            this.m_dropdb.Name = "m_dropdb";
+            this.m_dropdb.Size = new System.Drawing.Size(213, 24);
+            this.m_dropdb.Text = "Drop Database";
             // 
             // sp1
             // 
             this.sp1.Name = "sp1";
-            this.sp1.Size = new System.Drawing.Size(201, 6);
+            this.sp1.Size = new System.Drawing.Size(210, 6);
             // 
             // m_table
             // 
             this.m_table.Name = "m_table";
-            this.m_table.Size = new System.Drawing.Size(204, 24);
+            this.m_table.Size = new System.Drawing.Size(213, 24);
             this.m_table.Text = "Show Tables";
-            this.m_table.Click += new System.EventHandler(this.m1_Click);
+            this.m_table.Click += new System.EventHandler(this.m_table_Click);
             // 
             // m_field
             // 
             this.m_field.Name = "m_field";
-            this.m_field.Size = new System.Drawing.Size(204, 24);
+            this.m_field.Size = new System.Drawing.Size(213, 24);
             this.m_field.Text = "Show Fields";
-            this.m_field.Click += new System.EventHandler(this.m2_Click);
-            // 
-            // m_variable
-            // 
-            this.m_variable.Name = "m_variable";
-            this.m_variable.Size = new System.Drawing.Size(204, 24);
-            this.m_variable.Text = "Show Variables";
-            this.m_variable.Click += new System.EventHandler(this.m4_Click);
+            this.m_field.Click += new System.EventHandler(this.m_field_Click);
             // 
             // m_point
             // 
             this.m_point.Name = "m_point";
-            this.m_point.Size = new System.Drawing.Size(204, 24);
+            this.m_point.Size = new System.Drawing.Size(213, 24);
             this.m_point.Text = "Measuring Points";
             this.m_point.Click += new System.EventHandler(this.m_point_Click);
             // 
             // sp2
             // 
             this.sp2.Name = "sp2";
-            this.sp2.Size = new System.Drawing.Size(201, 6);
+            this.sp2.Size = new System.Drawing.Size(210, 6);
+            // 
+            // m_createsuper
+            // 
+            this.m_createsuper.Name = "m_createsuper";
+            this.m_createsuper.Size = new System.Drawing.Size(213, 24);
+            this.m_createsuper.Text = "Create SuperTable";
+            // 
+            // m_createtable
+            // 
+            this.m_createtable.Name = "m_createtable";
+            this.m_createtable.Size = new System.Drawing.Size(213, 24);
+            this.m_createtable.Text = "Create Table";
+            // 
+            // m_droptable
+            // 
+            this.m_droptable.Name = "m_droptable";
+            this.m_droptable.Size = new System.Drawing.Size(213, 24);
+            this.m_droptable.Text = "Drop Table";
             // 
             // m_query
             // 
             this.m_query.Name = "m_query";
-            this.m_query.Size = new System.Drawing.Size(204, 24);
+            this.m_query.Size = new System.Drawing.Size(213, 24);
             this.m_query.Text = "New Query";
-            this.m_query.Click += new System.EventHandler(this.m3_Click);
+            this.m_query.Click += new System.EventHandler(this.m_query_Click);
             // 
             // imageList1
             // 
@@ -419,7 +451,7 @@ namespace TDEngineClient
             this.m_record.Text = "General Values SQL";
             this.m_record.Click += new System.EventHandler(this.m_record_Click);
             // 
-            // Form1
+            // fmain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -429,7 +461,7 @@ namespace TDEngineClient
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "fmain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TDEngine Client";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -479,9 +511,8 @@ namespace TDEngineClient
         private System.Windows.Forms.ToolStripMenuItem m_table;
         private System.Windows.Forms.ToolStripMenuItem m_field;
         private System.Windows.Forms.ToolStripMenuItem m_query;
-        private System.Windows.Forms.ToolStripMenuItem m_variable;
-        private System.Windows.Forms.ToolStripMenuItem m_opendb;
-        private System.Windows.Forms.ToolStripMenuItem m_closedb;
+        private System.Windows.Forms.ToolStripMenuItem m_opensvr;
+        private System.Windows.Forms.ToolStripMenuItem m_closesvr;
         private System.Windows.Forms.ToolStripSeparator sp1;
         private System.Windows.Forms.ContextMenuStrip menuText;
         private System.Windows.Forms.ToolStripMenuItem m_record;
@@ -489,6 +520,11 @@ namespace TDEngineClient
         private System.Windows.Forms.ToolStripMenuItem m_run;
         private System.Windows.Forms.ToolStripMenuItem m_point;
         private System.Windows.Forms.ToolStripSeparator sp2;
+        private System.Windows.Forms.ToolStripMenuItem m_createdb;
+        private System.Windows.Forms.ToolStripMenuItem m_dropdb;
+        private System.Windows.Forms.ToolStripMenuItem m_createsuper;
+        private System.Windows.Forms.ToolStripMenuItem m_createtable;
+        private System.Windows.Forms.ToolStripMenuItem m_droptable;
     }
 }
 

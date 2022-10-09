@@ -25,28 +25,7 @@ namespace TDEngineClient.Services
             var response =  THelper.Query(account.TUrl, _base64Str, sql);
             if (response.code==0) //获取成功
             {
-                foreach (var meta in response.column_meta)
-                {
-                    
-                    dto.FieldList.Add(meta[0].ToString());
-                }
-
-                if (response.data.Count > 0)
-                {
-                    foreach (var record in response.data)
-                    {
-                        var itemList = new List<string>();
-                        foreach (var item in record)
-                        {
-
-                            itemList.Add(Convert.ToString(item));
-                        }
-
-                        dto.RecordList.Add(itemList);
-                    }
-                }
-
-                return dto;
+                dto = ConvertRecordList(dto, response);
             }
             else//获取失败
             {
@@ -54,8 +33,8 @@ namespace TDEngineClient.Services
                 dto.FieldList.Add("code");
                 dto.FieldList.Add("desc");
                 dto.RecordList.Add(new List<string> { response.code.ToString(),response.desc==null?"":response.desc});
-                return dto;
             }
+            return dto;
         }
 
 

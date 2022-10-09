@@ -11,9 +11,10 @@ namespace TDEngineClient.Services
     {
         public class DataBaseDto
         {
-            public string name { get; set; }
-            public string created_time { get; set; }
+            public string Name { get; set; }
+            public string CreatedTime { get; set; }
 
+            public TAccount Account { get; set; }
         }
 
         public static List<DataBaseDto> GetDbList(TAccount account)
@@ -40,7 +41,8 @@ namespace TDEngineClient.Services
 
                     var dbItem = new DataBaseDto
                     {
-                        name = (string)tempArr[0]
+                        Name = (string)tempArr[0],
+                        Account = account
                         //created_time = (string)tempArr[1]
                     };
                     dto.Add(dbItem);

@@ -23,19 +23,20 @@ namespace TDEngineClient.Services
             public string rollup { get; set; }
         }
 
-        public static List<StableDto> GetStables(TAccount account,string dbName="")
+        public static List<StableDto> GetStables(DataBaseDto database)
         {
             var dto = new List<StableDto>();
+            var account = database.Account;
             string _base64Str = THelper.GetBase64Str(account.TUsername, account.TPassword);
             string dbsql, sql;
             if (account.Version == 30)
             {
-                dbsql = string.IsNullOrEmpty(dbName) ? "" : $" where db_name='{dbName}'";
+                dbsql = string.IsNullOrEmpty(database.Name) ? "" : $" where db_name='{database.Name}'";
                 sql = $"select * from information_schema.ins_stables {dbsql};";
             }
             else
             {
-                sql = $"show {dbName}.stables;";
+                sql = $"show {database.Name}.stables;";
             }
 
             var response = THelper.QueryObjects(account.TUrl, _base64Str, sql);
@@ -67,7 +68,7 @@ namespace TDEngineClient.Services
                         var dbItem = new StableDto
                         {
                             stable_name = tempArr[0]?.ToString(),
-                            db_name = dbName,
+                            db_name = database.Name,
                             created_time = tempArr[1]?.ToString(),
                             columns = tempArr[2] == null ? 0 : (Int32)tempArr[2],
                             tags = tempArr[3] == null ? 0 : (Int32)tempArr[3]

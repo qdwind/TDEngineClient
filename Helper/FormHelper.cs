@@ -15,11 +15,12 @@ namespace TDEngineClient.Helper
         {
             try
             {
-                Rectangle myTabRect = (sender as TabControl).GetTabRect(e.Index);
+                var ctl = sender as TabControl;
+                Rectangle myTabRect = ctl.GetTabRect(e.Index);
 
                 //先添加TabPage属性   
-                e.Graphics.DrawString((sender as TabControl).TabPages[e.Index].Text
-                , (sender as TabControl).Font, SystemBrushes.ControlText, myTabRect.X + 2, myTabRect.Y + 2);
+                bool isActive = ctl.SelectedIndex == e.Index;
+                e.Graphics.DrawString(ctl.TabPages[e.Index].Text, ctl.Font, new SolidBrush(isActive? Color.Black:Color.Gray), myTabRect.X + 2, myTabRect.Y + 5);
 
                 //再画一个矩形框
                 using (Pen p = new Pen(Color.WhiteSmoke))
@@ -60,7 +61,11 @@ namespace TDEngineClient.Helper
         }
 
 
-
+        /// <summary>
+        /// 关闭TAB标签事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public static void tabControl_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)

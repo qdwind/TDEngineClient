@@ -63,7 +63,7 @@ namespace TDEngineClient.Helper
                     account.TUrl = $"http://{server}:{port}/rest/sql";
                     account.TUsername = user;
                     account.TPassword = pass;
-                    account.TDatabase = server;
+                    account.TServer = server;
                     account.AliasName = alias;
                     account.Info = info;
                     slist.Add(account);
@@ -89,7 +89,7 @@ namespace TDEngineClient.Helper
                     if (names.Length > 1)
                     {
                         item.Caption = names[1];
-                        item.AccountDB = names[0];
+                        item.AccountServer = names[0];
                     }
                     item.Text = text;
                     
@@ -146,7 +146,7 @@ namespace TDEngineClient.Helper
                 DeleteSection("query", filePath);//清除
                 foreach (var query in queries)
                 {
-                    Write("query", query.AccountDB + "|" + query.Caption, query.Text, filePath);
+                    Write("query", query.AccountServer + "|" + query.Caption, query.Text, filePath);
                 }
             }
             return true;

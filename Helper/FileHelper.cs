@@ -44,9 +44,13 @@ namespace TDEngineClient.Helper
             return Write(section, key, null, filePath);
         }
 
-        public static List<TAccount> GetServersFromIni()
+        /// <summary>
+        /// 读取配置信息
+        /// </summary>
+        /// <returns></returns>
+        public static Config GetConfig()
         {
-            List<TAccount> slist = new List<TAccount>();
+            var myconfig = new Config();
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");//在当前程序路径创建
             if (File.Exists(filePath))
             {
@@ -66,11 +70,12 @@ namespace TDEngineClient.Helper
                     account.TServer = server;
                     account.AliasName = alias;
                     account.Info = info;
-                    slist.Add(account);
+                    myconfig.ServerList.Add(account);
                 }
 
+                myconfig.System.Language = Read("system", "language", "", filePath);
             }
-            return slist;
+            return myconfig;
         }
 
         public static List<TQueryBox> GetQueriesFromIni()

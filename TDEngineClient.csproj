@@ -53,7 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Config.cs" />
     <Compile Include="Entity\NodeItem.cs" />
+    <Compile Include="Entity\SqlCommandType.cs" />
     <Compile Include="Entity\SqlValueDataType.cs" />
     <Compile Include="Entity\SqlValueItem.cs" />
     <Compile Include="Entity\SqlValueModeType.cs" />
@@ -90,6 +92,9 @@
     <Compile Include="Service\GetStables.cs" />
     <Compile Include="Service\GetTableList.cs" />
     <EmbeddedResource Include="fmain.resx">
+      <DependentUpon>fmain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fmain.zh-CN.resx">
       <DependentUpon>fmain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ftool.resx">

@@ -14,7 +14,7 @@ namespace TDEngineClient
 {
     partial class fmain 
     {
-        private List<TAccount> ServerList = new List<TAccount>();
+        private Config MyConfig;
         private int PageSize = 100;
 
         //private int CurrentPage = 1;
@@ -24,6 +24,10 @@ namespace TDEngineClient
         /// </summary>
         private void InitailForm()
         {
+            spInner.Dock = DockStyle.Fill;
+            spInner.SplitterDistance = spInner.Width - 100;
+            lblInfo.Text = "";
+
             tabControl1.Dock = DockStyle.Fill;
             panel2.Dock = DockStyle.Bottom;
             //清空控件
@@ -35,15 +39,14 @@ namespace TDEngineClient
             this.tabControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(FormHelper.tabControl_MouseDown);
             this.Text = $"{Application.ProductName} {Application.ProductVersion}";
             this.WindowState = FormWindowState.Maximized;
-            ServerList = FileHelper.GetServersFromIni();//从配置文件获取服务器列表
 
             //添加所有服务
             treeView1.Nodes.Clear();
-            for (int i = 0; i < ServerList.Count; i++)
+            for (int i = 0; i < MyConfig.ServerList.Count; i++)
             {
                 TreeNode item = new TreeNode();
-                item.Text = ServerList[i].TServer + (string.IsNullOrEmpty(ServerList[i].AliasName) ? "" : "(" + ServerList[i].AliasName + ")");
-                item.Tag = ServerList[i];
+                item.Text = MyConfig.ServerList[i].TServer + (string.IsNullOrEmpty(MyConfig.ServerList[i].AliasName) ? "" : "(" + MyConfig.ServerList[i].AliasName + ")");
+                item.Tag = MyConfig.ServerList[i];
                 item.ImageIndex = 0;
                 treeView1.Nodes.Add(item);
             }
@@ -52,10 +55,10 @@ namespace TDEngineClient
             var queries = FileHelper.GetQueriesFromIni();
             foreach (var query in queries)
             {
-                var account = ServerList.Where(t => t.TServer == query.AccountServer).FirstOrDefault();
+                var account = MyConfig.ServerList.Where(t => t.TServer == query.AccountServer).FirstOrDefault();
                 if (account != null)
                 {
-                    CreateQueryWindow(account, null, null, null, query);
+                    CreateQueryWindow(account, query);
                 }
             }
 
@@ -204,11 +207,113 @@ namespace TDEngineClient
             }
         }
 
+        /// <summary>
+        /// 创建查询命令窗口
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="db"></param>
+        /// <param name="stable"></param>
+        /// <param name="table"></param>
+        /// <param name="box"></param>
+        private void CreateQueryWindow(DataBaseDto db, StableDto stable, TableDto table)
+        {
+            var caption = db.Name + "->Query";
+            string[] text = new string[] { };
 
-        private void CreateQueryWindow(TAccount account, DataBaseDto db, StableDto stable, TableDto table, TQueryBox box = null)
+            if (db != null && table != null)
+            {
+                text = new string[] { $"select * from {db.Name}.{table.table_name} limit 100" };
+            }
+            else if (db != null && stable != null)
+            {
+                text = new string[] { $"select * from {db.Name}.{stable.stable_name} limit 100" };
+            }
+
+            AddTabWindow(db.Account, caption, text);
+        }
+
+        /// <summary>
+        /// 根据历史记录恢复查询窗口
+        /// </summary>
+        /// <param name="db"></param>
+        /// <param name="stable"></param>
+        /// <param name="table"></param>
+        /// <param name="box"></param>
+        private void CreateQueryWindow(TAccount account, TQueryBox box)
+        {
+            if (box == null) return;
+            var lines = box.Text.Split(new string[] { "\\r\\n" }, StringSplitOptions.None);
+            AddTabWindow(account, box.Caption, lines);
+        }
+
+
+        /// <summary>
+        /// 根据操作命令创建SQL窗口
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="account"></param>
+        /// <param name="db"></param>
+        /// <param name="stable"></param>
+        /// <param name="table"></param>
+        private void CreateQueryWindow(SqlCommandType command, TAccount account, DataBaseDto db, StableDto stable, TableDto table)
+        {
+            var caption ="";
+            string[] text = new string[] { };
+
+            if (command == SqlCommandType.CreateDatabase)
+            {
+                caption = $"{account.TServer}->sql";
+                text = new string[] { $"create database dbname keep 3650 duration 50" };
+            }
+            else if (command == SqlCommandType.DropDatabase)
+            {
+                caption = $"{account.TServer}->sql";
+                text = new string[] { $"drop database {db.Name}" };
+            }
+            else if (command == SqlCommandType.CreateStable)
+            {
+                caption = $"{db.Name}->sql";
+                text = new string[] { $"create stable {db.Name}.stablename (ts timestamp, intfield int, strfield binary(20)) tags (strfield binary(20))" };
+            }
+            else if (command == SqlCommandType.DropStable)
+            {
+                caption = $"{db.Name}->sql";
+                text = new string[] { $"drop stable {stable.stable_name}" };
+            }
+            else if (command == SqlCommandType.CreateTable)
+            {
+                if (stable == null)//直接建表
+                {
+                    caption = $"{db.Name}->sql";
+                    text = new string[] { $"create table {db.Name}.tablename (ts timestamp, intfield int, strfield binary(20))" };
+                }
+                else //在超级表下建子表
+                {
+                    caption = $"{db.Name}.{stable.stable_name}->sql";
+                    text = new string[] { $"create table {db.Name}.tablename using {db.Name}.{stable.stable_name} tags ('value1', 'value2')" };
+                }
+            }
+            else if (command == SqlCommandType.DropTable)
+            {
+                caption = $"{db.Name}->sql";
+                text = new string[] { $"drop table {db.Name}.{table.table_name}" };
+            }
+
+            AddTabWindow(account, caption, text);
+        }
+
+
+
+        /// <summary>
+        /// 添加TAB
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="caption"></param>
+        /// <param name="text"></param>
+        private void AddTabWindow(TAccount account, string caption,string[] text)
         {
             //if (db == null) return;
-            var tab = new TabPage(box == null ? db.Name + "->Query" : box.Caption);
+            var tab = new TabPage(caption);
             tabControl1.TabPages.Add(tab);
             tabControl1.SelectedTab = tab;
             tab.AutoScroll = true;
@@ -220,26 +325,13 @@ namespace TDEngineClient
             myText.Font = new Font(FontFamily.GenericSansSerif, 12);
             myText.ScrollBars = ScrollBars.Vertical;
             myText.Dock = DockStyle.Top;
-            if (box != null)
-            {
-                var lines = box.Text.Split(new string[] { "\\r\\n" }, StringSplitOptions.None);
-                myText.Lines = lines;
-            }
-            else if (db != null && table != null)
-            {
-                myText.Text = $"select * from {db.Name}.{table.table_name} limit 100";
-            }
-            else if (db != null && stable != null)
-            {
-                myText.Text = $"select * from {db.Name}.{stable.stable_name} limit 100";
-            }
+            myText.Lines = text;
 
             myText.Tag = account;
             myText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
             myText.ContextMenuStrip = menuText;
             ts2.Text = "Press F5 to Run SQL";
             tab.Controls.Add(myText);
-
 
             var dgv = new DataGridView();
             dgv.Dock = DockStyle.Fill;
@@ -252,6 +344,11 @@ namespace TDEngineClient
         }
 
 
+
+        /// <summary>
+        /// 显示查询结果窗口
+        /// </summary>
+        /// <param name="tpType"></param>
         private void CreateQueryResult(TabPageType tpType)
         {
             string sql = "";

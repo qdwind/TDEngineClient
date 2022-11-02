@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TDEngineClient.Entity;
 using TDEngineClient.Helper;
+using System.Linq;
 
 namespace TDEngineClient.Services
 {
@@ -89,6 +90,7 @@ namespace TDEngineClient.Services
                     }
 
                 }
+                dto = dto.OrderBy(t => t.table_name).ToList();//按表名排序
             }
             return dto;
         }

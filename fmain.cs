@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TDEngineClient.Entity;
@@ -19,6 +21,8 @@ namespace TDEngineClient
 
         public fmain()
         {
+            MyConfig = FileHelper.GetConfig();//读取配置文件
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(MyConfig.System.Language);
             InitializeComponent();
         }
 
@@ -89,7 +93,7 @@ namespace TDEngineClient
         private void m_query_Click(object sender, EventArgs e)
         {
             var item = GetCurrentNodeItem();
-            CreateQueryWindow(item.Server, item.Db, item.STable, item.Table); //创建SQL窗口
+            CreateQueryWindow(item.Db, item.STable, item.Table); //创建SQL窗口
         }
 
 
@@ -236,7 +240,7 @@ namespace TDEngineClient
                 }
                 else if (node.Tag is StableDto)//超级表
                 {
-                    SetMenu(new List<ToolStripMenuItem> { m_table,m_field,m_query },new List<ToolStripSeparator> { sp2 });
+                    SetMenu(new List<ToolStripMenuItem> { m_createtable, m_table,m_field,m_query },new List<ToolStripSeparator> { sp2 });
 
                     //var db = GetNodeDb(node);
                     //var stable = (node.Tag as StableDto);
@@ -255,5 +259,21 @@ namespace TDEngineClient
 
             }
         }
+
+        /// <summary>
+        /// 创建删除的操作命令
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void m_command_Click(object sender, EventArgs e)
+        {
+            if (sender is ToolStripMenuItem && int.TryParse((sender as ToolStripMenuItem).Tag.ToString(),out int cmd))
+            {
+                var item = GetCurrentNodeItem();
+                CreateQueryWindow((SqlCommandType)cmd, item.Server, item.Db, item.STable, item.Table);
+            }
+        }
+
+
     }
 }

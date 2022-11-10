@@ -22,7 +22,7 @@ namespace TDEngineClient
         public fmain()
         {
             MyConfig = FileHelper.GetConfig();//读取配置文件
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(MyConfig.System.Language);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(MyConfig.System.Language);//多语言设置
             InitializeComponent();
         }
 
@@ -32,17 +32,56 @@ namespace TDEngineClient
             InitailForm();
         }
 
-
         private void TextBoxKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F5 ||e.KeyCode ==Keys.F1) //按F5(或F1)时执行SQL语句
+            if (e.KeyCode == Keys.F5 || e.KeyCode == Keys.F1) //按F5(或F1)时执行SQL语句
             {
                 RunSql();
             }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TipBox.Visible = false;
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                if (TipBox.Visible && TipBox.SelectedIndex > 0)
+                {
+                    e.SuppressKeyPress = true;//取消输入
+                    TipBox.SelectedIndex = TipBox.SelectedIndex - 1;
+                }
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                if (TipBox.Visible && TipBox.Items.Count > TipBox.SelectedIndex)
+                {
+                    e.SuppressKeyPress = true;//取消输入
+                    TipBox.SelectedIndex = TipBox.SelectedIndex + 1;
+                }
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                if (TipBox.Visible && TipBox.SelectedIndex > -1)
+                {
+                    e.SuppressKeyPress = true;//取消输入
+                    ReplaceInputText((sender as TextBox), TipBox.Items[TipBox.SelectedIndex].ToString());
+                    TipBox.Visible = false;
+                }
+            }
             else
             {
-                ts3.Text = "Text Length "+(sender as TextBox).Text.Length.ToString();
+                ts3.Text = "Text Length " + (sender as TextBox).Text.Length.ToString();
             }
+        }
+
+
+        private void TextBoxKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode <Keys.D0 || e.KeyCode > Keys.Z)
+            {
+                return;
+            }
+
+            ShowTipBox(sender as TextBox); //显示智能提示框
         }
 
 
@@ -196,9 +235,9 @@ namespace TDEngineClient
                     {
                         if (ctl is TextBox)
                         {
-                            if ((ctl as TextBox).Tag is TAccount)
+                            if ((ctl as TextBox).Tag is QueryBox)
                             {
-                                tabText.AccountServer = ((ctl as TextBox).Tag as TAccount).TServer;
+                                tabText.AccountServer = ((ctl as TextBox).Tag as QueryBox).Server.TServer;
                             }
                             string sTxt = "";
                             foreach (string s in (ctl as TextBox).Lines)
@@ -274,6 +313,9 @@ namespace TDEngineClient
             }
         }
 
+        private void spInner_Panel1_Paint(object sender, PaintEventArgs e)
+        {
 
+        }
     }
 }

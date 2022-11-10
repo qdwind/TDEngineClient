@@ -89,5 +89,38 @@ namespace TDEngineClient.Helper
                 }
             }
         }
+
+        /// <summary>
+        /// 获取输入光标位置
+        /// </summary>
+        /// <param name="textBox1"></param>
+        /// <returns></returns>
+        public static Point GetCursorPos(this TextBox textBox1)
+        {
+            Graphics gc = textBox1.CreateGraphics();
+            int wd = (int)gc.MeasureString("x", textBox1.Font).Width;
+            int ht = (int)gc.MeasureString("x", textBox1.Font).Height;
+            Point p2 = textBox1.GetPositionFromCharIndex(textBox1.SelectionStart - 1);
+            Point p = textBox1.Location;
+            if (textBox1.Text.Length > 0)
+            {
+                if (textBox1.Text[textBox1.SelectionStart - 1] == '\n' || textBox1.Text[textBox1.SelectionStart - 1] == '\r')
+
+                {
+                    p.Y += p2.Y + 2 * ht;
+                }
+                else
+                {
+                    p.X += p2.X + wd;
+                    p.Y += p2.Y + ht;
+                }
+            }
+            else
+            {
+                p.Y += p2.Y + ht;
+            }
+            return p;
+        }
+
     }
 }

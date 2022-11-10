@@ -14,8 +14,9 @@ namespace TDEngineClient
 {
     partial class fmain 
     {
-        private Config MyConfig;
+        private Config MyConfig; //配置文件
         private int PageSize = 100;
+        private ListBox TipBox = new ListBox();//提示框
 
         //private int CurrentPage = 1;
 
@@ -24,12 +25,18 @@ namespace TDEngineClient
         /// </summary>
         private void InitailForm()
         {
+            statusStrip1.Height = 15;
+            statusStrip1.Dock = DockStyle.Bottom;
+            //statusStrip1.BringToFront();
+            spMain.Dock = DockStyle.Fill;
+            spMain.BringToFront();
             spInner.Dock = DockStyle.Fill;
             spInner.SplitterDistance = spInner.Width - 100;
             lblInfo.Text = "";
 
             tabControl1.Dock = DockStyle.Fill;
             panel2.Dock = DockStyle.Bottom;
+
             //清空控件
             this.tabControl1.TabPages.Clear();
             //绘制的方式OwnerDrawFixed表示由窗体绘制大小也一样
@@ -61,7 +68,7 @@ namespace TDEngineClient
                     CreateQueryWindow(account, query);
                 }
             }
-
+            panel1.Visible = true;
         }
 
         /// <summary>
@@ -303,9 +310,39 @@ namespace TDEngineClient
         }
 
 
+        private Panel CreateQueryPanel(TAccount account)
+        {
+            var pnl = new Panel();
+            pnl.Height = 30;
+            var cmb1 = new ComboBox();
+            cmb1.Parent = pnl;
+            cmb1.Width = 200;
+            cmb1.Top = 5;
+            cmb1.Text = $"{account.TServer}{(string.IsNullOrEmpty(account.AliasName) ? "" : "(" + account.AliasName + ")")}";
+            for (int i = 0; i < MyConfig.ServerList.Count; i++)
+            {
+                cmb1.Items.Add($"{MyConfig.ServerList[i].TServer}{(string.IsNullOrEmpty(MyConfig.ServerList[i].AliasName) ? "" : "(" + MyConfig.ServerList[i].AliasName + ")")}");
+            }
+            var btn = new Button();
+            btn.Left = 210;
+            btn.Top = 5;
+            btn.Parent = pnl;
+            btn.Image = imageList1.Images[7];
+            btn.Click += new System.EventHandler(Btn_Click); 
+            
+
+            return pnl;
+        }
+
+        private void Btn_Click(object sender, EventArgs e)
+        {
+            RunSql();
+        }
+
+
 
         /// <summary>
-        /// 添加TAB
+        /// 添加TAB查询窗口
         /// </summary>
         /// <param name="account"></param>
         /// <param name="caption"></param>
@@ -318,6 +355,11 @@ namespace TDEngineClient
             tabControl1.SelectedTab = tab;
             tab.AutoScroll = true;
 
+            var qbox = new QueryBox();//保存查询窗口的信息
+            qbox.TipsDict.AddRange(MyConst.TipsPublicDict);//添加公用TIPS列表
+            qbox.Caption = $"{account.TServer}{(string.IsNullOrEmpty(account.AliasName) ? "" : "(" + account.AliasName + ")")}";
+            qbox.Server = account;
+
             var myText = new TextBox();
             myText.Multiline = true;
             myText.MaxLength = 655360;
@@ -326,12 +368,19 @@ namespace TDEngineClient
             myText.ScrollBars = ScrollBars.Vertical;
             myText.Dock = DockStyle.Top;
             myText.Lines = text;
+            myText.HideSelection = false;
 
-            myText.Tag = account;
+            myText.Tag = qbox; //保存设置项
             myText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
+            myText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyUp);
             myText.ContextMenuStrip = menuText;
             ts2.Text = "Press F5 to Run SQL";
             tab.Controls.Add(myText);
+
+            var pnl = CreateQueryPanel(account);//创建查询工具栏
+            pnl.Dock = DockStyle.Top;
+            tab.Controls.Add(pnl);
+
 
             var dgv = new DataGridView();
             dgv.Dock = DockStyle.Fill;
@@ -341,8 +390,9 @@ namespace TDEngineClient
             //dgv.ReadOnly = true;
             tab.Controls.Add(dgv);
             dgv.BringToFront();
-        }
 
+        }
+        
 
 
         /// <summary>
@@ -440,9 +490,9 @@ namespace TDEngineClient
                 else if (ctl is TextBox)
                 {
                     tbox = (ctl as TextBox);
-                    if (tbox.Tag is TAccount)
+                    if (tbox.Tag is QueryBox)
                     {
-                        account = (tbox.Tag as TAccount);
+                        account = (tbox.Tag as QueryBox).Server;
                     }
                 }
             }
@@ -453,7 +503,7 @@ namespace TDEngineClient
                 {
                     var firstPos = tbox.GetFirstCharIndexOfCurrentLine();
                     var line = tbox.GetLineFromCharIndex(firstPos);
-                    var lastPos = tbox.GetFirstCharIndexFromLine(line + 1);
+                    var lastPos = tbox.SelectionStart;
                     tbox.Select(firstPos, lastPos - firstPos);
                 }
                 text = tbox.SelectedText;
@@ -789,6 +839,83 @@ namespace TDEngineClient
 
         }
 
+        private string GetInputText(TextBox txtBox)
+        {
+            //捕获键入字符
+            var leftPos = txtBox.GetFirstCharIndexOfCurrentLine();
+            var line = txtBox.GetLineFromCharIndex(leftPos);
+            var lastPos = txtBox.SelectionStart;
+            var text = "";
+            try
+            {
+                text = txtBox.Lines.Length > 0 ? txtBox.Lines[line] : "";
+            }
+            catch(Exception ex)
+            {
+
+            }
+
+            if (text.Length > 0)
+            {
+                text = text.Substring(0, lastPos - leftPos);
+                var sp = text.LastIndexOf(' ');
+                if (sp > 0) text = text.Substring(sp, text.Length - sp);
+            }
+            text = text.Trim();
+            return text;
+        }
+
+        /// <summary>
+        /// 替换当前输入词
+        /// </summary>
+        /// <param name="txtBox"></param>
+        /// <param name="txt"></param>
+        private void ReplaceInputText(TextBox txtBox, string txt)
+        {
+            var leftPos = txtBox.GetFirstCharIndexOfCurrentLine();
+            var line = txtBox.GetLineFromCharIndex(leftPos);
+            var lastPos = txtBox.SelectionStart;
+            var text = txtBox.Lines[line].Substring(0, lastPos - leftPos);
+            var sp = text.LastIndexOf(' ')+leftPos;
+            txtBox.Select(sp+1, lastPos - sp-1);
+            txtBox.SelectedText = txt;
+        }
+
+
+
+        /// <summary>
+        /// 显示提示框
+        /// </summary>
+        /// <param name="txtBox"></param>
+        private void ShowTipBox(TextBox txtBox)
+        {
+            var text = GetInputText(txtBox);
+            if (text.Length > 0)//检索
+            {
+                var dict = (txtBox.Tag as QueryBox).TipsDict;
+                var found = dict.Where(t => t.StartsWith(text)).OrderBy(t=>t).ToArray();
+                if (found.Length > 0)
+                {
+                    //捕获光标位置
+                    var p = FormHelper.GetCursorPos(txtBox);
+                    TipBox.Items.Clear();
+                    TipBox.Items.AddRange(found);
+                    if (TipBox.SelectedIndex == -1)
+                    {
+                        TipBox.SelectedIndex = 0;
+                    }
+
+                    TipBox.Left = spMain.Panel1.Width + p.X + 10;
+                    TipBox.Top = p.Y + 100;
+                    TipBox.Parent = this;
+                    TipBox.BringToFront();
+                    TipBox.Visible = true;
+                    return;
+                }
+
+            }
+            TipBox.Visible = false;//隐藏
+        }
 
 
         

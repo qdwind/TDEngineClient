@@ -11,6 +11,9 @@ namespace TDEngineClient.Helper
 {
     public static class FileHelper
     {
+        private const string CONFIGFILE = "config.ini"; //配置文件
+
+
         [DllImport("kernel32", EntryPoint = "GetPrivateProfileString")]
         private static extern long GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string fileName);
 
@@ -51,7 +54,7 @@ namespace TDEngineClient.Helper
         public static Config GetConfig()
         {
             var myconfig = new Config();
-            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");//在当前程序路径创建
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, CONFIGFILE);//在当前程序路径创建
             if (File.Exists(filePath))
             {
                 for (int i = 1; i < 10; i++)

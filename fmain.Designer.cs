@@ -48,15 +48,17 @@ namespace TDEngineClient
             this.sp2 = new System.Windows.Forms.ToolStripSeparator();
             this.m_query = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.spInner = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.btnLast = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPre = new System.Windows.Forms.Button();
             this.btnFirst = new System.Windows.Forms.Button();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ts2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -69,30 +71,28 @@ namespace TDEngineClient
             this.menuText = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.m_run = new System.Windows.Forms.ToolStripMenuItem();
             this.m_record = new System.Windows.Forms.ToolStripMenuItem();
-            this.spInner = new System.Windows.Forms.SplitContainer();
-            this.lblInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.spMain)).BeginInit();
             this.spMain.Panel1.SuspendLayout();
             this.spMain.Panel2.SuspendLayout();
             this.spMain.SuspendLayout();
             this.menuTree.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            this.statusStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.menuText.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spInner)).BeginInit();
             this.spInner.Panel1.SuspendLayout();
             this.spInner.Panel2.SuspendLayout();
             this.spInner.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.menuText.SuspendLayout();
             this.SuspendLayout();
             // 
             // spMain
             // 
-            resources.ApplyResources(this.spMain, "spMain");
             this.spMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            resources.ApplyResources(this.spMain, "spMain");
             this.spMain.Name = "spMain";
             // 
             // spMain.Panel1
@@ -101,6 +101,7 @@ namespace TDEngineClient
             // 
             // spMain.Panel2
             // 
+            this.spMain.Panel2.Controls.Add(this.panel2);
             this.spMain.Panel2.Controls.Add(this.spInner);
             // 
             // treeView1
@@ -225,26 +226,21 @@ namespace TDEngineClient
             this.imageList1.Images.SetKeyName(4, "systable.ico");
             this.imageList1.Images.SetKeyName(5, "serveropen.ico");
             this.imageList1.Images.SetKeyName(6, "dbopen.ico");
+            this.imageList1.Images.SetKeyName(7, "run.ico");
             // 
-            // tabControl1
+            // spInner
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            resources.ApplyResources(this.tabControl1, "tabControl1");
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
+            resources.ApplyResources(this.spInner, "spInner");
+            this.spInner.Name = "spInner";
             // 
-            // tabPage1
+            // spInner.Panel1
             // 
-            resources.ApplyResources(this.tabPage1, "tabPage1");
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.spInner.Panel1.Controls.Add(this.tabControl1);
+            this.spInner.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.spInner_Panel1_Paint);
             // 
-            // tabPage2
+            // spInner.Panel2
             // 
-            resources.ApplyResources(this.tabPage2, "tabPage2");
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.spInner.Panel2.Controls.Add(this.lblInfo);
             // 
             // panel2
             // 
@@ -309,6 +305,31 @@ namespace TDEngineClient
             this.btnFirst.UseVisualStyleBackColor = true;
             this.btnFirst.Click += new System.EventHandler(this.btnNext_Click);
             // 
+            // lblInfo
+            // 
+            resources.ApplyResources(this.lblInfo, "lblInfo");
+            this.lblInfo.Name = "lblInfo";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            resources.ApplyResources(this.tabControl1, "tabControl1");
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            // 
+            // tabPage1
+            // 
+            resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            resources.ApplyResources(this.tabPage2, "tabPage2");
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -317,12 +338,12 @@ namespace TDEngineClient
             // 
             // statusStrip1
             // 
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ts2,
             this.ts3,
             this.ts1});
-            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
             // 
             // ts2
@@ -343,6 +364,7 @@ namespace TDEngineClient
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.statusStrip1);
             this.panel1.Controls.Add(this.spMain);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
@@ -389,32 +411,12 @@ namespace TDEngineClient
             resources.ApplyResources(this.m_record, "m_record");
             this.m_record.Click += new System.EventHandler(this.m_record_Click);
             // 
-            // spInner
-            // 
-            resources.ApplyResources(this.spInner, "spInner");
-            this.spInner.Name = "spInner";
-            // 
-            // spInner.Panel1
-            // 
-            this.spInner.Panel1.Controls.Add(this.tabControl1);
-            this.spInner.Panel1.Controls.Add(this.panel2);
-            // 
-            // spInner.Panel2
-            // 
-            this.spInner.Panel2.Controls.Add(this.lblInfo);
-            // 
-            // lblInfo
-            // 
-            resources.ApplyResources(this.lblInfo, "lblInfo");
-            this.lblInfo.Name = "lblInfo";
-            // 
             // fmain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "fmain";
@@ -425,20 +427,21 @@ namespace TDEngineClient
             ((System.ComponentModel.ISupportInitialize)(this.spMain)).EndInit();
             this.spMain.ResumeLayout(false);
             this.menuTree.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.menuText.ResumeLayout(false);
             this.spInner.Panel1.ResumeLayout(false);
             this.spInner.Panel2.ResumeLayout(false);
             this.spInner.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spInner)).EndInit();
             this.spInner.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.menuText.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -12,7 +12,7 @@ namespace TDEngineClient.Helper
     public static class FileHelper
     {
         private const string CONFIGFILE = "config.ini"; //配置文件
-
+        private const int SERVERCOUNT = 20;//可配置服务器数
 
         [DllImport("kernel32", EntryPoint = "GetPrivateProfileString")]
         private static extern long GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string fileName);
@@ -57,7 +57,7 @@ namespace TDEngineClient.Helper
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, CONFIGFILE);//在当前程序路径创建
             if (File.Exists(filePath))
             {
-                for (int i = 1; i < 10; i++)
+                for (int i = 1; i < SERVERCOUNT+1; i++)
                 {
                     string server = Read("server" + i.ToString(), "server", "", filePath);
                     if (string.IsNullOrEmpty(server)) break;
@@ -66,13 +66,19 @@ namespace TDEngineClient.Helper
                     string pass = Read("server" + i.ToString(), "pass", "", filePath);
                     string alias = Read("server" + i.ToString(), "alias", "", filePath);
                     string info = Read("server" + i.ToString(), "info", "", filePath);
-                    TAccount account = new TAccount();
-                    account.TUrl = $"http://{server}:{port}/rest/sql";
-                    account.TUsername = user;
-                    account.TPassword = pass;
-                    account.TServer = server;
+                    string savepass = Read("server" + i.ToString(), "savepass", "", filePath);
+                    Server account = new Server();
+                    account.Url = $"http://{server}:{port}/rest/sql";
+                    account.Username = user;
+                    account.Password = pass;
+                    account.IP = server;
+                    if (int.TryParse(port, out int p))
+                    {
+                        account.Port = p;
+                    }
                     account.AliasName = alias;
                     account.Info = info;
+                    account.SavePass = savepass == "true";
                     myconfig.ServerList.Add(account);
                 }
 
@@ -107,25 +113,33 @@ namespace TDEngineClient.Helper
             return slist;
         }
 
-        public static void AddService(string server, string port, string user, string pass)
+        /// <summary>
+        /// 保存服务器列表
+        /// </summary>
+        /// <param name="servers"></param>
+        public static void SaveServers(List<Server> servers)
         {
-            //TAccount account = new TAccount();
-            //account.TUrl = $"http://{server}:{port}/rest/sql";
-            //account.TUsername = user;
-            //account.TPassword = pass;
-            //account.TDatabase = server;
-            //ServerList.Add(account);
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");//在当前程序路径创建
+            if (File.Exists(filePath))
+            {
+                for (int i = 1; i < SERVERCOUNT +1; i++)
+                {
+                    DeleteSection($"server{i}", filePath);//先全部清除
+                }
 
-            //var svrSection = "server" + ServerList.Count.ToString();
-            //string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");//在当前程序路径创建
-            //if (File.Exists(filePath))
-            //{
-            //    IniHelper.Write(svrSection, "server", server, filePath);
-            //    IniHelper.Write(svrSection, "port", port, filePath);
-            //    IniHelper.Write(svrSection, "user", user, filePath);
-            //    IniHelper.Write(svrSection, "pass", pass, filePath);
+                for (int i = 0; i < servers.Count; i++)
+                {
+                    var svrSection = $"server{i+1}";
+                    Write(svrSection, "server", servers[i].IP, filePath);
+                    Write(svrSection, "port", servers[i].Port.ToString(), filePath);
+                    Write(svrSection, "user", servers[i].Username, filePath);
+                    Write(svrSection, "pass", servers[i].Password, filePath);
+                    Write(svrSection, "alias", servers[i].AliasName, filePath);
+                    Write(svrSection, "info", servers[i].Info, filePath);
+                    Write(svrSection, "savepass", servers[i].SavePass ? "true" : "false", filePath);
 
-            //}
+                }
+            }
         }
 
         public static List<string> ReadSections(string iniFiename, string section = null)

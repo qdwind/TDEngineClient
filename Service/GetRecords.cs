@@ -9,20 +9,9 @@ namespace TDEngineClient.Services
 {
     public static partial class MyService
     {
-        public class RecordDto
-        {
-            public long Count { get; set; }
-            public List<string> FieldList { get; set; } = new List<string>();
-            public List<string> FieldType { get; set; } = new List<string>();
-            public List<List<string>> RecordList { get; set; } = new List<List<string>>();
 
-            public TAccount DB { get; set; }
-            public string TableName { get; set; }
-            public long CurrentPage { get; set; }
-            public long PageCount { get; set; }
-        }
 
-        public static  RecordDto GetRecords(TAccount account, string tableName,long page=1,int pageSize=10)
+        public static  RecordDto GetRecords(Server account, string tableName,long page=1,int pageSize=10)
         {
             
             var offset = (page - 1) * pageSize;//起始记录位置(下标从0开始)
@@ -33,11 +22,11 @@ namespace TDEngineClient.Services
             dto.DB = account;
             dto.TableName = tableName;
             dto.CurrentPage = page;
-            string _base64Str = THelper.GetBase64Str(account.TUsername, account.TPassword);
+            string _base64Str = THelper.GetBase64Str(account.Username, account.Password);
 
 
             string tmpsql = $"select count(*) from {tableName}";
-            var tmpresponse =  THelper.Query(account.TUrl, _base64Str, tmpsql);
+            var tmpresponse =  THelper.Query(account.Url, _base64Str, tmpsql);
             if (tmpresponse.code == 0 && tmpresponse.data.Count > 0) //获取成功
             {
                 dto.Count = Convert.ToInt64(tmpresponse.data[0][0]);
@@ -56,7 +45,7 @@ namespace TDEngineClient.Services
 
             string sql = $"select * from {tableName} limit {limit} offset {offset}";
 
-            var response =  THelper.Query(account.TUrl, _base64Str, sql);
+            var response =  THelper.Query(account.Url, _base64Str, sql);
             if (response.code == 0) //获取成功
             {
                 return ConvertRecordList(dto, response);

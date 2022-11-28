@@ -112,21 +112,22 @@ namespace TDEngineClient.Helper
             }
             catch (WebException ex)
             {
-                using (WebResponse response = ex.Response)
-                {
-                    HttpWebResponse httpResponse = (HttpWebResponse)response;
-                    using (Stream data = response.GetResponseStream())
-                    {
-                        using (var reader = new StreamReader(data))
-                        {
-                            string text = reader.ReadToEnd();
-                            var obj = (TResponse)THelper.JsonToObject(text, new TResponse());
-                            result = obj;
-                        }
-                    }
-                }
+                //using (WebResponse response = ex.Response)
+                //{
+                //    HttpWebResponse httpResponse = (HttpWebResponse)response;
+                //    using (Stream data = response.GetResponseStream())
+                //    {
+                //        using (var reader = new StreamReader(data))
+                //        {
+                //            string text = reader.ReadToEnd();
+                //            var obj = (TResponse)THelper.JsonToObject(text, new TResponse());
+                //            result = obj;
+                //        }
+                //    }
+                //}
                 //if (string.IsNullOrEmpty(result.status))
-                //    result.status = ex.Message;
+                result.code = -1;//返回错误
+                result.desc = ex.Message;//错误信息
             }
             return result;
         }

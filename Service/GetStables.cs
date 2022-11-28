@@ -9,25 +9,13 @@ namespace TDEngineClient.Services
 {
     public static partial class MyService
     {
-        public class StableDto
-        {
-            public string stable_name { get; set; }
-            public string db_name { get; set; }
-            public string created_time { get; set; }
-            public int columns { get; set; }
-            public int tags { get; set; }
-            public string last_update { get; set; }
-            public string table_comment { get; set; }
-            public string watermark { get; set; }
-            public string max_delay { get; set; }
-            public string rollup { get; set; }
-        }
+
 
         public static List<StableDto> GetStables(DataBaseDto database)
         {
             var dto = new List<StableDto>();
             var account = database.Account;
-            string _base64Str = THelper.GetBase64Str(account.TUsername, account.TPassword);
+            string _base64Str = THelper.GetBase64Str(account.Username, account.Password);
             string dbsql, sql;
             if (account.Version == 30)
             {
@@ -39,7 +27,7 @@ namespace TDEngineClient.Services
                 sql = $"show {database.Name}.stables;";
             }
 
-            var response = THelper.QueryObjects(account.TUrl, _base64Str, sql);
+            var response = THelper.QueryObjects(account.Url, _base64Str, sql);
             if (response.code == 0 && response.data.Count > 0) //获取成功
             {
                 foreach (var db in response.data)

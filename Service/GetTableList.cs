@@ -10,32 +10,15 @@ namespace TDEngineClient.Services
 {
     public static partial class MyService
     {
-        public enum TableType
-        {
-            CHILD_TABLE = 0,
-            NORMAL_TABLE =1,
-            SYSTEM_TABLE = 2,
-        }
 
-        public class TableDto
-        {
-            public string table_name { get; set; }
-            public string db_name { get; set; }
-            public string create_time { get; set; }
-            public int columns { get; set; } 
-            public string stable_name { get; set; }
-            public long uid { get; set; }
-            public int vgroup_id { get; set; }
-            public int ttl { get; set; }
-            public string table_comment { get; set; }
-            public string type { get; set; }
-        }
+
+
 
         public static List<TableDto> GetTables(DataBaseDto database)
         {
             var dto = new List<TableDto>();
             var account = database.Account;
-            string _base64Str = THelper.GetBase64Str(account.TUsername, account.TPassword);
+            string _base64Str = THelper.GetBase64Str(account.Username, account.Password);
             string dbsql, sql;
             if (account.Version == 30)
             {
@@ -47,7 +30,7 @@ namespace TDEngineClient.Services
                 sql = $"show {database.Name}.tables;";
             }
 
-            var response = THelper.QueryObjects(account.TUrl, _base64Str, sql);
+            var response = THelper.QueryObjects(account.Url, _base64Str, sql);
             if (response.code == 0 && response.data.Count > 0) //获取成功
             {
                 foreach (var db in response.data)

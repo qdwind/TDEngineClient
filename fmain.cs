@@ -22,7 +22,8 @@ namespace TDEngineClient
         public fmain()
         {
             MyConfig = FileHelper.GetConfig();//读取配置文件
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(MyConfig.System.Language);//多语言设置
+            if (MyConfig.System.Language != null)
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(MyConfig.System.Language);//多语言设置
             InitializeComponent();
         }
 
@@ -52,7 +53,7 @@ namespace TDEngineClient
             }
             else if (e.KeyCode == Keys.Down)
             {
-                if (TipBox.Visible && TipBox.Items.Count > TipBox.SelectedIndex)
+                if (TipBox.Visible && TipBox.Items.Count-1 > TipBox.SelectedIndex)
                 {
                     e.SuppressKeyPress = true;//取消输入
                     TipBox.SelectedIndex = TipBox.SelectedIndex + 1;
@@ -76,23 +77,23 @@ namespace TDEngineClient
 
         private void TextBoxKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode <Keys.D0 || e.KeyCode > Keys.Z)
-            {
-                return;
-            }
+            ShowTipBox(sender as TextBox,e.KeyCode); //显示智能提示框
+        }
 
-            ShowTipBox(sender as TextBox); //显示智能提示框
+        private void TextBoxClick(object sender, KeyEventArgs e)
+        {
+            ShowTipBox(sender as TextBox,e.KeyCode); //显示智能提示框
         }
 
 
         private void treeView1_DoubleClick(object sender, EventArgs e)
         {
-            var item = GetCurrentNodeItem();
+            var item = GetNodeItem(treeView1.SelectedNode);
             //if(item.Type == NodeItemType.Server)
 
 
             var node = (sender as TreeView).SelectedNode;
-            if (node.Tag is TAccount) //服务器
+            if (node.Tag is Server) //服务器
             {
                 if (node.Nodes.Count == 0)
                     OpenDB(node);
@@ -131,7 +132,7 @@ namespace TDEngineClient
 
         private void m_query_Click(object sender, EventArgs e)
         {
-            var item = GetCurrentNodeItem();
+            var item = GetNodeItem(treeView1.SelectedNode);
             CreateQueryWindow(item.Db, item.STable, item.Table); //创建SQL窗口
         }
 
@@ -152,7 +153,7 @@ namespace TDEngineClient
         private void m_opensvr_Click(object sender, EventArgs e)
         {
             var node = treeView1.SelectedNode;
-            if (node.Tag is TAccount)
+            if (node.Tag is Server)
             {
                 OpenDB(node);
             }
@@ -162,7 +163,7 @@ namespace TDEngineClient
         private void m_closesvr_Click(object sender, EventArgs e)
         {
             var node = treeView1.SelectedNode;
-            if (node.Tag is TAccount)
+            if (node.Tag is Server)
             {
                 node.Nodes.Clear();
                 node.ImageIndex = 0;
@@ -201,19 +202,19 @@ namespace TDEngineClient
 
         private void m_point_Click(object sender, EventArgs e)
         {
-            TAccount account = null;
+            Server account = null;
             var node = treeView1.SelectedNode;
-            if (node.Tag is TAccount)
+            if (node.Tag is Server)
             {
-                account = (node.Tag as TAccount);
+                account = (node.Tag as Server);
             }
             else if (node.Tag is StableDto)
             {
                 if (node.Parent != null && node.Parent.Tag is DataBaseDto)
                 {
                     var svrNode = node.Parent.Parent;
-                    if (svrNode != null && svrNode.Tag is TAccount)
-                        account = (svrNode.Tag as TAccount);
+                    if (svrNode != null && svrNode.Tag is Server)
+                        account = (svrNode.Tag as Server);
                 }
             }
             if (account == null) return;
@@ -237,7 +238,7 @@ namespace TDEngineClient
                         {
                             if ((ctl as TextBox).Tag is QueryBox)
                             {
-                                tabText.AccountServer = ((ctl as TextBox).Tag as QueryBox).Server.TServer;
+                                tabText.AccountServer = ((ctl as TextBox).Tag as QueryBox).Server.IP;
                             }
                             string sTxt = "";
                             foreach (string s in (ctl as TextBox).Lines)
@@ -267,19 +268,19 @@ namespace TDEngineClient
                 var node = (sender as TreeView).SelectedNode;
                 if (node == null)
                 {
-                    SetMenu(new List<ToolStripMenuItem> {});
+                    SetMenu(new List<ToolStripMenuItem> {m_newsvr});
                 }
-                else if (node.Tag is TAccount) //服务器
+                else if (node.Tag is Server) //服务器
                 {
-                    SetMenu(new List<ToolStripMenuItem> { m_opensvr, m_closesvr, m_createdb });
+                    SetMenu(new List<ToolStripMenuItem> {m_newsvr,m_editsvr,m_deletesvr, m_opensvr, m_closesvr, m_createdb }, new List<ToolStripSeparator> { sp1 });
                 }
                 else if (node.Tag is DataBaseDto)//数据库
                 {
-                    SetMenu(new List<ToolStripMenuItem> { m_dropdb,m_createsuper,m_createtable, m_point,m_query },new List<ToolStripSeparator> { sp1,sp2});
+                    SetMenu(new List<ToolStripMenuItem> { m_dropdb,m_createsuper,m_createtable, m_point,m_query },new List<ToolStripSeparator> { sp2,sp3});
                 }
                 else if (node.Tag is StableDto)//超级表
                 {
-                    SetMenu(new List<ToolStripMenuItem> { m_createtable, m_table,m_field,m_query },new List<ToolStripSeparator> { sp2 });
+                    SetMenu(new List<ToolStripMenuItem> { m_createtable, m_table,m_field,m_query },new List<ToolStripSeparator> { sp3 });
 
                     //var db = GetNodeDb(node);
                     //var stable = (node.Tag as StableDto);
@@ -287,7 +288,7 @@ namespace TDEngineClient
                 }
                 else if (node.Tag is TableDto) //表
                 {
-                    SetMenu(new List<ToolStripMenuItem> { m_field, m_droptable, m_query }, new List<ToolStripSeparator> { sp2 });
+                    SetMenu(new List<ToolStripMenuItem> { m_field, m_droptable, m_query }, new List<ToolStripSeparator> { sp3 });
 
                     //var db = GetNodeDb(node);
                     //var table = (node.Tag as TableDto);
@@ -308,7 +309,7 @@ namespace TDEngineClient
         {
             if (sender is ToolStripMenuItem && int.TryParse((sender as ToolStripMenuItem).Tag.ToString(),out int cmd))
             {
-                var item = GetCurrentNodeItem();
+                var item = GetNodeItem(treeView1.SelectedNode);
                 CreateQueryWindow((SqlCommandType)cmd, item.Server, item.Db, item.STable, item.Table);
             }
         }
@@ -316,6 +317,46 @@ namespace TDEngineClient
         private void spInner_Panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void m_newsvr_Click(object sender, EventArgs e)
+        {
+            fserver svr = new fserver();
+            if (svr.ShowDialog() == DialogResult.OK)
+            {
+                TreeNode item = new TreeNode();
+                item.Text = svr.Server.IP + (string.IsNullOrEmpty(svr.Server.AliasName) ? "" : "(" + svr.Server.AliasName + ")");
+                item.Tag = svr.Server;
+                item.ImageIndex = 0;
+                treeView1.Nodes.Add(item);
+                SaveConfigServers();
+            }
+
+
+        }
+
+        private void m_editsvr_Click(object sender, EventArgs e)
+        {
+            var item = GetNodeItem(treeView1.SelectedNode);
+            fserver svr = new fserver(item.Server);
+            if (svr.ShowDialog() == DialogResult.OK)
+            {
+                item.Server = svr.Server;
+                item.Node.Text = svr.Server.IP+(string.IsNullOrEmpty(svr.Server.AliasName)?"": "("+ svr.Server.AliasName + ")");
+
+                SaveConfigServers();
+            }
+
+        }
+
+        private void m_deletesvr_Click(object sender, EventArgs e)
+        {
+            var item = GetNodeItem(treeView1.SelectedNode);
+            if (MessageBox.Show($"Confirm to Delete {item.Server.IP}?", "Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                treeView1.SelectedNode.Remove();
+                SaveConfigServers();
+            }
         }
     }
 }

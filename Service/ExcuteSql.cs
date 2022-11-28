@@ -10,7 +10,7 @@ namespace TDEngineClient.Services
 {
     public static partial class MyService
     {
-        public static RecordDto ExcuteSql(TAccount account, string sql, long page = 1, int pageSize = 10)
+        public static RecordDto ExcuteSql(Server account, string sql, long page = 1, int pageSize = 10)
         {
 
             //var offset = (page - 1) * pageSize + 1;//起始记录位置(下标从1开始)
@@ -20,9 +20,9 @@ namespace TDEngineClient.Services
             var dto = new RecordDto();
             dto.DB = account;
             dto.CurrentPage = page;
-            string _base64Str = THelper.GetBase64Str(account.TUsername, account.TPassword);
+            string _base64Str = THelper.GetBase64Str(account.Username, account.Password);
 
-            var response =  THelper.Query(account.TUrl, _base64Str, sql);
+            var response =  THelper.Query(account.Url, _base64Str, sql);
             if (response.code==0) //获取成功
             {
                 dto = ConvertRecordList(dto, response);

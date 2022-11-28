@@ -9,21 +9,15 @@ namespace TDEngineClient.Services
 {
     public static partial class MyService
     {
-        public class DataBaseDto
-        {
-            public string Name { get; set; }
-            public string CreatedTime { get; set; }
 
-            public TAccount Account { get; set; }
-        }
 
-        public static List<DataBaseDto> GetDbList(TAccount account)
+        public static List<DataBaseDto> GetDbList(Server account)
         {
             var dto = new List<DataBaseDto>();
-            string _base64Str = THelper.GetBase64Str(account.TUsername, account.TPassword);
+            string _base64Str = THelper.GetBase64Str(account.Username, account.Password);
             string sql = $"show databases";
             //var response = await THelper.QueryObjectsAsync(account.TUrl, _base64Str, sql);
-            var response = THelper.QueryObjects(account.TUrl, _base64Str, sql);
+            var response = THelper.QueryObjects(account.Url, _base64Str, sql);
             if (response!=null  && response.data.Count > 0) //获取成功&& response.status == "succ"
             {
                 if (response.column_meta.Count > 1)

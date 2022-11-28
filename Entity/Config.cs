@@ -10,7 +10,7 @@ namespace TDEngineClient.Entity
     {
         public SystemConfig System { get; set; } = new SystemConfig();
 
-        public List<TAccount> ServerList { get; set; } = new List<TAccount>();
+        public List<Server> ServerList { get; set; } = new List<Server>();
     }
 
     public class SystemConfig

@@ -34,40 +34,55 @@ namespace TDEngineClient
             this.spMain = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.menuTree = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.m_newsvr = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_editsvr = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_deletesvr = new System.Windows.Forms.ToolStripMenuItem();
+            this.sp1 = new System.Windows.Forms.ToolStripSeparator();
             this.m_opensvr = new System.Windows.Forms.ToolStripMenuItem();
             this.m_closesvr = new System.Windows.Forms.ToolStripMenuItem();
             this.m_createdb = new System.Windows.Forms.ToolStripMenuItem();
             this.m_dropdb = new System.Windows.Forms.ToolStripMenuItem();
-            this.sp1 = new System.Windows.Forms.ToolStripSeparator();
+            this.sp2 = new System.Windows.Forms.ToolStripSeparator();
             this.m_table = new System.Windows.Forms.ToolStripMenuItem();
             this.m_field = new System.Windows.Forms.ToolStripMenuItem();
             this.m_point = new System.Windows.Forms.ToolStripMenuItem();
             this.m_createsuper = new System.Windows.Forms.ToolStripMenuItem();
             this.m_createtable = new System.Windows.Forms.ToolStripMenuItem();
             this.m_droptable = new System.Windows.Forms.ToolStripMenuItem();
-            this.sp2 = new System.Windows.Forms.ToolStripSeparator();
+            this.sp3 = new System.Windows.Forms.ToolStripSeparator();
             this.m_query = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.spInner = new System.Windows.Forms.SplitContainer();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.btnLast = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPre = new System.Windows.Forms.Button();
             this.btnFirst = new System.Windows.Forms.Button();
-            this.lblInfo = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.closeServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.explorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ts2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.ts3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.ts1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.menuText = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.m_run = new System.Windows.Forms.ToolStripMenuItem();
             this.m_record = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,16 +91,12 @@ namespace TDEngineClient
             this.spMain.Panel2.SuspendLayout();
             this.spMain.SuspendLayout();
             this.menuTree.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spInner)).BeginInit();
-            this.spInner.Panel1.SuspendLayout();
-            this.spInner.Panel2.SuspendLayout();
-            this.spInner.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            this.tabControl1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.menuText.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,8 +112,8 @@ namespace TDEngineClient
             // 
             // spMain.Panel2
             // 
+            this.spMain.Panel2.Controls.Add(this.tabControl1);
             this.spMain.Panel2.Controls.Add(this.panel2);
-            this.spMain.Panel2.Controls.Add(this.spInner);
             // 
             // treeView1
             // 
@@ -118,21 +129,48 @@ namespace TDEngineClient
             // 
             this.menuTree.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuTree.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.m_newsvr,
+            this.m_editsvr,
+            this.m_deletesvr,
+            this.sp1,
             this.m_opensvr,
             this.m_closesvr,
             this.m_createdb,
             this.m_dropdb,
-            this.sp1,
+            this.sp2,
             this.m_table,
             this.m_field,
             this.m_point,
             this.m_createsuper,
             this.m_createtable,
             this.m_droptable,
-            this.sp2,
+            this.sp3,
             this.m_query});
             this.menuTree.Name = "menuTree";
             resources.ApplyResources(this.menuTree, "menuTree");
+            // 
+            // m_newsvr
+            // 
+            this.m_newsvr.Name = "m_newsvr";
+            resources.ApplyResources(this.m_newsvr, "m_newsvr");
+            this.m_newsvr.Click += new System.EventHandler(this.m_newsvr_Click);
+            // 
+            // m_editsvr
+            // 
+            this.m_editsvr.Name = "m_editsvr";
+            resources.ApplyResources(this.m_editsvr, "m_editsvr");
+            this.m_editsvr.Click += new System.EventHandler(this.m_editsvr_Click);
+            // 
+            // m_deletesvr
+            // 
+            this.m_deletesvr.Name = "m_deletesvr";
+            resources.ApplyResources(this.m_deletesvr, "m_deletesvr");
+            this.m_deletesvr.Click += new System.EventHandler(this.m_deletesvr_Click);
+            // 
+            // sp1
+            // 
+            this.sp1.Name = "sp1";
+            resources.ApplyResources(this.sp1, "sp1");
             // 
             // m_opensvr
             // 
@@ -160,10 +198,10 @@ namespace TDEngineClient
             this.m_dropdb.Tag = "2";
             this.m_dropdb.Click += new System.EventHandler(this.m_command_Click);
             // 
-            // sp1
+            // sp2
             // 
-            this.sp1.Name = "sp1";
-            resources.ApplyResources(this.sp1, "sp1");
+            this.sp2.Name = "sp2";
+            resources.ApplyResources(this.sp2, "sp2");
             // 
             // m_table
             // 
@@ -204,10 +242,10 @@ namespace TDEngineClient
             this.m_droptable.Tag = "6";
             this.m_droptable.Click += new System.EventHandler(this.m_command_Click);
             // 
-            // sp2
+            // sp3
             // 
-            this.sp2.Name = "sp2";
-            resources.ApplyResources(this.sp2, "sp2");
+            this.sp3.Name = "sp3";
+            resources.ApplyResources(this.sp3, "sp3");
             // 
             // m_query
             // 
@@ -228,19 +266,25 @@ namespace TDEngineClient
             this.imageList1.Images.SetKeyName(6, "dbopen.ico");
             this.imageList1.Images.SetKeyName(7, "run.ico");
             // 
-            // spInner
+            // tabControl1
             // 
-            resources.ApplyResources(this.spInner, "spInner");
-            this.spInner.Name = "spInner";
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            resources.ApplyResources(this.tabControl1, "tabControl1");
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
             // 
-            // spInner.Panel1
+            // tabPage1
             // 
-            this.spInner.Panel1.Controls.Add(this.tabControl1);
-            this.spInner.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.spInner_Panel1_Paint);
+            resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // spInner.Panel2
+            // tabPage2
             // 
-            this.spInner.Panel2.Controls.Add(this.lblInfo);
+            resources.ApplyResources(this.tabPage2, "tabPage2");
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -305,36 +349,115 @@ namespace TDEngineClient
             this.btnFirst.UseVisualStyleBackColor = true;
             this.btnFirst.Click += new System.EventHandler(this.btnNext_Click);
             // 
-            // lblInfo
-            // 
-            resources.ApplyResources(this.lblInfo, "lblInfo");
-            this.lblInfo.Name = "lblInfo";
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            resources.ApplyResources(this.tabControl1, "tabControl1");
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            // 
-            // tabPage1
-            // 
-            resources.ApplyResources(this.tabPage1, "tabPage1");
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            resources.ApplyResources(this.tabPage2, "tabPage2");
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.viewToolStripMenuItem,
+            this.windowToolStripMenuItem,
+            this.helpToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newConnectionToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.closeServerToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
+            // 
+            // newConnectionToolStripMenuItem
+            // 
+            this.newConnectionToolStripMenuItem.Name = "newConnectionToolStripMenuItem";
+            resources.ApplyResources(this.newConnectionToolStripMenuItem, "newConnectionToolStripMenuItem");
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            // 
+            // closeServerToolStripMenuItem
+            // 
+            this.closeServerToolStripMenuItem.Name = "closeServerToolStripMenuItem";
+            resources.ApplyResources(this.closeServerToolStripMenuItem, "closeServerToolStripMenuItem");
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem,
+            this.pasteToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.selectAllToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            resources.ApplyResources(this.editToolStripMenuItem, "editToolStripMenuItem");
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            resources.ApplyResources(this.pasteToolStripMenuItem, "pasteToolStripMenuItem");
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
+            // 
+            // selectAllToolStripMenuItem
+            // 
+            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
+            resources.ApplyResources(this.selectAllToolStripMenuItem, "selectAllToolStripMenuItem");
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.explorerToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            resources.ApplyResources(this.viewToolStripMenuItem, "viewToolStripMenuItem");
+            // 
+            // explorerToolStripMenuItem
+            // 
+            this.explorerToolStripMenuItem.Checked = true;
+            this.explorerToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.explorerToolStripMenuItem.Name = "explorerToolStripMenuItem";
+            resources.ApplyResources(this.explorerToolStripMenuItem, "explorerToolStripMenuItem");
+            // 
+            // windowToolStripMenuItem
+            // 
+            this.windowToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newQueryToolStripMenuItem});
+            this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
+            resources.ApplyResources(this.windowToolStripMenuItem, "windowToolStripMenuItem");
+            // 
+            // newQueryToolStripMenuItem
+            // 
+            this.newQueryToolStripMenuItem.Name = "newQueryToolStripMenuItem";
+            resources.ApplyResources(this.newQueryToolStripMenuItem, "newQueryToolStripMenuItem");
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
             // 
             // statusStrip1
             // 
@@ -369,27 +492,6 @@ namespace TDEngineClient
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2});
-            resources.ApplyResources(this.toolStrip1, "toolStrip1");
-            this.toolStrip1.Name = "toolStrip1";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
-            this.toolStripButton1.Name = "toolStripButton1";
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.toolStripButton2, "toolStripButton2");
-            this.toolStripButton2.Name = "toolStripButton2";
-            // 
             // menuText
             // 
             this.menuText.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -416,7 +518,6 @@ namespace TDEngineClient
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "fmain";
@@ -427,20 +528,15 @@ namespace TDEngineClient
             ((System.ComponentModel.ISupportInitialize)(this.spMain)).EndInit();
             this.spMain.ResumeLayout(false);
             this.menuTree.ResumeLayout(false);
-            this.spInner.Panel1.ResumeLayout(false);
-            this.spInner.Panel2.ResumeLayout(false);
-            this.spInner.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spInner)).EndInit();
-            this.spInner.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            this.tabControl1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.menuText.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -462,9 +558,6 @@ namespace TDEngineClient
         private System.Windows.Forms.Button btnFirst;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripStatusLabel ts1;
         private System.Windows.Forms.ToolStripStatusLabel ts2;
         private System.Windows.Forms.ToolStripStatusLabel ts3;
@@ -487,8 +580,26 @@ namespace TDEngineClient
         private System.Windows.Forms.ToolStripMenuItem m_createsuper;
         private System.Windows.Forms.ToolStripMenuItem m_createtable;
         private System.Windows.Forms.ToolStripMenuItem m_droptable;
-        private System.Windows.Forms.SplitContainer spInner;
-        private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newConnectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem closeServerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newQueryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem explorerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem m_newsvr;
+        private System.Windows.Forms.ToolStripMenuItem m_editsvr;
+        private System.Windows.Forms.ToolStripMenuItem m_deletesvr;
+        private System.Windows.Forms.ToolStripSeparator sp3;
     }
 }
 

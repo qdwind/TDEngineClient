@@ -13,9 +13,9 @@ namespace TDEngineClient.Entity
     {
         public string Caption { get; set; } = "";
         public string Text { get; set; } = "";
-        public TAccount Server { get; set; }
+        public Server Server { get; set; }
 
-
-        public List<string> TipsDict = new List<string>(); //提示字典
+        public List<Tip> TipsDict = new List<Tip>(); //公共语法提示字典
+        public List<Tip> DbDict = new List<Tip>();   //数据库提示字典
     }
 }

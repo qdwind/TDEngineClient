@@ -54,14 +54,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\Config.cs" />
+    <Compile Include="Entity\DataBaseDto.cs" />
     <Compile Include="Entity\NodeItem.cs" />
     <Compile Include="Entity\QueryBox.cs" />
+    <Compile Include="Entity\RecordDto.cs" />
     <Compile Include="Entity\SqlCommandType.cs" />
     <Compile Include="Entity\SqlValueDataType.cs" />
     <Compile Include="Entity\SqlValueItem.cs" />
     <Compile Include="Entity\SqlValueModeType.cs" />
+    <Compile Include="Entity\StableDto.cs" />
+    <Compile Include="Entity\TableDto.cs" />
+    <Compile Include="Entity\TableType.cs" />
     <Compile Include="Entity\TabPageType.cs" />
-    <Compile Include="Entity\TAccount.cs" />
+    <Compile Include="Entity\Server.cs" />
+    <Compile Include="Entity\Tip.cs" />
+    <Compile Include="Entity\TipType.cs" />
     <Compile Include="Entity\TQueryBox.cs" />
     <Compile Include="Entity\TSuccessResponseBase.cs" />
     <Compile Include="Entity\TurnPageType.cs" />
@@ -73,6 +80,18 @@
     </Compile>
     <Compile Include="fmainFunc.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fpass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fpass.Designer.cs">
+      <DependentUpon>fpass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fserver.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fserver.Designer.cs">
+      <DependentUpon>fserver.cs</DependentUpon>
     </Compile>
     <Compile Include="ftool.cs">
       <SubType>Form</SubType>
@@ -98,6 +117,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fmain.zh-CN.resx">
       <DependentUpon>fmain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fpass.resx">
+      <DependentUpon>fpass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fserver.resx">
+      <DependentUpon>fserver.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ftool.resx">
       <DependentUpon>ftool.cs</DependentUpon>

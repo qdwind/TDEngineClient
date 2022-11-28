@@ -30,9 +30,7 @@ namespace TDEngineClient
             //statusStrip1.BringToFront();
             spMain.Dock = DockStyle.Fill;
             spMain.BringToFront();
-            spInner.Dock = DockStyle.Fill;
-            spInner.SplitterDistance = spInner.Width - 100;
-            lblInfo.Text = "";
+
 
             tabControl1.Dock = DockStyle.Fill;
             panel2.Dock = DockStyle.Bottom;
@@ -52,7 +50,7 @@ namespace TDEngineClient
             for (int i = 0; i < MyConfig.ServerList.Count; i++)
             {
                 TreeNode item = new TreeNode();
-                item.Text = MyConfig.ServerList[i].TServer + (string.IsNullOrEmpty(MyConfig.ServerList[i].AliasName) ? "" : "(" + MyConfig.ServerList[i].AliasName + ")");
+                item.Text = MyConfig.ServerList[i].IP + (string.IsNullOrEmpty(MyConfig.ServerList[i].AliasName) ? "" : "(" + MyConfig.ServerList[i].AliasName + ")");
                 item.Tag = MyConfig.ServerList[i];
                 item.ImageIndex = 0;
                 treeView1.Nodes.Add(item);
@@ -62,13 +60,18 @@ namespace TDEngineClient
             var queries = FileHelper.GetQueriesFromIni();
             foreach (var query in queries)
             {
-                var account = MyConfig.ServerList.Where(t => t.TServer == query.AccountServer).FirstOrDefault();
+                var account = MyConfig.ServerList.Where(t => t.IP == query.AccountServer).FirstOrDefault();
                 if (account != null)
                 {
                     CreateQueryWindow(account, query);
                 }
             }
             panel1.Visible = true;
+
+            //初始化tipbox
+            TipBox.Width = 260;
+            TipBox.Sorted = true;
+
         }
 
         /// <summary>
@@ -77,7 +80,22 @@ namespace TDEngineClient
         /// <param name="dbNode"></param>
         private void OpenDB(TreeNode dbNode)
         {
-            var account = (dbNode.Tag as TAccount);
+            var account = (dbNode.Tag as Server);
+
+            if (!account.SavePass)//不保存密码时要求密码
+            {
+                var passFrm = new fpass();
+                if (passFrm.ShowDialog() == DialogResult.OK)
+                {
+                    account.Password = passFrm.Pass;
+                    account.SavePass = passFrm.SavePass;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
             var result = MyService.GetDbList(account);
             if (result != null)
             {
@@ -97,7 +115,7 @@ namespace TDEngineClient
             }
             else
             {
-                MessageBox.Show("无法连接到服务器" + account.TUrl + "!", "Error", MessageBoxButtons.OK);
+                MessageBox.Show("无法连接到服务器" + account.Url + "!", "Error", MessageBoxButtons.OK);
             }
         }
 
@@ -246,7 +264,7 @@ namespace TDEngineClient
         /// <param name="stable"></param>
         /// <param name="table"></param>
         /// <param name="box"></param>
-        private void CreateQueryWindow(TAccount account, TQueryBox box)
+        private void CreateQueryWindow(Server account, TQueryBox box)
         {
             if (box == null) return;
             var lines = box.Text.Split(new string[] { "\\r\\n" }, StringSplitOptions.None);
@@ -262,19 +280,19 @@ namespace TDEngineClient
         /// <param name="db"></param>
         /// <param name="stable"></param>
         /// <param name="table"></param>
-        private void CreateQueryWindow(SqlCommandType command, TAccount account, DataBaseDto db, StableDto stable, TableDto table)
+        private void CreateQueryWindow(SqlCommandType command, Server account, DataBaseDto db, StableDto stable, TableDto table)
         {
             var caption ="";
             string[] text = new string[] { };
 
             if (command == SqlCommandType.CreateDatabase)
             {
-                caption = $"{account.TServer}->sql";
+                caption = $"{account.IP}->sql";
                 text = new string[] { $"create database dbname keep 3650 duration 50" };
             }
             else if (command == SqlCommandType.DropDatabase)
             {
-                caption = $"{account.TServer}->sql";
+                caption = $"{account.IP}->sql";
                 text = new string[] { $"drop database {db.Name}" };
             }
             else if (command == SqlCommandType.CreateStable)
@@ -310,7 +328,7 @@ namespace TDEngineClient
         }
 
 
-        private Panel CreateQueryPanel(TAccount account)
+        private Panel CreateQueryPanel(Server account)
         {
             var pnl = new Panel();
             pnl.Height = 30;
@@ -318,10 +336,10 @@ namespace TDEngineClient
             cmb1.Parent = pnl;
             cmb1.Width = 200;
             cmb1.Top = 5;
-            cmb1.Text = $"{account.TServer}{(string.IsNullOrEmpty(account.AliasName) ? "" : "(" + account.AliasName + ")")}";
+            cmb1.Text = $"{account.IP}{(string.IsNullOrEmpty(account.AliasName) ? "" : "(" + account.AliasName + ")")}";
             for (int i = 0; i < MyConfig.ServerList.Count; i++)
             {
-                cmb1.Items.Add($"{MyConfig.ServerList[i].TServer}{(string.IsNullOrEmpty(MyConfig.ServerList[i].AliasName) ? "" : "(" + MyConfig.ServerList[i].AliasName + ")")}");
+                cmb1.Items.Add($"{MyConfig.ServerList[i].IP}{(string.IsNullOrEmpty(MyConfig.ServerList[i].AliasName) ? "" : "(" + MyConfig.ServerList[i].AliasName + ")")}");
             }
             var btn = new Button();
             btn.Left = 210;
@@ -347,7 +365,7 @@ namespace TDEngineClient
         /// <param name="account"></param>
         /// <param name="caption"></param>
         /// <param name="text"></param>
-        private void AddTabWindow(TAccount account, string caption,string[] text)
+        private void AddTabWindow(Server account, string caption,string[] text)
         {
             //if (db == null) return;
             var tab = new TabPage(caption);
@@ -357,8 +375,10 @@ namespace TDEngineClient
 
             var qbox = new QueryBox();//保存查询窗口的信息
             qbox.TipsDict.AddRange(MyConst.TipsPublicDict);//添加公用TIPS列表
-            qbox.Caption = $"{account.TServer}{(string.IsNullOrEmpty(account.AliasName) ? "" : "(" + account.AliasName + ")")}";
+            qbox.Caption = $"{account.IP}{(string.IsNullOrEmpty(account.AliasName) ? "" : "(" + account.AliasName + ")")}";
             qbox.Server = account;
+
+
 
             var myText = new TextBox();
             myText.Multiline = true;
@@ -403,13 +423,13 @@ namespace TDEngineClient
         {
             string sql = "";
             string caption = "";
-            TAccount account = null;
+            Server account = null;
             StableDto stable = null;
             DataBaseDto db = null;
             var node = treeView1.SelectedNode;
-            if (node.Tag is TAccount)
+            if (node.Tag is Server)
             {
-                account = (node.Tag as TAccount);
+                account = (node.Tag as Server);
             }
             else if (node.Tag is StableDto)
             {
@@ -419,8 +439,8 @@ namespace TDEngineClient
                 {
                     db = (node.Parent.Tag as DataBaseDto);
                     var svrNode = node.Parent.Parent;
-                    if (svrNode != null && svrNode.Tag is TAccount)
-                        account = (svrNode.Tag as TAccount);
+                    if (svrNode != null && svrNode.Tag is Server)
+                        account = (svrNode.Tag as Server);
                 }
             }
             if (account == null || db == null) return;
@@ -458,14 +478,14 @@ namespace TDEngineClient
         }
 
 
-        private void ExcuteQuery(TAccount account, string sql, DataGridView dgv)
+        private void ExcuteQuery(Server account, string sql, DataGridView dgv)
         {
             dgv.Rows.Clear();
             var result = MyService.ExcuteSql(account, sql);
             if (result != null)
             {
                 AddRecords(dgv, result);
-                ShowRecordCount(result, account.TServer, 1, PageSize);
+                ShowRecordCount(result, account.IP, 1, PageSize);
             }
 
         }
@@ -478,7 +498,7 @@ namespace TDEngineClient
         {
             var tp = tabControl1.SelectedTab;
             if (tp == null) return;
-            TAccount account = null;
+            Server account = null;
             DataGridView dgv = null;
             TextBox tbox = null;
             foreach (var ctl in tp.Controls)
@@ -512,14 +532,14 @@ namespace TDEngineClient
             }
         }
 
-        private void ComputingMesuringPoints(TAccount account)
+        private void ComputingMesuringPoints(Server account)
         {
             string sql = "";
 
             StableDto stable = null;
             DataBaseDto db = null;
 
-            var tab = new TabPage(account.TServer + "->MesuringPoints");
+            var tab = new TabPage(account.IP + "->MesuringPoints");
             tabControl1.TabPages.Add(tab);
             tabControl1.SelectedTab = tab;
             tab.AutoScroll = true;
@@ -589,12 +609,11 @@ namespace TDEngineClient
 
 
 
-        private NodeItem GetCurrentNodeItem()
+        private NodeItem GetNodeItem(TreeNode node)
         {
             NodeItem item = new NodeItem();
-            var node = treeView1.SelectedNode;
             TreeNode svrNode = null, dbNode = null, sNode = null, tNode = null;
-            if (node.Tag is TAccount)
+            if (node.Tag is Server)
             {
                 svrNode = node;
             }
@@ -626,10 +645,10 @@ namespace TDEngineClient
                 }
             }
 
-            item.Server = svrNode?.Tag as TAccount;
+            item.Server = svrNode?.Tag as Server;
             item.Db = dbNode?.Tag as DataBaseDto;
             item.STable = sNode?.Tag as StableDto;
-
+            item.Node = node;
 
             return item;
         }
@@ -660,9 +679,9 @@ namespace TDEngineClient
 
         }
 
-        private void CreateTable(TAccount account, string tableName)
+        private void CreateTable(Server account, string tableName)
         {
-            var key = $"{tableName}@{account.TServer}";
+            var key = $"{tableName}@{account.IP}";
             if (tabControl1.TabPages.ContainsKey(key))
             {
                 tabControl1.SelectedTab = tabControl1.TabPages[key];
@@ -769,7 +788,7 @@ namespace TDEngineClient
         private DataBaseDto GetNodeDb(TreeNode node)
         {
             var db = new DataBaseDto();
-            var account = new TAccount();
+            var account = new Server();
 
             if (node.Tag is StableDto)//超级表
             {
@@ -778,8 +797,8 @@ namespace TDEngineClient
                 {
                     db = node.Parent.Tag as DataBaseDto;
                     var svrNode = node.Parent.Parent;
-                    if (svrNode != null && svrNode.Tag is TAccount)
-                        account = (svrNode.Tag as TAccount);
+                    if (svrNode != null && svrNode.Tag is Server)
+                        account = (svrNode.Tag as Server);
                 }
             }
             else if (node.Tag is TableDto) //表
@@ -788,15 +807,15 @@ namespace TDEngineClient
                 {
                     db = node.Parent.Tag as DataBaseDto;
                     var svrNode = node.Parent.Parent;
-                    if (svrNode != null && svrNode.Tag is TAccount)
-                        account = (svrNode.Tag as TAccount);
+                    if (svrNode != null && svrNode.Tag is Server)
+                        account = (svrNode.Tag as Server);
                 }
                 else if (node.Parent?.Parent != null && node.Parent.Parent.Tag is DataBaseDto)
                 {
                     db = node.Parent.Parent.Tag as DataBaseDto;
                     var svrNode = node.Parent.Parent.Parent;
-                    if (svrNode != null && svrNode.Tag is TAccount)
-                        account = (svrNode.Tag as TAccount);
+                    if (svrNode != null && svrNode.Tag is Server)
+                        account = (svrNode.Tag as Server);
                 }
             }
             db.Account = account;
@@ -806,6 +825,9 @@ namespace TDEngineClient
 
         private void SetMenu(List<ToolStripMenuItem> items,List<ToolStripSeparator> lines =null)
         {
+            m_newsvr.Visible = false;
+            m_editsvr.Visible = false;
+            m_deletesvr.Visible = false;
             m_opensvr.Visible = false;
             m_closesvr.Visible = false;
             m_createdb.Visible = false;
@@ -820,6 +842,7 @@ namespace TDEngineClient
             //分割线
             sp1.Visible = false;
             sp2.Visible = false;
+            sp3.Visible = false;
 
             if (items != null)
             {
@@ -887,13 +910,18 @@ namespace TDEngineClient
         /// 显示提示框
         /// </summary>
         /// <param name="txtBox"></param>
-        private void ShowTipBox(TextBox txtBox)
+        private void ShowTipBox(TextBox txtBox,Keys key)
         {
+            if ((key < Keys.D0 && key!=Keys.Back)|| key > Keys.Z )
+            {
+                return;
+            }
+
             var text = GetInputText(txtBox);
             if (text.Length > 0)//检索
             {
                 var dict = (txtBox.Tag as QueryBox).TipsDict;
-                var found = dict.Where(t => t.StartsWith(text)).OrderBy(t=>t).ToArray();
+                var found = dict.Where(t => t.Text.StartsWith(text)).OrderBy(t=>t.Text).Select(t=>t.Text).ToArray();
                 if (found.Length > 0)
                 {
                     //捕获光标位置
@@ -915,6 +943,24 @@ namespace TDEngineClient
 
             }
             TipBox.Visible = false;//隐藏
+        }
+
+        /// <summary>
+        /// 保存当前服务器树到配置文件
+        /// </summary>
+        /// <returns></returns>
+        private bool SaveConfigServers()
+        {
+            var svrList = new List<Server>();
+            for(int i=0;i<treeView1.Nodes.Count;i++)
+            {
+                var item = GetNodeItem(treeView1.Nodes[i]);
+                svrList.Add(item.Server);
+            }
+
+            MyConfig.ServerList = svrList;
+            FileHelper.SaveServers(svrList);//保存到配置文件
+            return true;
         }
 
 

@@ -96,32 +96,30 @@ namespace TDEngineClient
                 }
             }
 
-            var result = MyService.GetDbList(account);
-            if (result != null)
+            var svrInfo = MyService.GetServerDetail(account);
+            if (svrInfo.Connected)
             {
-                dbNode.Nodes.Clear();
-                if (account.Version == 30)
-                {
-                    AddDbsV30(dbNode, result);
-                }
-                else
-                {
-                    AddDbsV20(dbNode, result);
-                }
-
-                dbNode.Expand();
-                dbNode.ImageIndex = 5;
-                dbNode.SelectedImageIndex = 5;
+                SetServerNodes(svrInfo, dbNode);
             }
             else
             {
                 MessageBox.Show("无法连接到服务器" + account.Url + "!", "Error", MessageBoxButtons.OK);
             }
+           
+
         }
 
-        private void AddDbsV20(TreeNode node, List<DataBaseDto> dbs)
+
+        /// <summary>
+        /// 设置服务器节点
+        /// </summary>
+        /// <param name="serverDetail"></param>
+        /// <param name="dbNode"></param>
+        private void SetServerNodes(Server svr, TreeNode dbNode)
         {
-            foreach (var db in dbs)
+            dbNode.Nodes.Clear();
+
+            foreach (var db in svr.DbList)
             {
                 var item = new TreeNode();
                 item.Tag = db;
@@ -129,13 +127,10 @@ namespace TDEngineClient
                 item.ImageIndex = 1;
                 item.SelectedImageIndex = 1;
 
-                var tabs = MyService.GetTables(db);//所有表
-                var mystabs = MyService.GetStables(db);//添加超级表
-                foreach (var ms in mystabs)
+                foreach (var ms in db.Stables)//添加超级表
                 {
                     var stabItem = new TreeNode();
-                    var mytabs = tabs.Where(t => t.db_name == db.Name && t.stable_name == ms.stable_name).ToList();//超级表下的子表
-                    foreach (var mt in mytabs)
+                    foreach (var mt in ms.Tables)
                     {
                         var tabItem = new TreeNode();
                         tabItem.Tag = mt;
@@ -144,70 +139,14 @@ namespace TDEngineClient
                         tabItem.SelectedImageIndex = 3;
                         stabItem.Nodes.Add(tabItem);
                     }
-
-
                     stabItem.Tag = ms;
-                    stabItem.Text = $"{ms.stable_name}({mytabs.Count.ToString()})";
+                    stabItem.Text = $"{ms.stable_name}({ms.Tables.Count.ToString()})";
                     stabItem.ImageIndex = 2;
                     stabItem.SelectedImageIndex = 2;
                     item.Nodes.Add(stabItem);
                 }
 
-                var nortabs = tabs.Where(t => t.db_name == db.Name && t.stable_name == "").ToList();//普通表
-                foreach (var tab in nortabs)
-                {
-                    var tabItem = new TreeNode();
-                    tabItem.Tag = tab;
-                    tabItem.Text = $"{tab.table_name}";
-                    tabItem.ImageIndex = 3;
-                    tabItem.SelectedImageIndex = 3;
-                    item.Nodes.Add(tabItem);
-                }
-
-
-                node.Nodes.Add(item);
-            }
-        }
-
-        private void AddDbsV30(TreeNode node, List<DataBaseDto> dbs)
-        {
-            var account = dbs[0].Account;
-            var tabs = MyService.GetTables(new DataBaseDto { Account =account});
-            var stabs = MyService.GetStables(new DataBaseDto { Account = account });
-
-            foreach (var db in dbs)
-            {
-                var item = new TreeNode();
-                item.Tag = db;
-                item.Text = db.Name;
-                item.ImageIndex = 1;
-                item.SelectedImageIndex = 1;
-
-                var mystabs = stabs.Where(t => t.db_name == db.Name).ToList();//添加超级表
-                foreach (var ms in mystabs)
-                {
-                    var stabItem = new TreeNode();
-                    var mytabs = tabs.Where(t => t.db_name == db.Name && t.stable_name == ms.stable_name).ToList();//超级表下的子表
-                    foreach (var mt in mytabs)
-                    {
-                        var tabItem = new TreeNode();
-                        tabItem.Tag = mt;
-                        tabItem.Text = $"{mt.table_name}";
-                        tabItem.ImageIndex = 3;
-                        tabItem.SelectedImageIndex = 3;
-                        stabItem.Nodes.Add(tabItem);
-                    }
-
-
-                    stabItem.Tag = ms;
-                    stabItem.Text = $"{ms.stable_name}({mytabs.Count.ToString()})";
-                    stabItem.ImageIndex = 2;
-                    stabItem.SelectedImageIndex = 2;
-                    item.Nodes.Add(stabItem);
-                }
-
-                var systabs = tabs.Where(t => t.db_name == db.Name && t.type == TableType.SYSTEM_TABLE.ToString()).ToList();//系统表
-                foreach (var tab in systabs)
+                foreach (var tab in db.SysTables)//系统表
                 {
                     var tabItem = new TreeNode();
                     tabItem.Tag = tab;
@@ -216,8 +155,8 @@ namespace TDEngineClient
                     tabItem.SelectedImageIndex = 4;
                     item.Nodes.Add(tabItem);
                 }
-                var nortabs = tabs.Where(t => t.db_name == db.Name && t.type == TableType.NORMAL_TABLE.ToString()).ToList();//普通表
-                foreach (var tab in nortabs)
+
+                foreach (var tab in db.Tables)//普通表
                 {
                     var tabItem = new TreeNode();
                     tabItem.Tag = tab;
@@ -228,9 +167,14 @@ namespace TDEngineClient
                 }
 
 
-                node.Nodes.Add(item);
+                dbNode.Nodes.Add(item);
             }
+
+            dbNode.Expand();
+            dbNode.ImageIndex = 5;
+            dbNode.SelectedImageIndex = 5;
         }
+
 
         /// <summary>
         /// 创建查询命令窗口
@@ -374,17 +318,17 @@ namespace TDEngineClient
             tab.AutoScroll = true;
 
             var qbox = new QueryBox();//保存查询窗口的信息
-            qbox.TipsDict.AddRange(MyConst.TipsPublicDict);//添加公用TIPS列表
-            qbox.Caption = $"{account.IP}{(string.IsNullOrEmpty(account.AliasName) ? "" : "(" + account.AliasName + ")")}";
             qbox.Server = account;
-
-
+            qbox.TipsDict.AddRange(MyConst.TipsPublicDict);//添加公用TIPS列表
+            qbox.DbDict.AddRange(account.GetTipNames()); //添加数据库表名称列表
+            qbox.Caption = $"{account.IP}{(string.IsNullOrEmpty(account.AliasName) ? "" : "(" + account.AliasName + ")")}";
 
             var myText = new TextBox();
             myText.Multiline = true;
             myText.MaxLength = 655360;
             myText.Height = 400;
             myText.Font = new Font(FontFamily.GenericSansSerif, 12);
+            myText.ImeMode = ImeMode.Off;
             myText.ScrollBars = ScrollBars.Vertical;
             myText.Dock = DockStyle.Top;
             myText.Lines = text;
@@ -920,7 +864,9 @@ namespace TDEngineClient
             var text = GetInputText(txtBox);
             if (text.Length > 0)//检索
             {
-                var dict = (txtBox.Tag as QueryBox).TipsDict;
+                var dict = new List<Tip>();
+                dict.AddRange((txtBox.Tag as QueryBox).TipsDict);
+                dict.AddRange((txtBox.Tag as QueryBox).DbDict);
                 var found = dict.Where(t => t.Text.StartsWith(text)).OrderBy(t=>t.Text).Select(t=>t.Text).ToArray();
                 if (found.Length > 0)
                 {

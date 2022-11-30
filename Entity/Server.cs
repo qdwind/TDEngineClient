@@ -20,7 +20,43 @@ namespace TDEngineClient.Entity
         public bool SavePass { get; set; } = true;
 
         public List<DataBaseDto> DbList { get; set; } = new List<DataBaseDto>();
-        public List<StableDto> StableList { get; set; } = new List<StableDto>();
-        public List<TableDto> TableList { get; set; } = new List<TableDto>();
+
+
+
+        public bool Connected { get; set; } = false;
+
+        public List<Tip> GetTipNames()
+        {
+            var tips = new List<Tip>();
+            foreach (var db in DbList)
+            {
+                tips.Add(new Tip(db.Name, AliasName, TipType.Names));
+                foreach (var st in db.Stables)
+                {
+                    tips.Add(new Tip($"{db.Name}.{st.stable_name}", db.Name, TipType.Names));
+                    foreach (var tb in st.Tables)
+                    {
+                        tips.Add(new Tip($"{db.Name}.{tb.table_name}", st.stable_name, TipType.Names));
+                    }
+                }
+                foreach (var tb in db.Tables)
+                {
+                    tips.Add(new Tip($"{db.Name}.{tb.table_name}", db.Name, TipType.Names));
+                }
+                foreach (var tb in db.SysTables)
+                {
+                    tips.Add(new Tip($"{db.Name}.{tb.table_name}", db.Name, TipType.Names));
+                }
+            }
+
+
+            return tips;
+        }
+
+
+        public override string ToString()
+        {
+            return AliasName == "" ? IP : AliasName;
+        }
     }
 }

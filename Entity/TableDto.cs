@@ -18,5 +18,10 @@ namespace TDEngineClient.Entity
         public int ttl { get; set; }
         public string table_comment { get; set; }
         public string type { get; set; }
+
+        public override string ToString()
+        {
+            return table_name;
+        }
     }
 }

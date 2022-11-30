@@ -18,5 +18,12 @@ namespace TDEngineClient.Entity
         public string watermark { get; set; }
         public string max_delay { get; set; }
         public string rollup { get; set; }
+
+        public List<TableDto> Tables { get; set; } = new List<TableDto>();
+
+        public override string ToString()
+        {
+            return stable_name;
+        }
     }
 }

@@ -434,6 +434,7 @@ namespace TDEngineClient
             this.explorerToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.explorerToolStripMenuItem.Name = "explorerToolStripMenuItem";
             resources.ApplyResources(this.explorerToolStripMenuItem, "explorerToolStripMenuItem");
+            this.explorerToolStripMenuItem.Click += new System.EventHandler(this.explorerToolStripMenuItem_Click);
             // 
             // windowToolStripMenuItem
             // 

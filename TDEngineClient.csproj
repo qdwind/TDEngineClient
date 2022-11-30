@@ -110,6 +110,7 @@
     <Compile Include="Service\GetDbList.cs" />
     <Compile Include="Service\GetFileds.cs" />
     <Compile Include="Service\GetRecords.cs" />
+    <Compile Include="Service\GetServerDetail.cs" />
     <Compile Include="Service\GetStables.cs" />
     <Compile Include="Service\GetTableList.cs" />
     <EmbeddedResource Include="fmain.resx">

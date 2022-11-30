@@ -358,5 +358,11 @@ namespace TDEngineClient
                 SaveConfigServers();
             }
         }
+
+        private void explorerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            explorerToolStripMenuItem.Checked = !explorerToolStripMenuItem.Checked;
+            spMain.Panel1Collapsed = !explorerToolStripMenuItem.Checked;
+        }
     }
 }

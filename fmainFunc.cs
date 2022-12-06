@@ -99,7 +99,7 @@ namespace TDEngineClient
             var svrInfo = MyService.GetServerDetail(account);
             if (svrInfo.Connected)
             {
-                SetServerNodes(svrInfo, dbNode);
+                SetServerNodes(svrInfo, dbNode); //将数据库表添加到节点上
             }
             else
             {
@@ -859,6 +859,20 @@ namespace TDEngineClient
             if ((key < Keys.D0 && key!=Keys.Back)|| key > Keys.Z )
             {
                 return;
+            }
+
+            var svr = (txtBox.Tag as QueryBox).Server;
+            if ((txtBox.Tag as QueryBox).DbDict.Count==0)
+            {
+                var svrInfo = MyService.GetServerDetail(svr);
+                if (svrInfo.Connected)
+                {
+                    (txtBox.Tag as QueryBox).DbDict.AddRange(svr.GetTipNames()); //添加数据库表名称列表
+                }
+                else
+                {
+                    MessageBox.Show("无法连接到服务器" + svr.Url + "!", "Error", MessageBoxButtons.OK);
+                }
             }
 
             var text = GetInputText(txtBox);

@@ -816,19 +816,20 @@ namespace TDEngineClient
             try
             {
                 text = txtBox.Lines.Length > 0 ? txtBox.Lines[line] : "";
+                if (text.Length > 0)
+                {
+                    text = text.Substring(0, lastPos - leftPos);
+                    var sp = text.LastIndexOf(' ');
+                    if (sp > 0) text = text.Substring(sp, text.Length - sp);
+                }
+                text = text.Trim();
             }
             catch(Exception ex)
             {
 
             }
 
-            if (text.Length > 0)
-            {
-                text = text.Substring(0, lastPos - leftPos);
-                var sp = text.LastIndexOf(' ');
-                if (sp > 0) text = text.Substring(sp, text.Length - sp);
-            }
-            text = text.Trim();
+
             return text;
         }
 

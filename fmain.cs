@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -280,7 +280,7 @@ namespace TDEngineClient
                 }
                 else if (node.Tag is StableDto)//超级表
                 {
-                    SetMenu(new List<ToolStripMenuItem> { m_createtable, m_table,m_field,m_query },new List<ToolStripSeparator> { sp3 });
+                    SetMenu(new List<ToolStripMenuItem> { m_createtable, m_table,m_field, m_export, m_import, m_query },new List<ToolStripSeparator> { sp3 });
 
                     //var db = GetNodeDb(node);
                     //var stable = (node.Tag as StableDto);
@@ -288,7 +288,7 @@ namespace TDEngineClient
                 }
                 else if (node.Tag is TableDto) //表
                 {
-                    SetMenu(new List<ToolStripMenuItem> { m_field, m_droptable, m_query }, new List<ToolStripSeparator> { sp3 });
+                    SetMenu(new List<ToolStripMenuItem> { m_field, m_droptable,m_export,m_import, m_query }, new List<ToolStripSeparator> { sp3 });
 
                     //var db = GetNodeDb(node);
                     //var table = (node.Tag as TableDto);
@@ -363,6 +363,26 @@ namespace TDEngineClient
         {
             explorerToolStripMenuItem.Checked = !explorerToolStripMenuItem.Checked;
             spMain.Panel1Collapsed = !explorerToolStripMenuItem.Checked;
+        }
+
+        private void m_export_Click(object sender, EventArgs e)
+        {
+            var item = GetNodeItem(treeView1.SelectedNode);
+            var dlg = new FolderBrowserDialog();
+            if(dlg.ShowDialog()== DialogResult.OK)
+            {
+                ExportTable(item,dlg.SelectedPath);
+            }
+        }
+
+        private void m_import_Click(object sender, EventArgs e)
+        {
+            var item = GetNodeItem(treeView1.SelectedNode);
+            var dlg = new FolderBrowserDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                ImportTable(item, dlg.SelectedPath);
+            }
         }
     }
 }

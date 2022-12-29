@@ -1,4 +1,4 @@
-﻿
+
 namespace TDEngineClient
 {
     partial class fmain
@@ -49,6 +49,8 @@ namespace TDEngineClient
             this.m_createsuper = new System.Windows.Forms.ToolStripMenuItem();
             this.m_createtable = new System.Windows.Forms.ToolStripMenuItem();
             this.m_droptable = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_export = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_import = new System.Windows.Forms.ToolStripMenuItem();
             this.sp3 = new System.Windows.Forms.ToolStripSeparator();
             this.m_query = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -86,6 +88,7 @@ namespace TDEngineClient
             this.menuText = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.m_run = new System.Windows.Forms.ToolStripMenuItem();
             this.m_record = new System.Windows.Forms.ToolStripMenuItem();
+            this.psBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.spMain)).BeginInit();
             this.spMain.Panel1.SuspendLayout();
             this.spMain.Panel2.SuspendLayout();
@@ -108,6 +111,7 @@ namespace TDEngineClient
             // 
             // spMain.Panel1
             // 
+            this.spMain.Panel1.Controls.Add(this.psBar);
             this.spMain.Panel1.Controls.Add(this.treeView1);
             // 
             // spMain.Panel2
@@ -144,6 +148,8 @@ namespace TDEngineClient
             this.m_createsuper,
             this.m_createtable,
             this.m_droptable,
+            this.m_export,
+            this.m_import,
             this.sp3,
             this.m_query});
             this.menuTree.Name = "menuTree";
@@ -241,6 +247,18 @@ namespace TDEngineClient
             resources.ApplyResources(this.m_droptable, "m_droptable");
             this.m_droptable.Tag = "6";
             this.m_droptable.Click += new System.EventHandler(this.m_command_Click);
+            // 
+            // m_export
+            // 
+            this.m_export.Name = "m_export";
+            resources.ApplyResources(this.m_export, "m_export");
+            this.m_export.Click += new System.EventHandler(this.m_export_Click);
+            // 
+            // m_import
+            // 
+            this.m_import.Name = "m_import";
+            resources.ApplyResources(this.m_import, "m_import");
+            this.m_import.Click += new System.EventHandler(this.m_import_Click);
             // 
             // sp3
             // 
@@ -514,6 +532,11 @@ namespace TDEngineClient
             resources.ApplyResources(this.m_record, "m_record");
             this.m_record.Click += new System.EventHandler(this.m_record_Click);
             // 
+            // psBar
+            // 
+            resources.ApplyResources(this.psBar, "psBar");
+            this.psBar.Name = "psBar";
+            // 
             // fmain
             // 
             resources.ApplyResources(this, "$this");
@@ -559,8 +582,6 @@ namespace TDEngineClient
         private System.Windows.Forms.Button btnFirst;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ToolStripStatusLabel ts1;
-        private System.Windows.Forms.ToolStripStatusLabel ts2;
         private System.Windows.Forms.ToolStripStatusLabel ts3;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ContextMenuStrip menuTree;
@@ -601,6 +622,11 @@ namespace TDEngineClient
         private System.Windows.Forms.ToolStripMenuItem m_editsvr;
         private System.Windows.Forms.ToolStripMenuItem m_deletesvr;
         private System.Windows.Forms.ToolStripSeparator sp3;
+        private System.Windows.Forms.ToolStripMenuItem m_export;
+        private System.Windows.Forms.ToolStripMenuItem m_import;
+        private System.Windows.Forms.ToolStripStatusLabel ts2;
+        private System.Windows.Forms.ToolStripStatusLabel ts1;
+        private System.Windows.Forms.ProgressBar psBar;
     }
 }
 

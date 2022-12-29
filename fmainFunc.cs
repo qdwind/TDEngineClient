@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -783,6 +784,8 @@ namespace TDEngineClient
             m_createtable.Visible = false;
             m_droptable.Visible = false;
             m_query.Visible = false;
+            m_export.Visible = false;
+            m_import.Visible = false;
             //分割线
             sp1.Visible = false;
             sp2.Visible = false;
@@ -806,6 +809,11 @@ namespace TDEngineClient
 
         }
 
+        /// <summary>
+        /// 获取用户输入的词
+        /// </summary>
+        /// <param name="txtBox"></param>
+        /// <returns></returns>
         private string GetInputText(TextBox txtBox)
         {
             //捕获键入字符
@@ -815,16 +823,12 @@ namespace TDEngineClient
             var text = "";
             try
             {
-                text = txtBox.Lines.Length > 0 ? txtBox.Lines[line] : "";
-                if (text.Length > 0)
-                {
-                    text = text.Substring(0, lastPos - leftPos);
-                    var sp = text.LastIndexOf(' ');
-                    if (sp > 0) text = text.Substring(sp, text.Length - sp);
-                }
+                text = txtBox.Text.Substring(leftPos, lastPos - leftPos);
+                var sp = text.LastIndexOf(' ');
+                if (sp > 0) text = text.Substring(sp, text.Length - sp);
                 text = text.Trim();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -843,9 +847,9 @@ namespace TDEngineClient
             var leftPos = txtBox.GetFirstCharIndexOfCurrentLine();
             var line = txtBox.GetLineFromCharIndex(leftPos);
             var lastPos = txtBox.SelectionStart;
-            var text = txtBox.Lines[line].Substring(0, lastPos - leftPos);
-            var sp = text.LastIndexOf(' ')+leftPos;
-            txtBox.Select(sp+1, lastPos - sp-1);
+            var text = txtBox.Text.Substring(leftPos, lastPos - leftPos);
+            var sp = text.LastIndexOf(' ') + leftPos;
+            txtBox.Select(sp + 1, lastPos - sp - 1);
             txtBox.SelectedText = txt;
         }
 
@@ -857,7 +861,7 @@ namespace TDEngineClient
         /// <param name="txtBox"></param>
         private void ShowTipBox(TextBox txtBox,Keys key)
         {
-            if ((key < Keys.D0 && key!=Keys.Back)|| key > Keys.Z )
+            if ((key < Keys.D0 || key > Keys.Z) && key != Keys.Back && key != Keys.OemPeriod) //合法字符：0..8,A..Z,esc,.
             {
                 return;
             }
@@ -924,7 +928,165 @@ namespace TDEngineClient
             return true;
         }
 
+        /// <summary>
+        /// 导出表/超级表
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        private bool ExportTable(NodeItem item, string folderName)
+        {
+            var ret = false;
+            var tblist = new List<string>();
+            if (item.Table != null)
+            {
+                tblist.Add(item.Table.ToString());
+            }
+            else if (item.STable != null)
+            {
+                foreach (var tb in item.STable.Tables)
+                {
+                    tblist.Add(tb.ToString());
+                }
+                if (!folderName.EndsWith("\\")) folderName += "\\";
+                folderName = $"{folderName}{item.STable.ToString()}";//文件太多，建超级表文件夹
+                if (!Directory.Exists(folderName)) Directory.CreateDirectory(folderName);
+            }
 
-        
+            var filedList = new List<string>();//字段名列表
+            var tmpSql = $"describe {item.Db}.{item.STable}";
+            var fResult = MyService.ExcuteSql(item.Server, tmpSql);
+            if (fResult != null)
+            {
+                foreach (var rec in fResult.RecordList)
+                {
+                    if (rec.Count < 3 || rec[3] == "TAG") continue;
+                    var fname = rec[0];//字段名
+                    if (rec[1] != "INT" && rec[1] != "FLOAT" && rec[1] != "BOOL")
+                    {
+                        fname = $"'{fname}'";
+                    }
+                    filedList.Add(fname);
+                }
+            }
+
+            psBar.Value = 0;
+            psBar.Maximum = tblist.Count;
+            foreach (var tb in tblist)
+            {
+                ts2.Text = $"Exporting {tb}...";
+                statusStrip1.Refresh();
+                var tags = "";
+                var sql = $"show create table {item.Db}.{tb}";
+                var tagResult = MyService.ExcuteSql(item.Server, sql);
+                if (tagResult != null)
+                {
+                    tags = tagResult.RecordList[0][1];
+                    var p1 = tags.IndexOf("TAGS ");
+                    if (p1 == -1) continue;
+                    tags = tags.Substring(p1, tags.Length - p1);//"tags (...)"
+                }
+
+                sql = $"select * from {item.Db}.{tb}";
+                var result = MyService.ExcuteSql(item.Server, sql);
+                if (result != null)
+                {
+                    var recs = new List<List<string>>();
+                    var myflist = new List<string>();
+                    myflist.AddRange(filedList);
+                    if (tags != "") myflist.Add(tags);//将tag存入字段行末尾
+                    recs.Add(myflist);
+                    recs.AddRange(result.RecordList);
+                    ret = FileHelper.WriteListToTextFile($"{folderName}\\{tb}.txt", recs);
+                }
+
+                if (psBar.Value < psBar.Maximum)
+                    psBar.Value += 1;
+            }
+
+
+            return ret;
+
+        }
+
+        /// <summary>
+        /// 导入表/超级表
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        private bool ImportTable(NodeItem item, string folderName)
+        {
+            var ret = false;
+
+            //遍历文件
+            DirectoryInfo dir = new DirectoryInfo(folderName);
+            FileSystemInfo[] files = dir.GetFileSystemInfos();
+
+            psBar.Value = 0;
+            psBar.Maximum = files.Length;
+
+            foreach (var file in files)
+            {
+                if (file.Attributes == FileAttributes.Directory) continue;//忽略文件夹
+
+                var recs = FileHelper.ReadTextFileToList(file.FullName);//读取记录
+                if (recs.Count == 0) continue;
+                var fields = recs[0]; //读取字段列表和TAGS
+                var tags = "";
+                if (fields[fields.Count - 1].StartsWith("TAGS"))
+                {
+                    tags = fields[fields.Count - 1].Replace("\"","'");
+                    fields.RemoveAt(fields.Count - 1);
+                }
+
+                //生成语句头
+                var headSql = new StringBuilder();//语句头
+                headSql.Append($"insert into {item.Db}.{file.Name.Replace(file.Extension,"")}");//首行//字段名
+                if (item.Table == null)
+                {
+                    headSql.Append($" using {item.Db}.{item.STable} {tags}");//引用超级表TAGS
+                }
+                headSql.Append(" values ");
+
+                var sqlList = new List<string>();//sql语句集
+                var sql = new StringBuilder();
+
+                for (int i = 1; i < recs.Count; i++)
+                {
+                    var recStr = new List<string>();
+                    for (int j = 0; j < recs[i].Count; j++)
+                    {
+                        var value = recs[i][j];
+                        if (fields[j].StartsWith("'")) value = $"'{value}'"; //字符型加引号
+                        recStr.Add(value);
+                    }
+                    sql.Append($"({string.Join(",",recStr)})");//添加一条记录
+
+                    if (i % 1000 == 0) //每页单独一条SQL语句
+                    {
+                        sqlList.Add(headSql.ToString()+ sql.ToString());
+                        sql.Clear();
+                    }
+                }
+                if (sql.Length > 0)
+                    sqlList.Add(headSql.ToString() + sql.ToString());//不足一页的SQL语句
+
+                //语句生成完成，开始执行
+                foreach (var sq in sqlList)
+                {
+                    var result= ExcuteSql(item.Server, sq);
+
+                }
+
+                if (psBar.Value < psBar.Maximum)
+                    psBar.Value += 1;
+
+            }//单个文件结束
+
+
+            return ret;
+
+        }
+
+
     }
 }

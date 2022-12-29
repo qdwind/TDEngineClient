@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -125,6 +125,31 @@
   <data name="spMain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
+  <data name="psBar.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="psBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 377</value>
+  </data>
+  <data name="psBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 23</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="psBar.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;psBar.Name" xml:space="preserve">
+    <value>psBar</value>
+  </data>
+  <data name="&gt;&gt;psBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;psBar.Parent" xml:space="preserve">
+    <value>spMain.Panel1</value>
+  </data>
+  <data name="&gt;&gt;psBar.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="menuTree.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>455, 14</value>
   </metadata>
@@ -212,6 +237,18 @@
   <data name="m_droptable.Text" xml:space="preserve">
     <value>Drop Table</value>
   </data>
+  <data name="m_export.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_export.Text" xml:space="preserve">
+    <value>Export Table</value>
+  </data>
+  <data name="m_import.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_import.Text" xml:space="preserve">
+    <value>Import Table</value>
+  </data>
   <data name="sp3.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 6</value>
   </data>
@@ -222,7 +259,7 @@
     <value>New Query</value>
   </data>
   <data name="menuTree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 330</value>
+    <value>185, 374</value>
   </data>
   <data name="&gt;&gt;menuTree.Name" xml:space="preserve">
     <value>menuTree</value>
@@ -236,7 +273,6 @@
   <data name="treeView1.Font" type="System.Drawing.Font, System.Drawing">
     <value>宋体, 10.8pt</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="treeView1.ImageIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -248,7 +284,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAC+
-        DAAAAk1TRnQBSQFMAgEBCAEAATQBAQE0AQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        DAAAAk1TRnQBSQFMAgEBCAEAAUwBAQFMAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAATADAAEBAQABCAYAAQwYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -330,7 +366,7 @@
     <value>spMain.Panel1</value>
   </data>
   <data name="&gt;&gt;treeView1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;spMain.Panel1.Name" xml:space="preserve">
     <value>spMain.Panel1</value>
@@ -639,22 +675,22 @@
     <value>13, 14</value>
   </metadata>
   <data name="newConnectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="newConnectionToolStripMenuItem.Text" xml:space="preserve">
     <value>New Connection</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>168, 6</value>
   </data>
   <data name="closeServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="closeServerToolStripMenuItem.Text" xml:space="preserve">
     <value>Close Server</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
@@ -666,22 +702,22 @@
     <value>File</value>
   </data>
   <data name="copyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>128, 22</value>
   </data>
   <data name="copyToolStripMenuItem.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="pasteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>128, 22</value>
   </data>
   <data name="pasteToolStripMenuItem.Text" xml:space="preserve">
     <value>Paste</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>125, 6</value>
   </data>
   <data name="selectAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>128, 22</value>
   </data>
   <data name="selectAllToolStripMenuItem.Text" xml:space="preserve">
     <value>Select All</value>
@@ -693,7 +729,7 @@
     <value>Edit</value>
   </data>
   <data name="explorerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="explorerToolStripMenuItem.Text" xml:space="preserve">
     <value>Explorer</value>
@@ -705,7 +741,7 @@
     <value>View</value>
   </data>
   <data name="newQueryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>141, 22</value>
   </data>
   <data name="newQueryToolStripMenuItem.Text" xml:space="preserve">
     <value>New Query</value>
@@ -765,7 +801,10 @@
     <value>False</value>
   </data>
   <data name="ts2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 486</value>
+    <value>1, 486</value>
+  </data>
+  <data name="ts2.Text" xml:space="preserve">
+    <value>info</value>
   </data>
   <data name="ts2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -774,7 +813,10 @@
     <value>False</value>
   </data>
   <data name="ts3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>3919, 486</value>
+    <value>4324, 486</value>
+  </data>
+  <data name="ts3.Text" xml:space="preserve">
+    <value>page</value>
   </data>
   <data name="ts3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -783,7 +825,10 @@
     <value>False</value>
   </data>
   <data name="ts1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 486</value>
+    <value>350, 486</value>
+  </data>
+  <data name="ts1.Text" xml:space="preserve">
+    <value>ok</value>
   </data>
   <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>70, 500</value>
@@ -792,7 +837,7 @@
     <value>1, 0, 10, 0</value>
   </data>
   <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>4230, 491</value>
+    <value>4686, 491</value>
   </data>
   <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -972,6 +1017,18 @@
     <value>m_droptable</value>
   </data>
   <data name="&gt;&gt;m_droptable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_export.Name" xml:space="preserve">
+    <value>m_export</value>
+  </data>
+  <data name="&gt;&gt;m_export.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_import.Name" xml:space="preserve">
+    <value>m_import</value>
+  </data>
+  <data name="&gt;&gt;m_import.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;sp3.Name" xml:space="preserve">

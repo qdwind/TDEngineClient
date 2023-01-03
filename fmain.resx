@@ -237,19 +237,58 @@
   <data name="m_droptable.Text" xml:space="preserve">
     <value>Drop Table</value>
   </data>
+  <data name="sp3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 6</value>
+  </data>
+  <data name="m_export_tables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="m_export_tables.Text" xml:space="preserve">
+    <value>Table Files</value>
+  </data>
+  <data name="m_export_stable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="m_export_stable.Text" xml:space="preserve">
+    <value>Stable File</value>
+  </data>
+  <data name="m_export_sql.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="m_export_sql.Text" xml:space="preserve">
+    <value>SQL File</value>
+  </data>
   <data name="m_export.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 22</value>
   </data>
   <data name="m_export.Text" xml:space="preserve">
-    <value>Export Table</value>
+    <value>Export To</value>
+  </data>
+  <data name="m_impor_tables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="m_impor_tables.Text" xml:space="preserve">
+    <value>Table Files</value>
+  </data>
+  <data name="m_impor_stable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="m_impor_stable.Text" xml:space="preserve">
+    <value>Stable File</value>
+  </data>
+  <data name="m_impor_sql.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="m_impor_sql.Text" xml:space="preserve">
+    <value>SQL File</value>
   </data>
   <data name="m_import.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 22</value>
   </data>
   <data name="m_import.Text" xml:space="preserve">
-    <value>Import Table</value>
+    <value>Import From</value>
   </data>
-  <data name="sp3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="sp4.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 6</value>
   </data>
   <data name="m_query.Size" type="System.Drawing.Size, System.Drawing">
@@ -259,7 +298,7 @@
     <value>New Query</value>
   </data>
   <data name="menuTree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 374</value>
+    <value>185, 424</value>
   </data>
   <data name="&gt;&gt;menuTree.Name" xml:space="preserve">
     <value>menuTree</value>
@@ -284,7 +323,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAC+
-        DAAAAk1TRnQBSQFMAgEBCAEAAUwBAQFMAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        DAAAAk1TRnQBSQFMAgEBCAEAAVwBAQFcAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAATADAAEBAQABCAYAAQwYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -702,22 +741,22 @@
     <value>File</value>
   </data>
   <data name="copyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="copyToolStripMenuItem.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="pasteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="pasteToolStripMenuItem.Text" xml:space="preserve">
     <value>Paste</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="selectAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="selectAllToolStripMenuItem.Text" xml:space="preserve">
     <value>Select All</value>
@@ -729,7 +768,7 @@
     <value>Edit</value>
   </data>
   <data name="explorerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="explorerToolStripMenuItem.Text" xml:space="preserve">
     <value>Explorer</value>
@@ -741,7 +780,7 @@
     <value>View</value>
   </data>
   <data name="newQueryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="newQueryToolStripMenuItem.Text" xml:space="preserve">
     <value>New Query</value>
@@ -813,7 +852,7 @@
     <value>False</value>
   </data>
   <data name="ts3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>4324, 486</value>
+    <value>4366, 486</value>
   </data>
   <data name="ts3.Text" xml:space="preserve">
     <value>page</value>
@@ -837,7 +876,7 @@
     <value>1, 0, 10, 0</value>
   </data>
   <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>4686, 491</value>
+    <value>4728, 491</value>
   </data>
   <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -910,6 +949,12 @@
   </data>
   <data name="&gt;&gt;menuText.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="m_imports.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_imports.Text" xml:space="preserve">
+    <value>Import Stable</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1019,6 +1064,12 @@
   <data name="&gt;&gt;m_droptable.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;sp3.Name" xml:space="preserve">
+    <value>sp3</value>
+  </data>
+  <data name="&gt;&gt;sp3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;m_export.Name" xml:space="preserve">
     <value>m_export</value>
   </data>
@@ -1031,10 +1082,10 @@
   <data name="&gt;&gt;m_import.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;sp3.Name" xml:space="preserve">
-    <value>sp3</value>
+  <data name="&gt;&gt;sp4.Name" xml:space="preserve">
+    <value>sp4</value>
   </data>
-  <data name="&gt;&gt;sp3.Type" xml:space="preserve">
+  <data name="&gt;&gt;sp4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;m_query.Name" xml:space="preserve">
@@ -1173,6 +1224,48 @@
     <value>m_record</value>
   </data>
   <data name="&gt;&gt;m_record.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_export_tables.Name" xml:space="preserve">
+    <value>m_export_tables</value>
+  </data>
+  <data name="&gt;&gt;m_export_tables.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_export_stable.Name" xml:space="preserve">
+    <value>m_export_stable</value>
+  </data>
+  <data name="&gt;&gt;m_export_stable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_export_sql.Name" xml:space="preserve">
+    <value>m_export_sql</value>
+  </data>
+  <data name="&gt;&gt;m_export_sql.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_impor_tables.Name" xml:space="preserve">
+    <value>m_impor_tables</value>
+  </data>
+  <data name="&gt;&gt;m_impor_tables.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_impor_stable.Name" xml:space="preserve">
+    <value>m_impor_stable</value>
+  </data>
+  <data name="&gt;&gt;m_impor_stable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_impor_sql.Name" xml:space="preserve">
+    <value>m_impor_sql</value>
+  </data>
+  <data name="&gt;&gt;m_impor_sql.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_imports.Name" xml:space="preserve">
+    <value>m_imports</value>
+  </data>
+  <data name="&gt;&gt;m_imports.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

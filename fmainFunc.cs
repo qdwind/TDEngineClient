@@ -786,10 +786,12 @@ namespace TDEngineClient
             m_query.Visible = false;
             m_export.Visible = false;
             m_import.Visible = false;
+            m_imports.Visible = false;
             //分割线
             sp1.Visible = false;
             sp2.Visible = false;
             sp3.Visible = false;
+            sp4.Visible = false;
 
             if (items != null)
             {
@@ -929,7 +931,7 @@ namespace TDEngineClient
         }
 
         /// <summary>
-        /// 导出表/超级表
+        /// 导出表/超级表的所有子表文件
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
@@ -1009,7 +1011,7 @@ namespace TDEngineClient
         }
 
         /// <summary>
-        /// 导入表/超级表
+        /// 导入子表(文件夹)
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
@@ -1081,6 +1083,82 @@ namespace TDEngineClient
                     psBar.Value += 1;
 
             }//单个文件结束
+
+
+            return ret;
+
+        }
+
+
+        /// <summary>
+        /// 导入超级表文本
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        private bool ImportStable(NodeItem item, string fileName)
+        {
+            var ret = false;
+
+
+            var recs = FileHelper.ReadTextFileToList(fileName);//读取记录
+            var fields = recs[0]; //读取字段列表和TAGS
+            var tags = "";
+            if (fields[fields.Count - 1].ToLower().StartsWith("tags"))
+            {
+                tags = fields[fields.Count - 1].Replace("\"", "'");
+                fields.RemoveAt(fields.Count - 1);
+            }
+
+
+
+            var tablePreName = "power_l_";//=====================================
+
+            var sqlList = new List<string>();//sql语句集
+            var sql = new StringBuilder();//单条语句
+            var headSql = new StringBuilder();//语句头
+            var tagPos = fields.Count;//首个tag的索引位置
+            var currentTag = "";
+            for (int i = 1; i < recs.Count; i++)
+            {
+                if (recs[i][tagPos] != currentTag) //新子表
+                {
+                    if (sql.Length > 0)//完成上一子表的SQL语句
+                        sqlList.Add(headSql.ToString() + sql.ToString());//不足一页的SQL语句
+                    sql.Clear();//清除已完成语句
+                    currentTag = recs[i][tagPos];//产生新TAG
+                    headSql.Clear();//生成新子表的SQL语句头
+                    headSql.Append($"insert into {item.Db}.{tablePreName}{currentTag}");//子表名
+                    headSql.Append($" using {item.Db}.{item.STable} tags('{currentTag}','null')");//引用超级表TAGS =======================
+                    headSql.Append(" values ");
+                }
+
+                var recStr = new List<string>();
+                for (int j = 0; j < fields.Count; j++) //========================
+                {
+                    var value = recs[i][j];
+                    if (fields[j].StartsWith("'")) value = $"'{value}'"; //字符型加引号
+                    recStr.Add(value);
+                }
+                sql.Append($"({string.Join(",", recStr)})");//添加一条记录
+
+                if (i % 1000 == 0) //每页单独一条SQL语句
+                {
+                    sqlList.Add(headSql.ToString() + sql.ToString());
+                    sql.Clear();
+                }
+            }
+            if (sql.Length > 0)
+                sqlList.Add(headSql.ToString() + sql.ToString());//不足一页的SQL语句
+
+            //语句生成完成，开始执行
+            psBar.Value = 0;
+            psBar.Maximum = sqlList.Count;
+            foreach (var sq in sqlList)
+            {
+                var result = ExcuteSql(item.Server, sq);
+                if (psBar.Value < psBar.Maximum)
+                    psBar.Value += 1;
+            }
 
 
             return ret;

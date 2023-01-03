@@ -276,11 +276,11 @@ namespace TDEngineClient
                 }
                 else if (node.Tag is DataBaseDto)//数据库
                 {
-                    SetMenu(new List<ToolStripMenuItem> { m_dropdb,m_createsuper,m_createtable, m_point,m_query },new List<ToolStripSeparator> { sp2,sp3});
+                    SetMenu(new List<ToolStripMenuItem> { m_dropdb,m_createsuper,m_createtable, m_point,m_query },new List<ToolStripSeparator> { sp2,sp4});
                 }
                 else if (node.Tag is StableDto)//超级表
                 {
-                    SetMenu(new List<ToolStripMenuItem> { m_createtable, m_table,m_field, m_export, m_import, m_query },new List<ToolStripSeparator> { sp3 });
+                    SetMenu(new List<ToolStripMenuItem> { m_createtable, m_table,m_field, m_export, m_import,m_imports, m_query },new List<ToolStripSeparator> {sp3, sp4 });
 
                     //var db = GetNodeDb(node);
                     //var stable = (node.Tag as StableDto);
@@ -288,7 +288,7 @@ namespace TDEngineClient
                 }
                 else if (node.Tag is TableDto) //表
                 {
-                    SetMenu(new List<ToolStripMenuItem> { m_field, m_droptable,m_export,m_import, m_query }, new List<ToolStripSeparator> { sp3 });
+                    SetMenu(new List<ToolStripMenuItem> { m_field, m_droptable,m_export,m_import,m_imports, m_query }, new List<ToolStripSeparator> {sp3, sp4 });
 
                     //var db = GetNodeDb(node);
                     //var table = (node.Tag as TableDto);
@@ -365,17 +365,27 @@ namespace TDEngineClient
             spMain.Panel1Collapsed = !explorerToolStripMenuItem.Checked;
         }
 
-        private void m_export_Click(object sender, EventArgs e)
+        private void m_export_tables_Click(object sender, EventArgs e)
         {
             var item = GetNodeItem(treeView1.SelectedNode);
             var dlg = new FolderBrowserDialog();
-            if(dlg.ShowDialog()== DialogResult.OK)
+            if (dlg.ShowDialog() == DialogResult.OK)
             {
-                ExportTable(item,dlg.SelectedPath);
+                ExportTable(item, dlg.SelectedPath);
             }
         }
 
-        private void m_import_Click(object sender, EventArgs e)
+        private void m_impor_tables_Click(object sender, EventArgs e)
+        {
+            var item = GetNodeItem(treeView1.SelectedNode);
+            var dlg = new OpenFileDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                ImportStable(item, dlg.FileName);
+            }
+        }
+
+        private void m_impor_stable_Click(object sender, EventArgs e)
         {
             var item = GetNodeItem(treeView1.SelectedNode);
             var dlg = new FolderBrowserDialog();

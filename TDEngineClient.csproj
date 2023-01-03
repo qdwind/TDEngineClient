@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Entity\Config.cs" />
     <Compile Include="Entity\DataBaseDto.cs" />
+    <Compile Include="Entity\FileHeader.cs" />
     <Compile Include="Entity\NodeItem.cs" />
     <Compile Include="Entity\QueryBox.cs" />
     <Compile Include="Entity\RecordDto.cs" />

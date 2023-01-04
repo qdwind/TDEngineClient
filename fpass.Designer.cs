@@ -1,4 +1,4 @@
-﻿
+
 namespace TDEngineClient
 {
     partial class fpass
@@ -62,7 +62,6 @@ namespace TDEngineClient
             this.btnOk.TabIndex = 9;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // chkSavePass
             // 

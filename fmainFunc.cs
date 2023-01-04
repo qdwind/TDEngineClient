@@ -101,6 +101,7 @@ namespace TDEngineClient
             if (svrInfo.Connected)
             {
                 SetServerNodes(svrInfo, dbNode); //将数据库表添加到节点上
+                SaveConfigServers();//保持配置
             }
             else
             {

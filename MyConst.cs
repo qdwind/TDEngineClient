@@ -28,10 +28,10 @@ namespace TDEngineClient
             new Tip("order by","", TipType.Standard),
             new Tip("first","", TipType.Standard),
             new Tip("last","", TipType.Standard),
+            new Tip("tbname in('')","", TipType.Standard),
 
 
-
-            new Tip("count()","", TipType.Functions),
+            new Tip("count(*)","", TipType.Functions),
             new Tip("sum()","", TipType.Functions),
             new Tip("first()","", TipType.Functions),
             new Tip("bottom()","", TipType.Functions),

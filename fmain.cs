@@ -365,15 +365,6 @@ namespace TDEngineClient
             spMain.Panel1Collapsed = !explorerToolStripMenuItem.Checked;
         }
 
-        private void m_export_tables_Click(object sender, EventArgs e)
-        {
-            var item = GetNodeItem(treeView1.SelectedNode);
-            var dlg = new FolderBrowserDialog();
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                ExportTable(item, dlg.SelectedPath);
-            }
-        }
 
         private void m_impor_tables_Click(object sender, EventArgs e)
         {
@@ -392,6 +383,21 @@ namespace TDEngineClient
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 ImportTable(item, dlg.SelectedPath);
+            }
+        }
+
+        /// <summary>
+        /// 导出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void m_export_Click(object sender, EventArgs e)
+        {
+            var item = GetNodeItem(treeView1.SelectedNode);
+            var exform = new fexport(item);
+            if (exform.ShowDialog() == DialogResult.OK)
+            {
+                ExportTable(item, exform.FolderName, exform.TableNames);
             }
         }
     }

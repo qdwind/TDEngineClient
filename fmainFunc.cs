@@ -936,20 +936,12 @@ namespace TDEngineClient
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        private bool ExportTable(NodeItem item, string folderName)
+        private bool ExportTable(NodeItem item, string folderName, List<string> tblist)
         {
             var ret = false;
-            var tblist = new List<string>();
-            if (item.Table != null)
+
+            if (item.STable != null)
             {
-                tblist.Add(item.Table.ToString());
-            }
-            else if (item.STable != null)
-            {
-                foreach (var tb in item.STable.Tables)
-                {
-                    tblist.Add(tb.ToString());
-                }
                 if (!folderName.EndsWith("\\")) folderName += "\\";
                 folderName = $"{folderName}{item.STable.ToString()}";//文件太多，建超级表文件夹
                 if (!Directory.Exists(folderName)) Directory.CreateDirectory(folderName);

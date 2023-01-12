@@ -53,6 +53,9 @@ namespace TDEngineClient
             this.sp3 = new System.Windows.Forms.ToolStripSeparator();
             this.m_export = new System.Windows.Forms.ToolStripMenuItem();
             this.m_import = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_impor_tables = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_impor_stable = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_impor_sql = new System.Windows.Forms.ToolStripMenuItem();
             this.sp4 = new System.Windows.Forms.ToolStripSeparator();
             this.m_query = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -90,12 +93,6 @@ namespace TDEngineClient
             this.menuText = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.m_run = new System.Windows.Forms.ToolStripMenuItem();
             this.m_record = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_export_tables = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_export_stable = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_export_sql = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_impor_tables = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_impor_stable = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_impor_sql = new System.Windows.Forms.ToolStripMenuItem();
             this.m_imports = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.spMain)).BeginInit();
             this.spMain.Panel1.SuspendLayout();
@@ -269,12 +266,9 @@ namespace TDEngineClient
             // 
             // m_export
             // 
-            this.m_export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.m_export_tables,
-            this.m_export_stable,
-            this.m_export_sql});
             this.m_export.Name = "m_export";
             resources.ApplyResources(this.m_export, "m_export");
+            this.m_export.Click += new System.EventHandler(this.m_export_Click);
             // 
             // m_import
             // 
@@ -284,6 +278,23 @@ namespace TDEngineClient
             this.m_impor_sql});
             this.m_import.Name = "m_import";
             resources.ApplyResources(this.m_import, "m_import");
+            // 
+            // m_impor_tables
+            // 
+            this.m_impor_tables.Name = "m_impor_tables";
+            resources.ApplyResources(this.m_impor_tables, "m_impor_tables");
+            this.m_impor_tables.Click += new System.EventHandler(this.m_impor_tables_Click);
+            // 
+            // m_impor_stable
+            // 
+            this.m_impor_stable.Name = "m_impor_stable";
+            resources.ApplyResources(this.m_impor_stable, "m_impor_stable");
+            this.m_impor_stable.Click += new System.EventHandler(this.m_impor_stable_Click);
+            // 
+            // m_impor_sql
+            // 
+            this.m_impor_sql.Name = "m_impor_sql";
+            resources.ApplyResources(this.m_impor_sql, "m_impor_sql");
             // 
             // sp4
             // 
@@ -557,39 +568,6 @@ namespace TDEngineClient
             resources.ApplyResources(this.m_record, "m_record");
             this.m_record.Click += new System.EventHandler(this.m_record_Click);
             // 
-            // m_export_tables
-            // 
-            this.m_export_tables.Name = "m_export_tables";
-            resources.ApplyResources(this.m_export_tables, "m_export_tables");
-            this.m_export_tables.Click += new System.EventHandler(this.m_export_tables_Click);
-            // 
-            // m_export_stable
-            // 
-            this.m_export_stable.Name = "m_export_stable";
-            resources.ApplyResources(this.m_export_stable, "m_export_stable");
-            // 
-            // m_export_sql
-            // 
-            this.m_export_sql.Name = "m_export_sql";
-            resources.ApplyResources(this.m_export_sql, "m_export_sql");
-            // 
-            // m_impor_tables
-            // 
-            this.m_impor_tables.Name = "m_impor_tables";
-            resources.ApplyResources(this.m_impor_tables, "m_impor_tables");
-            this.m_impor_tables.Click += new System.EventHandler(this.m_impor_tables_Click);
-            // 
-            // m_impor_stable
-            // 
-            this.m_impor_stable.Name = "m_impor_stable";
-            resources.ApplyResources(this.m_impor_stable, "m_impor_stable");
-            this.m_impor_stable.Click += new System.EventHandler(this.m_impor_stable_Click);
-            // 
-            // m_impor_sql
-            // 
-            this.m_impor_sql.Name = "m_impor_sql";
-            resources.ApplyResources(this.m_impor_sql, "m_impor_sql");
-            // 
             // m_imports
             // 
             this.m_imports.Name = "m_imports";
@@ -686,9 +664,6 @@ namespace TDEngineClient
         private System.Windows.Forms.ToolStripStatusLabel ts1;
         private System.Windows.Forms.ProgressBar psBar;
         private System.Windows.Forms.ToolStripSeparator sp3;
-        private System.Windows.Forms.ToolStripMenuItem m_export_tables;
-        private System.Windows.Forms.ToolStripMenuItem m_export_stable;
-        private System.Windows.Forms.ToolStripMenuItem m_export_sql;
         private System.Windows.Forms.ToolStripMenuItem m_impor_tables;
         private System.Windows.Forms.ToolStripMenuItem m_impor_stable;
         private System.Windows.Forms.ToolStripMenuItem m_impor_sql;

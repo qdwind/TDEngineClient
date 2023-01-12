@@ -73,6 +73,12 @@
     <Compile Include="Entity\TQueryBox.cs" />
     <Compile Include="Entity\TSuccessResponseBase.cs" />
     <Compile Include="Entity\TurnPageType.cs" />
+    <Compile Include="fexport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fexport.Designer.cs">
+      <DependentUpon>fexport.cs</DependentUpon>
+    </Compile>
     <Compile Include="fmain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     <Compile Include="Service\GetServerDetail.cs" />
     <Compile Include="Service\GetStables.cs" />
     <Compile Include="Service\GetTableList.cs" />
+    <EmbeddedResource Include="fexport.resx">
+      <DependentUpon>fexport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fmain.resx">
       <DependentUpon>fmain.cs</DependentUpon>
     </EmbeddedResource>

@@ -94,6 +94,8 @@ namespace TDEngineClient
             this.m_run = new System.Windows.Forms.ToolStripMenuItem();
             this.m_record = new System.Windows.Forms.ToolStripMenuItem();
             this.m_imports = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_paste = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.spMain)).BeginInit();
             this.spMain.Panel1.SuspendLayout();
             this.spMain.Panel2.SuspendLayout();
@@ -552,7 +554,9 @@ namespace TDEngineClient
             this.menuText.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuText.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.m_run,
-            this.m_record});
+            this.m_record,
+            this.m_copy,
+            this.m_paste});
             this.menuText.Name = "menuText";
             resources.ApplyResources(this.menuText, "menuText");
             // 
@@ -572,6 +576,18 @@ namespace TDEngineClient
             // 
             this.m_imports.Name = "m_imports";
             resources.ApplyResources(this.m_imports, "m_imports");
+            // 
+            // m_copy
+            // 
+            this.m_copy.Name = "m_copy";
+            resources.ApplyResources(this.m_copy, "m_copy");
+            this.m_copy.Click += new System.EventHandler(this.m_copy_Click);
+            // 
+            // m_paste
+            // 
+            this.m_paste.Name = "m_paste";
+            resources.ApplyResources(this.m_paste, "m_paste");
+            this.m_paste.Click += new System.EventHandler(this.m_paste_Click);
             // 
             // fmain
             // 
@@ -668,6 +684,8 @@ namespace TDEngineClient
         private System.Windows.Forms.ToolStripMenuItem m_impor_stable;
         private System.Windows.Forms.ToolStripMenuItem m_impor_sql;
         private System.Windows.Forms.ToolStripMenuItem m_imports;
+        private System.Windows.Forms.ToolStripMenuItem m_copy;
+        private System.Windows.Forms.ToolStripMenuItem m_paste;
     }
 }
 

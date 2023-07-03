@@ -400,5 +400,43 @@ namespace TDEngineClient
                 ExportTable(item, exform.FolderName, exform.TableNames);
             }
         }
+
+        private void m_copy_Click(object sender, EventArgs e)
+        {
+            var tp = tabControl1.SelectedTab;
+            if (tp == null) return;
+
+            TextBox tbox = null;
+            foreach (var ctl in tp.Controls)
+            {
+                if (ctl is TextBox)
+                {
+                    tbox = (ctl as TextBox);
+                    break;
+                }
+            }
+
+            //if(!string.IsNullOrEmpty(tbox?.SelectedText))
+            //    Clipboard.SetText(tbox?.SelectedText);
+            tbox?.Copy();
+        }
+
+        private void m_paste_Click(object sender, EventArgs e)
+        {
+            var tp = tabControl1.SelectedTab;
+            if (tp == null) return;
+
+            TextBox tbox = null;
+            foreach (var ctl in tp.Controls)
+            {
+                if (ctl is TextBox)
+                {
+                    tbox = (ctl as TextBox);
+                    break;
+                }
+            }
+
+            tbox?.Paste();
+        }
     }
 }

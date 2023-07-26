@@ -93,9 +93,9 @@ namespace TDEngineClient
             this.menuText = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.m_run = new System.Windows.Forms.ToolStripMenuItem();
             this.m_record = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_imports = new System.Windows.Forms.ToolStripMenuItem();
             this.m_copy = new System.Windows.Forms.ToolStripMenuItem();
             this.m_paste = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_imports = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.spMain)).BeginInit();
             this.spMain.Panel1.SuspendLayout();
             this.spMain.Panel2.SuspendLayout();
@@ -431,6 +431,7 @@ namespace TDEngineClient
             // 
             this.newConnectionToolStripMenuItem.Name = "newConnectionToolStripMenuItem";
             resources.ApplyResources(this.newConnectionToolStripMenuItem, "newConnectionToolStripMenuItem");
+            this.newConnectionToolStripMenuItem.Click += new System.EventHandler(this.newConnectionToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -441,11 +442,13 @@ namespace TDEngineClient
             // 
             this.closeServerToolStripMenuItem.Name = "closeServerToolStripMenuItem";
             resources.ApplyResources(this.closeServerToolStripMenuItem, "closeServerToolStripMenuItem");
+            this.closeServerToolStripMenuItem.Click += new System.EventHandler(this.closeServerToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -461,11 +464,13 @@ namespace TDEngineClient
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             resources.ApplyResources(this.copyToolStripMenuItem, "copyToolStripMenuItem");
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             resources.ApplyResources(this.pasteToolStripMenuItem, "pasteToolStripMenuItem");
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -476,6 +481,7 @@ namespace TDEngineClient
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
             resources.ApplyResources(this.selectAllToolStripMenuItem, "selectAllToolStripMenuItem");
+            this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
@@ -503,6 +509,7 @@ namespace TDEngineClient
             // 
             this.newQueryToolStripMenuItem.Name = "newQueryToolStripMenuItem";
             resources.ApplyResources(this.newQueryToolStripMenuItem, "newQueryToolStripMenuItem");
+            this.newQueryToolStripMenuItem.Click += new System.EventHandler(this.newQueryToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -572,11 +579,6 @@ namespace TDEngineClient
             resources.ApplyResources(this.m_record, "m_record");
             this.m_record.Click += new System.EventHandler(this.m_record_Click);
             // 
-            // m_imports
-            // 
-            this.m_imports.Name = "m_imports";
-            resources.ApplyResources(this.m_imports, "m_imports");
-            // 
             // m_copy
             // 
             this.m_copy.Name = "m_copy";
@@ -588,6 +590,11 @@ namespace TDEngineClient
             this.m_paste.Name = "m_paste";
             resources.ApplyResources(this.m_paste, "m_paste");
             this.m_paste.Click += new System.EventHandler(this.m_paste_Click);
+            // 
+            // m_imports
+            // 
+            this.m_imports.Name = "m_imports";
+            resources.ApplyResources(this.m_imports, "m_imports");
             // 
             // fmain
             // 

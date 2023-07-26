@@ -43,6 +43,7 @@ namespace TDEngineClient
             this.tabControl1.Padding = new System.Drawing.Point(FormHelper.CLOSE_SIZE, FormHelper.CLOSE_SIZE);
             this.tabControl1.DrawItem += new DrawItemEventHandler(FormHelper.tabControl_DrawItem);
             this.tabControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(FormHelper.tabControl_MouseDown);
+            this.tabControl1.Appearance = TabAppearance.Normal;
             this.Text = $"{Application.ProductName} {Application.ProductVersion}";
             this.WindowState = FormWindowState.Maximized;
 
@@ -188,6 +189,7 @@ namespace TDEngineClient
         /// <param name="box"></param>
         private void CreateQueryWindow(DataBaseDto db, StableDto stable, TableDto table)
         {
+            if (db == null) return;
             var caption = db.Name + "->Query";
             string[] text = new string[] { };
 

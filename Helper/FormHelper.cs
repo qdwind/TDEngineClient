@@ -18,25 +18,26 @@ namespace TDEngineClient.Helper
                 var ctl = sender as TabControl;
                 Rectangle myTabRect = ctl.GetTabRect(e.Index);
 
+                //填充矩形框
+                Color recColor = e.State == DrawItemState.Selected ? Color.WhiteSmoke : Color.White;
+                using (Brush b = new SolidBrush(recColor))
+                {
+                    e.Graphics.FillRectangle(b, myTabRect);
+                }
+
                 //先添加TabPage属性   
                 bool isActive = ctl.SelectedIndex == e.Index;
                 e.Graphics.DrawString(ctl.TabPages[e.Index].Text, ctl.Font, new SolidBrush(isActive? Color.Black:Color.Gray), myTabRect.X + 2, myTabRect.Y + 5);
 
-                //再画一个矩形框
-                using (Pen p = new Pen(Color.WhiteSmoke))
+
+                //再画一个矩形框(模拟关闭按钮)
+                using (Pen p = new Pen(e.State == DrawItemState.Selected ? Color.WhiteSmoke : Color.White))
                 {
                     myTabRect.Offset(myTabRect.Width - (CLOSE_SIZE + 3), 2);
                     myTabRect.Width = CLOSE_SIZE;
                     myTabRect.Height = CLOSE_SIZE;
-                    // e.Graphics.DrawRectangle(p, myTabRect);
+                    e.Graphics.DrawRectangle(p, myTabRect);
                 }
-
-                //填充矩形框
-                //Color recColor = e.State == DrawItemState.Selected ? Color.WhiteSmoke : Color.WhiteSmoke;
-                //using (Brush b = new SolidBrush(recColor))
-                //{
-                //    e.Graphics.FillRectangle(b, myTabRect);
-                //}
 
                 //画关闭符号
                 using (Pen objpen = new Pen(e.State == DrawItemState.Selected ? Color.Black : Color.WhiteSmoke))

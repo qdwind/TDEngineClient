@@ -132,6 +132,7 @@ namespace TDEngineClient
 
         private void m_query_Click(object sender, EventArgs e)
         {
+            if (treeView1.SelectedNode == null) return;
             var item = GetNodeItem(treeView1.SelectedNode);
             CreateQueryWindow(item.Db, item.STable, item.Table); //创建SQL窗口
         }
@@ -153,7 +154,7 @@ namespace TDEngineClient
         private void m_opensvr_Click(object sender, EventArgs e)
         {
             var node = treeView1.SelectedNode;
-            if (node.Tag is Server)
+            if (node?.Tag is Server)
             {
                 OpenDB(node);
             }
@@ -163,7 +164,7 @@ namespace TDEngineClient
         private void m_closesvr_Click(object sender, EventArgs e)
         {
             var node = treeView1.SelectedNode;
-            if (node.Tag is Server)
+            if (node?.Tag is Server)
             {
                 node.Nodes.Clear();
                 node.ImageIndex = 0;
@@ -437,6 +438,79 @@ namespace TDEngineClient
             }
 
             tbox?.Paste();
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var tp = tabControl1.SelectedTab;
+            if (tp == null) return;
+
+            TextBox tbox = null;
+            foreach (var ctl in tp.Controls)
+            {
+                if (ctl is TextBox)
+                {
+                    tbox = (ctl as TextBox);
+                    break;
+                }
+            }
+            tbox?.Copy();
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var tp = tabControl1.SelectedTab;
+            if (tp == null) return;
+
+            TextBox tbox = null;
+            foreach (var ctl in tp.Controls)
+            {
+                if (ctl is TextBox)
+                {
+                    tbox = (ctl as TextBox);
+                    break;
+                }
+            }
+
+            tbox?.Paste();
+        }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var tp = tabControl1.SelectedTab;
+            if (tp == null) return;
+
+            TextBox tbox = null;
+            foreach (var ctl in tp.Controls)
+            {
+                if (ctl is TextBox)
+                {
+                    tbox = (ctl as TextBox);
+                    tbox.SelectAll();
+                    break;
+                }
+            }
+            tbox?.SelectAll();
+        }
+
+        private void newConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            m_newsvr_Click(sender, e);
+        }
+
+        private void closeServerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            m_closesvr_Click(sender, e);
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void newQueryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            m_query_Click(sender, e);
         }
     }
 }

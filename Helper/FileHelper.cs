@@ -13,6 +13,7 @@ namespace TDEngineClient.Helper
     {
         private const string CONFIGFILE = "config.ini"; //配置文件
         private const int SERVERCOUNT = 20;//可配置服务器数
+        private const string INI_QUERY_KEY = "query"; //查询记录键
 
         [DllImport("kernel32", EntryPoint = "GetPrivateProfileString")]
         private static extern long GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string fileName);
@@ -93,11 +94,11 @@ namespace TDEngineClient.Helper
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");//在当前程序路径创建
             if (File.Exists(filePath))
             {
-                var qlist = ReadSections(filePath,"query");
+                var qlist = ReadSections(filePath, INI_QUERY_KEY);
                 foreach (var q in qlist)
                 {
-                    string text = Read("query" ,q, "", filePath);
-                    if (string.IsNullOrEmpty(text)) break;
+                    string text = Read(INI_QUERY_KEY, q, "", filePath);
+                    if (string.IsNullOrEmpty(text)) continue;
                     var item = new TQueryBox();
                     var names = q.Split('|');
                     if (names.Length > 1)
@@ -165,10 +166,10 @@ namespace TDEngineClient.Helper
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");//在当前程序路径创建
             if (File.Exists(filePath))
             {
-                DeleteSection("query", filePath);//清除
+                DeleteSection(INI_QUERY_KEY, filePath);//清除
                 foreach (var query in queries)
                 {
-                    Write("query", query.AccountServer + "|" + query.Caption, query.Text, filePath);
+                    Write(INI_QUERY_KEY, query.AccountServer + "|" + query.Caption, query.Text, filePath);
                 }
             }
             return true;

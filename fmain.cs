@@ -85,6 +85,30 @@ namespace TDEngineClient
             ShowTipBox(sender as TextBox,e.KeyCode); //显示智能提示框
         }
 
+        private void TextBoxMouseClick(object sender, MouseEventArgs e)
+        {
+            if ((DateTime.Now - LastDbClickTime).TotalMilliseconds < 1000 && sender is TextBox)//触发三连击事件
+            {
+                var tbox = sender as TextBox;
+                var txt = tbox.Text;
+                if (txt.Length == 0) return;
+                var pos = tbox.SelectionStart;
+                var lineStart = tbox.GetFirstCharIndexOfCurrentLine(); //行首
+                var lineEnd = tbox.Text.IndexOf(Environment.NewLine, lineStart);//行尾
+                if (lineEnd < lineStart) lineEnd = tbox.Text.Length;
+
+                var leftPos = txt.Substring(0, pos).LastIndexOf("'") + 1; //左边引号位置
+                if (leftPos < lineStart) leftPos = lineStart; //不越过当前行
+                var rightPos = txt.Substring(pos).IndexOf("'") + pos; //右边引号位置
+                if (leftPos== lineStart || rightPos < leftPos || rightPos>lineEnd) rightPos = lineEnd; //不越过当前行
+                tbox.Select(leftPos, rightPos-leftPos);
+            }
+        }
+        private void TextBoxMouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            LastDbClickTime = DateTime.Now; //记录最后双击时间
+        }
+
 
         private void treeView1_DoubleClick(object sender, EventArgs e)
         {
@@ -228,7 +252,7 @@ namespace TDEngineClient
             var mylist = new List<TQueryBox>();
             foreach ( var tab in tabControl1.TabPages)
             {
-                if (tab is TabPage && (tab as TabPage).Text.Contains("->Query"))
+                if (tab is TabPage && (tab as TabPage).Text.Contains(CAPTION_QUERY))
                 {
                     var tabText = new TQueryBox();
                     tabText.Caption=(tab as TabPage).Text;
@@ -366,7 +390,11 @@ namespace TDEngineClient
             spMain.Panel1Collapsed = !explorerToolStripMenuItem.Checked;
         }
 
-
+        /// <summary>
+        /// 导入表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void m_impor_tables_Click(object sender, EventArgs e)
         {
             var item = GetNodeItem(treeView1.SelectedNode);
@@ -377,6 +405,11 @@ namespace TDEngineClient
             }
         }
 
+        /// <summary>
+        /// 导入超级表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void m_impor_stable_Click(object sender, EventArgs e)
         {
             var item = GetNodeItem(treeView1.SelectedNode);
@@ -511,6 +544,16 @@ namespace TDEngineClient
         private void newQueryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             m_query_Click(sender, e);
+        }
+
+        private void m_case_Click(object sender, EventArgs e)
+        {
+            ChangeCase(false);
+        }
+
+        private void m_ucase_Click(object sender, EventArgs e)
+        {
+            ChangeCase(true);
         }
     }
 }

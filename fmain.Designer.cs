@@ -93,6 +93,10 @@ namespace TDEngineClient
             this.menuText = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.m_run = new System.Windows.Forms.ToolStripMenuItem();
             this.m_record = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.m_ucase = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_lcase = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.m_copy = new System.Windows.Forms.ToolStripMenuItem();
             this.m_paste = new System.Windows.Forms.ToolStripMenuItem();
             this.m_imports = new System.Windows.Forms.ToolStripMenuItem();
@@ -562,6 +566,10 @@ namespace TDEngineClient
             this.menuText.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.m_run,
             this.m_record,
+            this.toolStripSeparator1,
+            this.m_ucase,
+            this.m_lcase,
+            this.toolStripSeparator2,
             this.m_copy,
             this.m_paste});
             this.menuText.Name = "menuText";
@@ -578,6 +586,28 @@ namespace TDEngineClient
             this.m_record.Name = "m_record";
             resources.ApplyResources(this.m_record, "m_record");
             this.m_record.Click += new System.EventHandler(this.m_record_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // m_ucase
+            // 
+            this.m_ucase.Name = "m_ucase";
+            resources.ApplyResources(this.m_ucase, "m_ucase");
+            this.m_ucase.Click += new System.EventHandler(this.m_ucase_Click);
+            // 
+            // m_lcase
+            // 
+            this.m_lcase.Name = "m_lcase";
+            resources.ApplyResources(this.m_lcase, "m_lcase");
+            this.m_lcase.Click += new System.EventHandler(this.m_case_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             // 
             // m_copy
             // 
@@ -693,6 +723,10 @@ namespace TDEngineClient
         private System.Windows.Forms.ToolStripMenuItem m_imports;
         private System.Windows.Forms.ToolStripMenuItem m_copy;
         private System.Windows.Forms.ToolStripMenuItem m_paste;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem m_lcase;
+        private System.Windows.Forms.ToolStripMenuItem m_ucase;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 

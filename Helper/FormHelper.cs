@@ -19,7 +19,7 @@ namespace TDEngineClient.Helper
                 Rectangle myTabRect = ctl.GetTabRect(e.Index);
 
                 //填充矩形框
-                Color recColor = e.State == DrawItemState.Selected ? Color.WhiteSmoke : Color.White;
+                Color recColor = e.State == DrawItemState.Selected ? Color.LightGray : Color.White;
                 using (Brush b = new SolidBrush(recColor))
                 {
                     e.Graphics.FillRectangle(b, myTabRect);
@@ -29,9 +29,11 @@ namespace TDEngineClient.Helper
                 bool isActive = ctl.SelectedIndex == e.Index;
                 e.Graphics.DrawString(ctl.TabPages[e.Index].Text, ctl.Font, new SolidBrush(isActive? Color.Black:Color.Gray), myTabRect.X + 2, myTabRect.Y + 5);
 
+                //e.Graphics.DrawLine(new Pen(isActive? Color.Black:Color.White, 1), new Point(myTabRect.X,myTabRect.Y+myTabRect.Height), new Point(myTabRect.X+myTabRect.Width,myTabRect.Y+myTabRect.Height));
+
 
                 //再画一个矩形框(模拟关闭按钮)
-                using (Pen p = new Pen(e.State == DrawItemState.Selected ? Color.WhiteSmoke : Color.White))
+                using (Pen p = new Pen(e.State == DrawItemState.Selected ? Color.LightGray : Color.White))
                 {
                     myTabRect.Offset(myTabRect.Width - (CLOSE_SIZE + 3), 2);
                     myTabRect.Width = CLOSE_SIZE;
@@ -40,7 +42,7 @@ namespace TDEngineClient.Helper
                 }
 
                 //画关闭符号
-                using (Pen objpen = new Pen(e.State == DrawItemState.Selected ? Color.Black : Color.WhiteSmoke))
+                using (Pen objpen = new Pen(Color.Black)) //new Pen(e.State == DrawItemState.Selected ? Color.Black : Color.WhiteSmoke))
                 {
                     //"\"线
                     Point p1 = new Point(myTabRect.X + 3, myTabRect.Y + 3);
@@ -122,6 +124,13 @@ namespace TDEngineClient.Helper
             }
             return p;
         }
+
+        public static void PageBox_PageChanged(object sender, EventArgs e)
+        {
+            //MessageBox.Show("test");
+        }
+
+
 
     }
 }

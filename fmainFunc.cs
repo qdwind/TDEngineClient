@@ -19,6 +19,12 @@ namespace TDEngineClient
         private int PageSize = 100;
         private ListBox TipBox = new ListBox();//提示框
 
+        private const string CAPTION_QUERY = "->"; //查询标签
+        private const string CAPTION_SQL = "->Sql"; //创建标签
+        private const string CAPTION_POINT = "->MesuringPoints"; //测点
+
+        private DateTime LastDbClickTime; //最近的双击时间
+
         //private int CurrentPage = 1;
 
         /// <summary>
@@ -32,18 +38,18 @@ namespace TDEngineClient
             spMain.Dock = DockStyle.Fill;
             spMain.BringToFront();
 
-
             tabControl1.Dock = DockStyle.Fill;
             panel2.Dock = DockStyle.Bottom;
 
             //清空控件
             this.tabControl1.TabPages.Clear();
             //绘制的方式OwnerDrawFixed表示由窗体绘制大小也一样
+            this.tabControl1.Appearance = TabAppearance.Normal;
             this.tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
             this.tabControl1.Padding = new System.Drawing.Point(FormHelper.CLOSE_SIZE, FormHelper.CLOSE_SIZE);
             this.tabControl1.DrawItem += new DrawItemEventHandler(FormHelper.tabControl_DrawItem);
             this.tabControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(FormHelper.tabControl_MouseDown);
-            this.tabControl1.Appearance = TabAppearance.Normal;
+            
             this.Text = $"{Application.ProductName} {Application.ProductVersion}";
             this.WindowState = FormWindowState.Maximized;
 
@@ -190,7 +196,7 @@ namespace TDEngineClient
         private void CreateQueryWindow(DataBaseDto db, StableDto stable, TableDto table)
         {
             if (db == null) return;
-            var caption = db.Name + "->Query";
+            var caption = $"{db.Name}@{(string.IsNullOrEmpty(db.Account.AliasName) ? db.Account.IP : db.Account.AliasName)}{CAPTION_QUERY}";
             string[] text = new string[] { };
 
             if (db != null && table != null)
@@ -235,40 +241,40 @@ namespace TDEngineClient
 
             if (command == SqlCommandType.CreateDatabase)
             {
-                caption = $"{account.IP}->sql";
+                caption = $"{(string.IsNullOrEmpty(db.Account.AliasName) ? db.Account.IP : db.Account.AliasName)}{CAPTION_SQL}";
                 text = new string[] { $"create database dbname keep 3650 duration 50" };
             }
             else if (command == SqlCommandType.DropDatabase)
             {
-                caption = $"{account.IP}->sql";
+                caption = $"{(string.IsNullOrEmpty(db.Account.AliasName) ? db.Account.IP : db.Account.AliasName)}{CAPTION_SQL}";
                 text = new string[] { $"drop database {db.Name}" };
             }
             else if (command == SqlCommandType.CreateStable)
             {
-                caption = $"{db.Name}->sql";
+                caption = $"{db.Name}{CAPTION_SQL}";
                 text = new string[] { $"create stable {db.Name}.stablename (ts timestamp, intfield int, strfield binary(20)) tags (strfield binary(20))" };
             }
             else if (command == SqlCommandType.DropStable)
             {
-                caption = $"{db.Name}->sql";
+                caption = $"{db.Name}{CAPTION_SQL}";
                 text = new string[] { $"drop stable {stable.stable_name}" };
             }
             else if (command == SqlCommandType.CreateTable)
             {
                 if (stable == null)//直接建表
                 {
-                    caption = $"{db.Name}->sql";
+                    caption = $"{db.Name}{CAPTION_SQL}";
                     text = new string[] { $"create table {db.Name}.tablename (ts timestamp, intfield int, strfield binary(20))" };
                 }
                 else //在超级表下建子表
                 {
-                    caption = $"{db.Name}.{stable.stable_name}->sql";
+                    caption = $"{db.Name}.{stable.stable_name}{CAPTION_SQL}";
                     text = new string[] { $"create table {db.Name}.tablename using {db.Name}.{stable.stable_name} tags ('value1', 'value2')" };
                 }
             }
             else if (command == SqlCommandType.DropTable)
             {
-                caption = $"{db.Name}->sql";
+                caption = $"{db.Name}{CAPTION_SQL}";
                 text = new string[] { $"drop table {db.Name}.{table.table_name}" };
             }
 
@@ -339,8 +345,10 @@ namespace TDEngineClient
             myText.HideSelection = false;
 
             myText.Tag = qbox; //保存设置项
-            myText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyDown);
-            myText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxKeyUp);
+            myText.MouseClick += new MouseEventHandler(this.TextBoxMouseClick);
+            myText.MouseDoubleClick += new MouseEventHandler(this.TextBoxMouseDoubleClick);
+            myText.KeyDown += new KeyEventHandler(this.TextBoxKeyDown);
+            myText.KeyUp += new KeyEventHandler(this.TextBoxKeyUp);
             myText.ContextMenuStrip = menuText;
             ts2.Text = "Press F5 to Run SQL";
             tab.Controls.Add(myText);
@@ -349,9 +357,20 @@ namespace TDEngineClient
             pnl.Dock = DockStyle.Top;
             tab.Controls.Add(pnl);
 
+            var spl = new Splitter();
+            spl.Dock = DockStyle.Top;
+            tab.Controls.Add(spl);
+            spl.BringToFront();
+
+            var pageBox = new SqlPageBox();
+            pageBox.Dock = DockStyle.Bottom;
+            tab.Controls.Add(pageBox);
+            pageBox.BringToFront();
 
             var dgv = new DataGridView();
             dgv.Dock = DockStyle.Fill;
+
+
             //dgv.Dock = DockStyle.None;
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -470,13 +489,36 @@ namespace TDEngineClient
                 if (string.IsNullOrEmpty(tbox.SelectedText))
                 {
                     var firstPos = tbox.GetFirstCharIndexOfCurrentLine();
-                    var line = tbox.GetLineFromCharIndex(firstPos);
+                    //var line = tbox.GetLineFromCharIndex(firstPos);
                     var lastPos = tbox.SelectionStart;
                     tbox.Select(firstPos, lastPos - firstPos);
                 }
                 text = tbox.SelectedText;
 
                 ExcuteQuery(account, text, dgv);
+            }
+        }
+
+        /// <summary>
+        /// 转换大小写
+        /// </summary>
+        private void ChangeCase(bool toUp)
+        {
+            var tp = tabControl1.SelectedTab;
+            if (tp == null) return;
+            TextBox tbox = null;
+            foreach (var ctl in tp.Controls)
+            {
+                if (ctl is TextBox)
+                {
+                    tbox = (ctl as TextBox);
+                    break;
+                }
+            }
+            if (tbox != null && !string.IsNullOrEmpty(tbox.SelectedText))
+            {
+                var text = toUp ? tbox.SelectedText.ToUpper() : tbox.SelectedText.ToLower();
+                tbox.SelectedText = text;
             }
         }
 
@@ -487,7 +529,7 @@ namespace TDEngineClient
             StableDto stable = null;
             DataBaseDto db = null;
 
-            var tab = new TabPage(account.IP + "->MesuringPoints");
+            var tab = new TabPage($"{account.IP}{CAPTION_POINT }");
             tabControl1.TabPages.Add(tab);
             tabControl1.SelectedTab = tab;
             tab.AutoScroll = true;
@@ -629,7 +671,7 @@ namespace TDEngineClient
 
         private void CreateTable(Server account, string tableName)
         {
-            var key = $"{tableName}@{account.IP}";
+            var key = $"{tableName}@{(string.IsNullOrEmpty(account.AliasName)? account.IP:account.AliasName)}";
             if (tabControl1.TabPages.ContainsKey(key))
             {
                 tabControl1.SelectedTab = tabControl1.TabPages[key];

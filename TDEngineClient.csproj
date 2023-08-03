@@ -120,6 +120,12 @@
     <Compile Include="Service\GetServerDetail.cs" />
     <Compile Include="Service\GetStables.cs" />
     <Compile Include="Service\GetTableList.cs" />
+    <Compile Include="SqlPageBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SqlPageBox.Designer.cs">
+      <DependentUpon>SqlPageBox.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="fexport.resx">
       <DependentUpon>fexport.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,6 +154,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SqlPageBox.resx">
+      <DependentUpon>SqlPageBox.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="config.ini" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

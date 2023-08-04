@@ -62,12 +62,6 @@ namespace TDEngineClient
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.btnLast = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.btnPre = new System.Windows.Forms.Button();
-            this.btnFirst = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,8 +100,6 @@ namespace TDEngineClient
             this.spMain.SuspendLayout();
             this.menuTree.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -128,7 +120,6 @@ namespace TDEngineClient
             // spMain.Panel2
             // 
             this.spMain.Panel2.Controls.Add(this.tabControl1);
-            this.spMain.Panel2.Controls.Add(this.panel2);
             // 
             // psBar
             // 
@@ -345,69 +336,6 @@ namespace TDEngineClient
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.numericUpDown1);
-            this.panel2.Controls.Add(this.btnLast);
-            this.panel2.Controls.Add(this.btnNext);
-            this.panel2.Controls.Add(this.btnPre);
-            this.panel2.Controls.Add(this.btnFirst);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
-            // 
-            // numericUpDown1
-            // 
-            resources.ApplyResources(this.numericUpDown1, "numericUpDown1");
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numericUpDown1_KeyDown);
-            // 
-            // btnLast
-            // 
-            resources.ApplyResources(this.btnLast, "btnLast");
-            this.btnLast.Name = "btnLast";
-            this.btnLast.Tag = "1";
-            this.btnLast.UseVisualStyleBackColor = true;
-            this.btnLast.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // btnNext
-            // 
-            resources.ApplyResources(this.btnNext, "btnNext");
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Tag = "3";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // btnPre
-            // 
-            resources.ApplyResources(this.btnPre, "btnPre");
-            this.btnPre.Name = "btnPre";
-            this.btnPre.Tag = "2";
-            this.btnPre.UseVisualStyleBackColor = true;
-            this.btnPre.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // btnFirst
-            // 
-            resources.ApplyResources(this.btnFirst, "btnFirst");
-            this.btnFirst.Name = "btnFirst";
-            this.btnFirst.Tag = "0";
-            this.btnFirst.UseVisualStyleBackColor = true;
-            this.btnFirst.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // menuStrip1
             // 
@@ -642,8 +570,6 @@ namespace TDEngineClient
             this.spMain.ResumeLayout(false);
             this.menuTree.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -663,12 +589,6 @@ namespace TDEngineClient
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.SplitContainer spMain;
         private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Button btnLast;
-        private System.Windows.Forms.Button btnNext;
-        private System.Windows.Forms.Button btnPre;
-        private System.Windows.Forms.Button btnFirst;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ToolStripStatusLabel ts3;

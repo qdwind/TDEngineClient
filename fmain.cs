@@ -137,12 +137,12 @@ namespace TDEngineClient
             }
         }
 
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-            var type = (TurnPageType)Convert.ToInt32((sender as Button).Tag);
-            TurnPage(tabControl1.SelectedTab, type);
+        //private void btnNext_Click(object sender, EventArgs e)
+        //{
+        //    var type = (TurnPageType)Convert.ToInt32((sender as Button).Tag);
+        //    TurnPage(tabControl1.SelectedTab, type);
 
-        }
+        //}
 
         private void m_table_Click(object sender, EventArgs e)
         {
@@ -162,18 +162,18 @@ namespace TDEngineClient
         }
 
 
-        private void numericUpDown1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (int.TryParse(numericUpDown1.Value.ToString(), out int num))
-                {
+        //private void numericUpDown1_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        if (int.TryParse(numericUpDown1.Value.ToString(), out int num))
+        //        {
 
-                    TurnPage(tabControl1.SelectedTab,  TurnPageType.ToPage,num);
-                }
+        //            TurnPage(tabControl1.SelectedTab,  TurnPageType.ToPage,num);
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
         private void m_opensvr_Click(object sender, EventArgs e)
         {

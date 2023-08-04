@@ -19,7 +19,7 @@ namespace TDEngineClient.Services
 
             var dto = new RecordDto();
             dto.DB = account;
-            dto.CurrentPage = page;
+            //dto.CurrentPage = page;
             string _base64Str = THelper.GetBase64Str(account.Username, account.Password);
 
             var response =  THelper.Query(account.Url, _base64Str, sql);

@@ -39,7 +39,7 @@ namespace TDEngineClient
             spMain.BringToFront();
 
             tabControl1.Dock = DockStyle.Fill;
-            panel2.Dock = DockStyle.Bottom;
+            //panel2.Dock = DockStyle.Bottom;
 
             //清空控件
             this.tabControl1.TabPages.Clear();
@@ -362,11 +362,6 @@ namespace TDEngineClient
             tab.Controls.Add(spl);
             spl.BringToFront();
 
-            var pageBox = new SqlPageBox();
-            pageBox.Dock = DockStyle.Bottom;
-            tab.Controls.Add(pageBox);
-            pageBox.BringToFront();
-
             var dgv = new DataGridView();
             dgv.Dock = DockStyle.Fill;
 
@@ -427,6 +422,7 @@ namespace TDEngineClient
             tabControl1.TabPages.Add(tab);
             tabControl1.SelectedTab = tab;
             tab.AutoScroll = true;
+
             var dgv = new DataGridView();
             dgv.Dock = DockStyle.Fill;
             //dgv.Dock = DockStyle.None;
@@ -434,6 +430,7 @@ namespace TDEngineClient
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             //dgv.ReadOnly = true;
             tab.Controls.Add(dgv);
+
 
             var result = MyService.ExcuteSql(account, sql);
             if (result != null)
@@ -452,7 +449,8 @@ namespace TDEngineClient
             if (result != null)
             {
                 AddRecords(dgv, result);
-                ShowRecordCount(result, account.IP, 1, PageSize);
+                //ShowRecordCount(result, account.IP, 1, PageSize);
+                ts3.Text = result.RecordList.Count.ToString() + " Records";
             }
 
         }
@@ -690,11 +688,19 @@ namespace TDEngineClient
 
                 //dgv.ReadOnly = true;
 
+                var pageBox = new SqlPageBox();//添加分页栏组件
+                pageBox.Dock = DockStyle.Bottom;
+                tab.Controls.Add(pageBox);
+                pageBox.BringToFront();
+                pageBox.PageSize = PageSize;
+                pageBox.PageChanged += new SqlPageBox.PageChangHandle(this.PageBox_PageChanged);
+
                 var result = MyService.GetRecords(account, tableName, 1, PageSize);
                 if (result != null)
                 {
                     AddRecords(dgv, result);
-                    ShowRecordCount(result, tableName, 1, PageSize);
+                    //ShowRecordCount(result, tableName, 1, PageSize);
+                    pageBox.RecordCount = result.Count;
                 }
                 tabControl1.SelectedTab = tabControl1.TabPages[key];
                 tab.Tag = result;
@@ -702,73 +708,6 @@ namespace TDEngineClient
 
         }
 
-        private void TurnPage(TabPage tp, TurnPageType type, long toPage = 0)
-        {
-            if (tp == null) return;
-            if (tp.Tag is RecordDto)
-            {
-                var table = (tp.Tag as RecordDto);
-                var account = table.DB;
-                var tableName = table.TableName;
-
-                var targetPage = table.CurrentPage;
-                if (type == TurnPageType.First)
-                {
-                    targetPage = 1;
-                }
-                else if (type == TurnPageType.Last)
-                {
-                    targetPage = table.PageCount;
-                }
-                else if (type == TurnPageType.Prev)
-                {
-                    targetPage = table.CurrentPage > 1 ? table.CurrentPage - 1 : table.CurrentPage;
-                }
-                else if (type == TurnPageType.Next)
-                {
-                    targetPage = table.CurrentPage < table.PageCount ? table.CurrentPage + 1 : table.CurrentPage;
-                }
-                else if (type == TurnPageType.ToPage)
-                {
-                    targetPage = toPage > 0 && toPage <= table.PageCount ? toPage : table.CurrentPage;
-                }
-
-                if (targetPage == table.CurrentPage) return;//已在目标页，无须改变
-
-                var currentPage = targetPage;
-
-                var result = MyService.GetRecords(account, tableName, currentPage, PageSize);
-                if (result != null)
-                {
-                    foreach (var ctl in tp.Controls)
-                    {
-                        if (ctl is DataGridView)
-                        {
-                            AddRecords(ctl as DataGridView, result);
-                            ShowRecordCount(result, tableName, currentPage, PageSize);
-                            break;
-                        }
-                    }
-
-                    tp.Tag = result;
-                }
-                numericUpDown1.Value = currentPage;
-            }
-
-        }
-
-
-        public void ShowRecordCount(RecordDto rec, string tableName, long page = 1, int pageSize = 10)
-        {
-            var offset = (page - 1) * pageSize + 1;//起始记录位置(下标从1开始)
-            var limit = pageSize;
-            //var count = rec.Count;
-            //var Pages = rec.PageCount;
-            var offsetMax = offset + pageSize - 1;
-            if (offsetMax > rec.Count) offsetMax = rec.Count;
-            string info = $"Page[{rec.CurrentPage}/{rec.PageCount}] Record[{offset}-{offsetMax}/{rec.Count}]";
-            ts3.Text = info;
-        }
 
         /// <summary>
         /// 获取节点对应的数据库
@@ -974,6 +913,8 @@ namespace TDEngineClient
             FileHelper.SaveServers(svrList);//保存到配置文件
             return true;
         }
+
+        #region 导入导出
 
         /// <summary>
         /// 导出表/超级表的所有子表文件
@@ -1202,6 +1143,41 @@ namespace TDEngineClient
 
         }
 
+        #endregion
+
+        public void PageBox_PageChanged(object sender, EventArgs e)
+        {
+            if (!(sender is SqlPageBox)) return;
+            if (!((sender as SqlPageBox).Parent is TabPage)) return;
+            var tp = (sender as SqlPageBox).Parent as TabPage;
+
+            if (tp.Tag is RecordDto)
+            {
+                var table = (tp.Tag as RecordDto);
+                var account = table.DB;
+                var tableName = table.TableName;
+
+                var currentPage = (sender as SqlPageBox).CurrentPage;
+
+
+                var result = MyService.GetRecords(account, tableName, currentPage, PageSize);
+                if (result != null)
+                {
+                    foreach (var ctl in tp.Controls)
+                    {
+                        if (ctl is DataGridView)
+                        {
+                            AddRecords(ctl as DataGridView, result);
+                            //ShowRecordCount(result, tableName, currentPage, PageSize);
+                            break;
+                        }
+                    }
+
+                    tp.Tag = result;
+                }
+                //numericUpDown1.Value = currentPage;
+            }
+        }
 
     }
 }

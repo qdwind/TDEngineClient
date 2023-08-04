@@ -15,7 +15,7 @@ namespace TDEngineClient.Entity
 
         public Server DB { get; set; }
         public string TableName { get; set; }
-        public long CurrentPage { get; set; }
-        public long PageCount { get; set; }
+        //public long CurrentPage { get; set; }
+        //public long PageCount { get; set; }
     }
 }

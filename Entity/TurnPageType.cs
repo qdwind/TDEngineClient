@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace TDEngineClient.Entity
 {
-        public enum TurnPageType
-        {
-            First,
-            Last,
-            Prev,
-            Next,
-            ToPage
-        }
+        //public enum TurnPageType
+        //{
+        //    First,
+        //    Last,
+        //    Prev,
+        //    Next,
+        //    ToPage
+        //}
 }

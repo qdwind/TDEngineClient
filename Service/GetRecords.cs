@@ -21,7 +21,7 @@ namespace TDEngineClient.Services
             var dto = new RecordDto();
             dto.DB = account;
             dto.TableName = tableName;
-            dto.CurrentPage = page;
+            //dto.CurrentPage = page;
             string _base64Str = THelper.GetBase64Str(account.Username, account.Password);
 
 
@@ -30,17 +30,17 @@ namespace TDEngineClient.Services
             if (tmpresponse.code == 0 && tmpresponse.data.Count > 0) //获取成功
             {
                 dto.Count = Convert.ToInt64(tmpresponse.data[0][0]);
-                if (dto.Count > pageSize)
-                {
-                    if (dto.Count % pageSize > 0)
-                        dto.PageCount = dto.Count / pageSize + 1;
-                    else
-                        dto.PageCount = dto.Count / pageSize;
-                }
-                else
-                {
-                    dto.PageCount = 1;
-                }
+                //if (dto.Count > pageSize)
+                //{
+                //    if (dto.Count % pageSize > 0)
+                //        dto.PageCount = dto.Count / pageSize + 1;
+                //    else
+                //        dto.PageCount = dto.Count / pageSize;
+                //}
+                //else
+                //{
+                //    dto.PageCount = 1;
+                //}
             }
 
             string sql = $"select * from {tableName} limit {limit} offset {offset}";

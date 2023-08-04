@@ -27,6 +27,8 @@ namespace TDEngineClient
                     Pages = recordCount / PageSize + 1;
                 else
                     Pages = recordCount / PageSize;
+                CurrentPage = 1;
+                RefreshPageInfo();//刷新信息显示
             }
         }
         /// <summary>
@@ -90,6 +92,7 @@ namespace TDEngineClient
             pnlPage.Top = 0;
             this.Height = pnlPage.Height;
             lblInfo.Top = 8;
+            lblInfo.Width = 400;
             lblInfo.Text = "";
         }
 
@@ -113,36 +116,71 @@ namespace TDEngineClient
             var btn = sender as Button;
             if (btn.Name == "btnFirst") //首页
             {
-                CurrentPage = 1;
+                ChangePage(1);
             }
             else if (btn.Name == "btnLast") //末页
             {
-                CurrentPage = Pages;
+                ChangePage(Pages); 
             }
             else if (btn.Name == "btnPre") //前页
             {
-                CurrentPage = CurrentPage - 1;
+                ChangePage(CurrentPage - 1);
             }
             else if (btn.Name == "btnNext") //后页
             {
-                CurrentPage = CurrentPage + 1;
-            }
-
-            if (ShowPageInfo)
-            {
-                lblInfo.Text = $"Page[{CurrentPage}/{Pages}]Record[{RecordFrom + 1}-{RecordTo + 1}/{RecordCount}]";
+                ChangePage(CurrentPage + 1);
             }
 
             if (PageChanged != null)
             {
-                PageChanged(sender,e );
+                PageChanged(this,e );
             }
         }
+
+
+        private void ChangePage(long page)
+        {
+            CurrentPage = page;//切换当前页
+            RefreshPageInfo();//刷新信息显示
+        }
+
+
+
 
         private void SqlPageBox_Resize(object sender, EventArgs e)
         {
             pnlPage.Left = this.Width - pnlPage.Width;
-            lblInfo.Left = pnlPage.Left - pnlPage.Width;
+            lblInfo.Left = pnlPage.Left - lblInfo.Width-10;
+        }
+
+        private void RefreshPageInfo()
+        {
+            if (ShowPageInfo)
+            {
+                lblInfo.Text = $"Page[{CurrentPage}/{Pages}]Record[{RecordFrom + 1}-{RecordTo + 1}/{RecordCount}]";
+            }
+        }
+
+        private void txtCurrentPage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Back)
+            {
+                return;
+            }
+            else if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (txtCurrentPage.Text.Trim() == "") txtCurrentPage.Text = "1";
+                ChangePage(long.Parse(txtCurrentPage.Text));
+                if (PageChanged != null)
+                {
+                    PageChanged(this, e);
+                }
+            }
+            else if (e.KeyChar < (char)Keys.D0 || e.KeyChar > (char)Keys.D9)
+            {
+                e.Handled = true; //数字输入校验
+            }
+
         }
     }
 }

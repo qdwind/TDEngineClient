@@ -125,11 +125,6 @@ namespace TDEngineClient.Helper
             return p;
         }
 
-        public static void PageBox_PageChanged(object sender, EventArgs e)
-        {
-            //MessageBox.Show("test");
-        }
-
 
 
     }

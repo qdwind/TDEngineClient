@@ -30,11 +30,11 @@ namespace TDEngineClient
         private void InitializeComponent()
         {
             this.pnlPage = new System.Windows.Forms.Panel();
+            this.txtCurrentPage = new System.Windows.Forms.TextBox();
             this.btnLast = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPre = new System.Windows.Forms.Button();
             this.btnFirst = new System.Windows.Forms.Button();
-            this.txtCurrentPage = new System.Windows.Forms.TextBox();
             this.lblText = new System.Windows.Forms.Label();
             this.lblInfo = new System.Windows.Forms.Label();
             this.pnlPage.SuspendLayout();
@@ -52,6 +52,17 @@ namespace TDEngineClient
             this.pnlPage.Size = new System.Drawing.Size(212, 34);
             this.pnlPage.TabIndex = 11;
             this.pnlPage.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPage_Paint);
+            // 
+            // txtCurrentPage
+            // 
+            this.txtCurrentPage.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtCurrentPage.Location = new System.Drawing.Point(78, 8);
+            this.txtCurrentPage.Name = "txtCurrentPage";
+            this.txtCurrentPage.Size = new System.Drawing.Size(51, 18);
+            this.txtCurrentPage.TabIndex = 13;
+            this.txtCurrentPage.Text = "1";
+            this.txtCurrentPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCurrentPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCurrentPage_KeyPress);
             // 
             // btnLast
             // 
@@ -109,16 +120,6 @@ namespace TDEngineClient
             this.btnFirst.UseVisualStyleBackColor = true;
             this.btnFirst.Click += new System.EventHandler(this.PageButtonClick);
             // 
-            // txtCurrentPage
-            // 
-            this.txtCurrentPage.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtCurrentPage.Location = new System.Drawing.Point(78, 8);
-            this.txtCurrentPage.Name = "txtCurrentPage";
-            this.txtCurrentPage.Size = new System.Drawing.Size(51, 18);
-            this.txtCurrentPage.TabIndex = 13;
-            this.txtCurrentPage.Text = "1";
-            this.txtCurrentPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // lblText
             // 
             this.lblText.Location = new System.Drawing.Point(16, 14);
@@ -130,13 +131,12 @@ namespace TDEngineClient
             // 
             // lblInfo
             // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(165, 17);
+            this.lblInfo.Location = new System.Drawing.Point(111, 17);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(63, 15);
+            this.lblInfo.Size = new System.Drawing.Size(117, 16);
             this.lblInfo.TabIndex = 3;
             this.lblInfo.Text = "lblInfo";
-            this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // SqlPageBox
             // 
@@ -151,7 +151,6 @@ namespace TDEngineClient
             this.pnlPage.ResumeLayout(false);
             this.pnlPage.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

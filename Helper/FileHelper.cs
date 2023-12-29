@@ -83,7 +83,11 @@ namespace TDEngineClient.Helper
                     myconfig.ServerList.Add(account);
                 }
 
-                myconfig.System.Language = Read("system", "language", "", filePath);
+                if (int.TryParse(Read("system", "language", "", filePath), out int lanCode))
+                {
+                    myconfig.System.Language = lanCode;
+                }
+
             }
             return myconfig;
         }
@@ -142,6 +146,20 @@ namespace TDEngineClient.Helper
                 }
             }
         }
+
+        /// <summary>
+        /// 保存其他配置
+        /// </summary>
+        /// <param name="sysConfig"></param>
+        public static void SaveSystemConfig(SystemConfig sysConfig)
+        {
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");//在当前程序路径创建
+            if (File.Exists(filePath))
+            {
+                Write("system", "language", sysConfig.Language.ToString(), filePath);
+            }
+        }
+
 
         public static List<string> ReadSections(string iniFiename, string section = null)
         {

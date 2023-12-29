@@ -30,15 +30,15 @@ namespace TDEngineClient
         private void InitializeComponent()
         {
             this.txtServer = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblServer = new System.Windows.Forms.Label();
+            this.lblPort = new System.Windows.Forms.Label();
             this.txtPort = new System.Windows.Forms.TextBox();
             this.txtUser = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblUser = new System.Windows.Forms.Label();
             this.txtPass = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblPass = new System.Windows.Forms.Label();
             this.btnView = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblAlias = new System.Windows.Forms.Label();
             this.txtAlias = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -48,77 +48,86 @@ namespace TDEngineClient
             // 
             // txtServer
             // 
-            this.txtServer.Location = new System.Drawing.Point(127, 71);
+            this.txtServer.Location = new System.Drawing.Point(95, 57);
+            this.txtServer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtServer.Name = "txtServer";
-            this.txtServer.Size = new System.Drawing.Size(192, 25);
+            this.txtServer.Size = new System.Drawing.Size(145, 21);
             this.txtServer.TabIndex = 0;
             // 
-            // label1
+            // lblServer
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(55, 74);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Server";
+            this.lblServer.AutoSize = true;
+            this.lblServer.Location = new System.Drawing.Point(41, 59);
+            this.lblServer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblServer.Name = "lblServer";
+            this.lblServer.Size = new System.Drawing.Size(41, 12);
+            this.lblServer.TabIndex = 1;
+            this.lblServer.Text = "Server";
             // 
-            // label2
+            // lblPort
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(71, 119);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 15);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Port";
+            this.lblPort.AutoSize = true;
+            this.lblPort.Location = new System.Drawing.Point(53, 95);
+            this.lblPort.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPort.Name = "lblPort";
+            this.lblPort.Size = new System.Drawing.Size(29, 12);
+            this.lblPort.TabIndex = 3;
+            this.lblPort.Text = "Port";
             // 
             // txtPort
             // 
-            this.txtPort.Location = new System.Drawing.Point(127, 116);
+            this.txtPort.Location = new System.Drawing.Point(95, 93);
+            this.txtPort.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(192, 25);
+            this.txtPort.Size = new System.Drawing.Size(145, 21);
             this.txtPort.TabIndex = 2;
             this.txtPort.Text = "6041";
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(127, 159);
+            this.txtUser.Location = new System.Drawing.Point(95, 127);
+            this.txtUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(192, 25);
+            this.txtUser.Size = new System.Drawing.Size(145, 21);
             this.txtUser.TabIndex = 0;
             this.txtUser.Text = "root";
             // 
-            // label3
+            // lblUser
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(71, 162);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 15);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "User";
+            this.lblUser.AutoSize = true;
+            this.lblUser.Location = new System.Drawing.Point(53, 130);
+            this.lblUser.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblUser.Name = "lblUser";
+            this.lblUser.Size = new System.Drawing.Size(29, 12);
+            this.lblUser.TabIndex = 1;
+            this.lblUser.Text = "User";
             // 
             // txtPass
             // 
-            this.txtPass.Location = new System.Drawing.Point(127, 204);
+            this.txtPass.Location = new System.Drawing.Point(95, 163);
+            this.txtPass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPass.Name = "txtPass";
             this.txtPass.PasswordChar = '*';
-            this.txtPass.Size = new System.Drawing.Size(170, 25);
+            this.txtPass.Size = new System.Drawing.Size(128, 21);
             this.txtPass.TabIndex = 2;
             this.txtPass.Text = "taosdata";
             // 
-            // label4
+            // lblPass
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(71, 207);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Pass";
+            this.lblPass.AutoSize = true;
+            this.lblPass.Location = new System.Drawing.Point(53, 166);
+            this.lblPass.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPass.Name = "lblPass";
+            this.lblPass.Size = new System.Drawing.Size(29, 12);
+            this.lblPass.TabIndex = 3;
+            this.lblPass.Text = "Pass";
             // 
             // btnView
             // 
-            this.btnView.Location = new System.Drawing.Point(297, 203);
+            this.btnView.Location = new System.Drawing.Point(223, 162);
+            this.btnView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnView.Name = "btnView";
-            this.btnView.Size = new System.Drawing.Size(24, 28);
+            this.btnView.Size = new System.Drawing.Size(18, 22);
             this.btnView.TabIndex = 4;
             this.btnView.Text = "👁";
             this.btnView.UseVisualStyleBackColor = true;
@@ -126,28 +135,31 @@ namespace TDEngineClient
             this.btnView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnView_MouseDown);
             this.btnView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnView_MouseUp);
             // 
-            // label5
+            // lblAlias
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(63, 34);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 15);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Alias";
+            this.lblAlias.AutoSize = true;
+            this.lblAlias.Location = new System.Drawing.Point(47, 27);
+            this.lblAlias.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblAlias.Name = "lblAlias";
+            this.lblAlias.Size = new System.Drawing.Size(35, 12);
+            this.lblAlias.TabIndex = 6;
+            this.lblAlias.Text = "Alias";
             // 
             // txtAlias
             // 
-            this.txtAlias.Location = new System.Drawing.Point(127, 31);
+            this.txtAlias.Location = new System.Drawing.Point(95, 25);
+            this.txtAlias.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtAlias.Name = "txtAlias";
-            this.txtAlias.Size = new System.Drawing.Size(192, 25);
+            this.txtAlias.Size = new System.Drawing.Size(145, 21);
             this.txtAlias.TabIndex = 5;
             // 
             // btnOk
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(190, 293);
+            this.btnOk.Location = new System.Drawing.Point(142, 234);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(107, 38);
+            this.btnOk.Size = new System.Drawing.Size(80, 30);
             this.btnOk.TabIndex = 7;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -156,18 +168,20 @@ namespace TDEngineClient
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(309, 291);
+            this.btnCancel.Location = new System.Drawing.Point(232, 233);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(101, 39);
+            this.btnCancel.Size = new System.Drawing.Size(76, 31);
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnTest
             // 
-            this.btnTest.Location = new System.Drawing.Point(27, 294);
+            this.btnTest.Location = new System.Drawing.Point(20, 235);
+            this.btnTest.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(101, 36);
+            this.btnTest.Size = new System.Drawing.Size(76, 29);
             this.btnTest.TabIndex = 9;
             this.btnTest.Text = "Test";
             this.btnTest.UseVisualStyleBackColor = true;
@@ -178,9 +192,10 @@ namespace TDEngineClient
             this.chkSavePass.AutoSize = true;
             this.chkSavePass.Checked = true;
             this.chkSavePass.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSavePass.Location = new System.Drawing.Point(127, 235);
+            this.chkSavePass.Location = new System.Drawing.Point(95, 188);
+            this.chkSavePass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkSavePass.Name = "chkSavePass";
-            this.chkSavePass.Size = new System.Drawing.Size(166, 24);
+            this.chkSavePass.Size = new System.Drawing.Size(102, 16);
             this.chkSavePass.TabIndex = 10;
             this.chkSavePass.Text = "Save Password";
             this.chkSavePass.UseVisualStyleBackColor = true;
@@ -188,30 +203,31 @@ namespace TDEngineClient
             // fserver
             // 
             this.AcceptButton = this.btnOk;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(443, 397);
+            this.ClientSize = new System.Drawing.Size(332, 318);
             this.ControlBox = false;
             this.Controls.Add(this.chkSavePass);
             this.Controls.Add(this.btnTest);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblAlias);
             this.Controls.Add(this.txtAlias);
             this.Controls.Add(this.btnView);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblPass);
+            this.Controls.Add(this.lblPort);
             this.Controls.Add(this.txtPass);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblUser);
             this.Controls.Add(this.txtPort);
             this.Controls.Add(this.txtUser);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblServer);
             this.Controls.Add(this.txtServer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "fserver";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Server";
+            this.Text = "Server Config";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fserver_FormClosed);
             this.Load += new System.EventHandler(this.fserver_Load);
             this.ResumeLayout(false);
@@ -222,15 +238,15 @@ namespace TDEngineClient
         #endregion
 
         private System.Windows.Forms.TextBox txtServer;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblServer;
+        private System.Windows.Forms.Label lblPort;
         private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.TextBox txtUser;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblUser;
         private System.Windows.Forms.TextBox txtPass;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblPass;
         private System.Windows.Forms.Button btnView;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblAlias;
         private System.Windows.Forms.TextBox txtAlias;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;

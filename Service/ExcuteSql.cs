@@ -16,7 +16,7 @@ namespace TDEngineClient.Services
             //var offset = (page - 1) * pageSize + 1;//起始记录位置(下标从1开始)
             //var limit = pageSize;
             //var recordTo = recordFrom + pageSize - 1;//截至记录位置
-
+            
             var dto = new RecordDto();
             dto.DB = account;
             //dto.CurrentPage = page;

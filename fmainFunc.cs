@@ -241,7 +241,7 @@ namespace TDEngineClient
 
             if (command == SqlCommandType.CreateDatabase)
             {
-                caption = $"{(string.IsNullOrEmpty(db.Account.AliasName) ? db.Account.IP : db.Account.AliasName)}{CAPTION_SQL}";
+                caption = $"{(string.IsNullOrEmpty(account.AliasName) ? account.Url : account.AliasName)}{CAPTION_SQL}";
                 text = new string[] { $"create database dbname keep 3650 duration 50" };
             }
             else if (command == SqlCommandType.DropDatabase)
@@ -365,7 +365,6 @@ namespace TDEngineClient
             var dgv = new DataGridView();
             dgv.Dock = DockStyle.Fill;
 
-
             //dgv.Dock = DockStyle.None;
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -437,6 +436,7 @@ namespace TDEngineClient
             {
                 AddRecords(dgv, result);
                 ts3.Text = result.RecordList.Count.ToString() + " Records";
+                ts2.Text = sql;
             }
 
         }
@@ -451,6 +451,7 @@ namespace TDEngineClient
                 AddRecords(dgv, result);
                 //ShowRecordCount(result, account.IP, 1, PageSize);
                 ts3.Text = result.RecordList.Count.ToString() + " Records";
+                ts2.Text = sql;
             }
 
         }
@@ -679,14 +680,7 @@ namespace TDEngineClient
                 tabControl1.TabPages.Add(key, key);
                 var tab = tabControl1.TabPages[key];
                 tab.AutoScroll = true;
-                var dgv = new DataGridView();
-                dgv.Parent = tab;
-                dgv.Dock = DockStyle.Fill;
-                //dgv.Dock = DockStyle.None;
-                dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-                dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-                //dgv.ReadOnly = true;
 
                 var pageBox = new SqlPageBox();//添加分页栏组件
                 pageBox.Dock = DockStyle.Bottom;
@@ -694,6 +688,16 @@ namespace TDEngineClient
                 pageBox.BringToFront();
                 pageBox.PageSize = PageSize;
                 pageBox.PageChanged += new SqlPageBox.PageChangHandle(this.PageBox_PageChanged);
+
+                var dgv = new DataGridView();
+                dgv.Parent = tab;
+                dgv.Dock = DockStyle.Fill;
+                //dgv.Dock = DockStyle.None;
+                dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+                dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgv.BringToFront();
+
+                //dgv.ReadOnly = true;
 
                 var result = MyService.GetRecords(account, tableName, 1, PageSize);
                 if (result != null)

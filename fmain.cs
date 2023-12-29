@@ -22,8 +22,6 @@ namespace TDEngineClient
         public fmain()
         {
             MyConfig = FileHelper.GetConfig();//读取配置文件
-            if (MyConfig.System.Language != null)
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(MyConfig.System.Language);//多语言设置
             InitializeComponent();
         }
 
@@ -31,11 +29,17 @@ namespace TDEngineClient
         private void Form1_Load(object sender, EventArgs e)
         {
             InitailForm();
+
+            if (MyConfig.System.Language != null)
+            {
+                //Thread.CurrentThread.CurrentUICulture = new CultureInfo(MyConfig.System.Language);//多语言设置
+                SetLanguage(MyConfig.System.Language);//设置语言
+            }
         }
 
         private void TextBoxKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F5 || e.KeyCode == Keys.F1) //按F5(或F1)时执行SQL语句
+            if (e.KeyCode == Keys.F5) //按F5时执行SQL语句
             {
                 RunSql();
             }
@@ -67,6 +71,10 @@ namespace TDEngineClient
                     ReplaceInputText((sender as TextBox), TipBox.Items[TipBox.SelectedIndex].ToString());
                     TipBox.Visible = false;
                 }
+            }
+            else if(e.KeyCode ==Keys.F1)//帮助
+            {
+                System.Diagnostics.Process.Start("explorer.exe", "https://docs.taosdata.com/taos-sql");
             }
             else
             {
@@ -346,7 +354,7 @@ namespace TDEngineClient
 
         private void m_newsvr_Click(object sender, EventArgs e)
         {
-            fserver svr = new fserver();
+            fserver svr = new fserver(MyConfig.System.Language);
             if (svr.ShowDialog() == DialogResult.OK)
             {
                 TreeNode item = new TreeNode();
@@ -363,7 +371,7 @@ namespace TDEngineClient
         private void m_editsvr_Click(object sender, EventArgs e)
         {
             var item = GetNodeItem(treeView1.SelectedNode);
-            fserver svr = new fserver(item.Server);
+            fserver svr = new fserver(MyConfig.System.Language,item.Server);
             if (svr.ShowDialog() == DialogResult.OK)
             {
                 item.Server = svr.Server;
@@ -554,6 +562,26 @@ namespace TDEngineClient
         private void m_ucase_Click(object sender, EventArgs e)
         {
             ChangeCase(true);
+        }
+
+        private void m_about_Click(object sender, EventArgs e)
+        {
+            var info =$"{Application.ProductName}\r {Application.ProductVersion}\r {Application.CompanyName}";
+            MessageBox.Show(info, "About", MessageBoxButtons.OK);
+        }
+
+        private void m_en_Click(object sender, EventArgs e)
+        {
+            m_en.Checked = true;
+            m_cn.Checked = false;
+            SetLanguage(0);//英文
+        }
+
+        private void m_cn_Click(object sender, EventArgs e)
+        {
+            m_en.Checked = false;
+            m_cn.Checked = true;
+            SetLanguage(1);//中文
         }
     }
 }

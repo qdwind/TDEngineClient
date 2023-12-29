@@ -108,6 +108,9 @@
     </Compile>
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\FormHelper.cs" />
+    <Compile Include="Helper\Lang.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Helper\StringHelper.cs" />
     <Compile Include="Helper\THelper.cs" />
     <Compile Include="MyConst.cs" />
@@ -130,9 +133,6 @@
       <DependentUpon>fexport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fmain.resx">
-      <DependentUpon>fmain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="fmain.zh-CN.resx">
       <DependentUpon>fmain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fpass.resx">

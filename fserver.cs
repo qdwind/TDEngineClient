@@ -16,11 +16,13 @@ namespace TDEngineClient
     {
         public Server Server { get; } = new Server();
 
-        public fserver(Server svr=null)
+        public fserver(int langCode,Server svr=null)
         {
             InitializeComponent();
             if (svr != null)
                 Server = svr;
+
+            SetLanguage(langCode); //设置语言
         }
 
         private void btnView_Click(object sender, EventArgs e)
@@ -95,5 +97,23 @@ namespace TDEngineClient
                 MessageBox.Show("Connect Failed." , "Error", MessageBoxButtons.OK);
             }
         }
+
+
+        private void SetLanguage(int lanCode)
+        {
+            this.Text = lanCode == 0 ? "Server Config" : "服务器设置";
+            lblAlias.Text = lanCode == 0 ? "Alias" : "别名";
+            lblServer.Text = lanCode == 0 ? "Server" : "服务器";
+            lblUser.Text = lanCode == 0 ? "User" : "用户名";
+            lblPass.Text = lanCode == 0 ? "Pass" : "密码";
+            lblPort.Text = lanCode == 0 ? "Port" : "端口";
+            chkSavePass.Text = lanCode == 0 ? "Save Password" : "保存密码";
+            btnOk.Text = lanCode == 0 ? "Ok" : "确定";
+            btnCancel.Text = lanCode == 0 ? "Cancel" : "取消";
+            btnTest.Text = lanCode == 0 ? "Test" : "测试";
+
+        }
+
+
     }
 }

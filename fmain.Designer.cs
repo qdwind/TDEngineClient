@@ -53,9 +53,9 @@ namespace TDEngineClient
             this.sp3 = new System.Windows.Forms.ToolStripSeparator();
             this.m_export = new System.Windows.Forms.ToolStripMenuItem();
             this.m_import = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_impor_tables = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_impor_stable = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_impor_sql = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_import_tables = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_import_stable = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_import_sql = new System.Windows.Forms.ToolStripMenuItem();
             this.sp4 = new System.Windows.Forms.ToolStripSeparator();
             this.m_query = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -78,7 +78,10 @@ namespace TDEngineClient
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_lan = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_en = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_cn = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_about = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ts2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.ts3 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -270,28 +273,28 @@ namespace TDEngineClient
             // m_import
             // 
             this.m_import.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.m_impor_tables,
-            this.m_impor_stable,
-            this.m_impor_sql});
+            this.m_import_tables,
+            this.m_import_stable,
+            this.m_import_sql});
             this.m_import.Name = "m_import";
             resources.ApplyResources(this.m_import, "m_import");
             // 
-            // m_impor_tables
+            // m_import_tables
             // 
-            this.m_impor_tables.Name = "m_impor_tables";
-            resources.ApplyResources(this.m_impor_tables, "m_impor_tables");
-            this.m_impor_tables.Click += new System.EventHandler(this.m_impor_tables_Click);
+            this.m_import_tables.Name = "m_import_tables";
+            resources.ApplyResources(this.m_import_tables, "m_import_tables");
+            this.m_import_tables.Click += new System.EventHandler(this.m_impor_tables_Click);
             // 
-            // m_impor_stable
+            // m_import_stable
             // 
-            this.m_impor_stable.Name = "m_impor_stable";
-            resources.ApplyResources(this.m_impor_stable, "m_impor_stable");
-            this.m_impor_stable.Click += new System.EventHandler(this.m_impor_stable_Click);
+            this.m_import_stable.Name = "m_import_stable";
+            resources.ApplyResources(this.m_import_stable, "m_import_stable");
+            this.m_import_stable.Click += new System.EventHandler(this.m_impor_stable_Click);
             // 
-            // m_impor_sql
+            // m_import_sql
             // 
-            this.m_impor_sql.Name = "m_impor_sql";
-            resources.ApplyResources(this.m_impor_sql, "m_impor_sql");
+            this.m_import_sql.Name = "m_import_sql";
+            resources.ApplyResources(this.m_import_sql, "m_import_sql");
             // 
             // sp4
             // 
@@ -446,14 +449,38 @@ namespace TDEngineClient
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
+            this.m_lan,
+            this.m_about});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             // 
-            // aboutToolStripMenuItem
+            // m_lan
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
+            this.m_lan.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.m_en,
+            this.m_cn});
+            this.m_lan.Name = "m_lan";
+            resources.ApplyResources(this.m_lan, "m_lan");
+            // 
+            // m_en
+            // 
+            this.m_en.Checked = true;
+            this.m_en.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.m_en.Name = "m_en";
+            resources.ApplyResources(this.m_en, "m_en");
+            this.m_en.Click += new System.EventHandler(this.m_en_Click);
+            // 
+            // m_cn
+            // 
+            this.m_cn.Name = "m_cn";
+            resources.ApplyResources(this.m_cn, "m_cn");
+            this.m_cn.Click += new System.EventHandler(this.m_cn_Click);
+            // 
+            // m_about
+            // 
+            this.m_about.Name = "m_about";
+            resources.ApplyResources(this.m_about, "m_about");
+            this.m_about.Click += new System.EventHandler(this.m_about_Click);
             // 
             // statusStrip1
             // 
@@ -626,7 +653,7 @@ namespace TDEngineClient
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem explorerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem m_about;
         private System.Windows.Forms.ToolStripMenuItem m_newsvr;
         private System.Windows.Forms.ToolStripMenuItem m_editsvr;
         private System.Windows.Forms.ToolStripMenuItem m_deletesvr;
@@ -637,9 +664,9 @@ namespace TDEngineClient
         private System.Windows.Forms.ToolStripStatusLabel ts1;
         private System.Windows.Forms.ProgressBar psBar;
         private System.Windows.Forms.ToolStripSeparator sp3;
-        private System.Windows.Forms.ToolStripMenuItem m_impor_tables;
-        private System.Windows.Forms.ToolStripMenuItem m_impor_stable;
-        private System.Windows.Forms.ToolStripMenuItem m_impor_sql;
+        private System.Windows.Forms.ToolStripMenuItem m_import_tables;
+        private System.Windows.Forms.ToolStripMenuItem m_import_stable;
+        private System.Windows.Forms.ToolStripMenuItem m_import_sql;
         private System.Windows.Forms.ToolStripMenuItem m_imports;
         private System.Windows.Forms.ToolStripMenuItem m_copy;
         private System.Windows.Forms.ToolStripMenuItem m_paste;
@@ -647,6 +674,9 @@ namespace TDEngineClient
         private System.Windows.Forms.ToolStripMenuItem m_lcase;
         private System.Windows.Forms.ToolStripMenuItem m_ucase;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem m_lan;
+        private System.Windows.Forms.ToolStripMenuItem m_en;
+        private System.Windows.Forms.ToolStripMenuItem m_cn;
     }
 }
 

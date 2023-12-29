@@ -15,6 +15,6 @@ namespace TDEngineClient.Entity
 
     public class SystemConfig
     {
-        public string Language { get; set; }
+        public int Language { get; set; } = 0;
     }
 }

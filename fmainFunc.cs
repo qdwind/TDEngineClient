@@ -17,7 +17,7 @@ namespace TDEngineClient
     {
         private Config MyConfig; //配置文件
         private int PageSize = 100;
-        private ListBox TipBox = new ListBox();//提示框
+        private DataGridView TipBox = new DataGridView();//提示框
 
         private const string CAPTION_QUERY = "->"; //查询标签
         private const string CAPTION_SQL = "->Sql"; //创建标签
@@ -77,9 +77,21 @@ namespace TDEngineClient
             panel1.Visible = true;
 
             //初始化tipbox
-            TipBox.Width = 260;
-            TipBox.Sorted = true;
-
+            TipBox.Width = 400;
+            TipBox.Columns.Add("text","text");
+            TipBox.Columns.Add("tip", "tip");
+            TipBox.Columns[0].Width = 300;
+            TipBox.Columns[1].Width = 80;
+            TipBox.ReadOnly = true;
+            TipBox.AllowUserToAddRows = false;
+            TipBox.ColumnHeadersVisible = false;
+            TipBox.RowHeadersVisible = false;
+            TipBox.EditMode = DataGridViewEditMode.EditProgrammatically;
+            TipBox.AllowUserToResizeRows = false;
+            TipBox.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            TipBox.BackgroundColor = Color.White;
+            TipBox.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            
         }
 
         /// <summary>
@@ -525,8 +537,8 @@ namespace TDEngineClient
         {
             string sql = "";
 
-            StableDto stable = null;
-            DataBaseDto db = null;
+            //StableDto stable = null;
+            //DataBaseDto db = null;
 
             var tab = new TabPage($"{account.IP}{CAPTION_POINT }");
             tabControl1.TabPages.Add(tab);
@@ -820,7 +832,7 @@ namespace TDEngineClient
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine($"Error in GetInputText:{ex.Message}");
             }
 
 
@@ -876,17 +888,29 @@ namespace TDEngineClient
                 var dict = new List<Tip>();
                 dict.AddRange((txtBox.Tag as QueryBox).TipsDict);
                 dict.AddRange((txtBox.Tag as QueryBox).DbDict);
-                var found = dict.Where(t => t.Text.StartsWith(text)).OrderBy(t=>t.Text).Select(t=>t.Text).ToArray();
-                if (found.Length > 0)
+                //var found = dict.Where(t => t.Text.StartsWith(text)).OrderBy(t=>t.Text).Select(t=>t.Text).ToArray();
+                var found = dict.Where(t => t.Text.StartsWith(text)).OrderBy(t => t.Text).ToList();//以关键词开头的
+
+                var foundMids = dict.Where(t => t.Text.Contains(text) && !t.Text.StartsWith(text)).OrderBy(t => t.Text).ToList();//仅包含的
+                found.AddRange(foundMids);
+
+                if (found.Count > 0)
                 {
                     //捕获光标位置
                     var p = FormHelper.GetCursorPos(txtBox);
-                    TipBox.Items.Clear();
-                    TipBox.Items.AddRange(found);
-                    if (TipBox.SelectedIndex == -1)
+                    TipBox.Rows.Clear();
+                    for (int i = 0; i < found.Count; i++)
                     {
-                        TipBox.SelectedIndex = 0;
+                        TipBox.Rows.Add(found[i].Text);
+                        TipBox.Rows[i].Cells[1].Value = found[i].Remark;
                     }
+                    //TipBox.Items.AddRange(found);
+
+                    if (TipBox.CurrentRow == null)
+                    {
+                        TipBox.Rows[0].Selected = true;
+                    }
+
 
                     TipBox.Left = spMain.Panel1.Width + p.X + 10;
                     TipBox.Top = p.Y + 100;

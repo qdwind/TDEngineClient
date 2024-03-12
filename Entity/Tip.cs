@@ -21,6 +21,11 @@ namespace TDEngineClient.Entity
             Type = type;
         }
 
+        public override string ToString()
+        {
+            return Text;
+        }
+
     }
 
 

@@ -78,6 +78,7 @@ namespace TDEngineClient.Helper
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"Error in QueryObjects:{ex.Message}");
                 return null;
             }
         }

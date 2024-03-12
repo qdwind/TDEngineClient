@@ -247,19 +247,19 @@
     <value>Export...</value>
   </data>
   <data name="m_import_tables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>137, 22</value>
   </data>
   <data name="m_import_tables.Text" xml:space="preserve">
     <value>Table Files</value>
   </data>
   <data name="m_import_stable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>137, 22</value>
   </data>
   <data name="m_import_stable.Text" xml:space="preserve">
     <value>Stable File</value>
   </data>
   <data name="m_import_sql.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>137, 22</value>
   </data>
   <data name="m_import_sql.Text" xml:space="preserve">
     <value>SQL File</value>
@@ -280,7 +280,7 @@
     <value>New Query</value>
   </data>
   <data name="menuTree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 402</value>
+    <value>185, 380</value>
   </data>
   <data name="&gt;&gt;menuTree.Name" xml:space="preserve">
     <value>menuTree</value>
@@ -305,7 +305,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAC+
-        DAAAAk1TRnQBSQFMAgEBCAEAAbwBAQG8AQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        DAAAAk1TRnQBSQFMAgEBCAEAAcQBAQHEAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAATADAAEBAQABCAYAAQwYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -525,22 +525,22 @@
     <value>13, 14</value>
   </metadata>
   <data name="newConnectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="newConnectionToolStripMenuItem.Text" xml:space="preserve">
     <value>New Connection</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>168, 6</value>
   </data>
   <data name="closeServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="closeServerToolStripMenuItem.Text" xml:space="preserve">
     <value>Close Server</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
@@ -552,22 +552,22 @@
     <value>File</value>
   </data>
   <data name="copyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>128, 22</value>
   </data>
   <data name="copyToolStripMenuItem.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="pasteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>128, 22</value>
   </data>
   <data name="pasteToolStripMenuItem.Text" xml:space="preserve">
     <value>Paste</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>125, 6</value>
   </data>
   <data name="selectAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>128, 22</value>
   </data>
   <data name="selectAllToolStripMenuItem.Text" xml:space="preserve">
     <value>Select All</value>
@@ -579,7 +579,7 @@
     <value>Edit</value>
   </data>
   <data name="explorerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="explorerToolStripMenuItem.Text" xml:space="preserve">
     <value>Explorer</value>
@@ -591,7 +591,7 @@
     <value>View</value>
   </data>
   <data name="newQueryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>141, 22</value>
   </data>
   <data name="newQueryToolStripMenuItem.Text" xml:space="preserve">
     <value>New Query</value>
@@ -603,25 +603,25 @@
     <value>Window</value>
   </data>
   <data name="m_en.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>117, 22</value>
   </data>
   <data name="m_en.Text" xml:space="preserve">
     <value>English</value>
   </data>
   <data name="m_cn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>117, 22</value>
   </data>
   <data name="m_cn.Text" xml:space="preserve">
     <value>中文</value>
   </data>
   <data name="m_lan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>133, 22</value>
   </data>
   <data name="m_lan.Text" xml:space="preserve">
     <value>Language</value>
   </data>
   <data name="m_about.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>133, 22</value>
   </data>
   <data name="m_about.Text" xml:space="preserve">
     <value>About</value>
@@ -681,7 +681,7 @@
     <value>False</value>
   </data>
   <data name="ts3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>5087, 486</value>
+    <value>5101, 486</value>
   </data>
   <data name="ts3.Text" xml:space="preserve">
     <value>page</value>
@@ -705,7 +705,7 @@
     <value>1, 0, 10, 0</value>
   </data>
   <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>5748, 491</value>
+    <value>5762, 491</value>
   </data>
   <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

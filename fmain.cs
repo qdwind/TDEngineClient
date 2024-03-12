@@ -30,11 +30,8 @@ namespace TDEngineClient
         {
             InitailForm();
 
-            if (MyConfig.System.Language != null)
-            {
-                //Thread.CurrentThread.CurrentUICulture = new CultureInfo(MyConfig.System.Language);//多语言设置
-                SetLanguage(MyConfig.System.Language);//设置语言
-            }
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo(MyConfig.System.Language);//多语言设置
+            SetLanguage(MyConfig.System.Language);//设置语言
         }
 
         private void TextBoxKeyDown(object sender, KeyEventArgs e)
@@ -49,26 +46,41 @@ namespace TDEngineClient
             }
             else if (e.KeyCode == Keys.Up)
             {
-                if (TipBox.Visible && TipBox.SelectedIndex > 0)
+                if (TipBox.Visible)
                 {
                     e.SuppressKeyPress = true;//取消输入
-                    TipBox.SelectedIndex = TipBox.SelectedIndex - 1;
+                    if (TipBox.CurrentCell.RowIndex > 0)
+                    {
+                        TipBox.CurrentCell = TipBox.Rows[TipBox.CurrentCell.RowIndex - 1].Cells[0];
+                    }
+                    else
+                    {
+                        TipBox.CurrentCell = TipBox.Rows[TipBox.Rows.Count-1].Cells[0];
+                    }
                 }
             }
             else if (e.KeyCode == Keys.Down)
             {
-                if (TipBox.Visible && TipBox.Items.Count-1 > TipBox.SelectedIndex)
+                if (TipBox.Visible)
                 {
                     e.SuppressKeyPress = true;//取消输入
-                    TipBox.SelectedIndex = TipBox.SelectedIndex + 1;
+                    if (TipBox.CurrentCell.RowIndex < TipBox.Rows.Count - 1)
+                    {
+                        TipBox.CurrentCell = TipBox.Rows[TipBox.CurrentCell.RowIndex + 1].Cells[0];
+                    }
+                    else if (TipBox.CurrentCell.RowIndex == TipBox.Rows.Count - 1)
+                    {
+                        TipBox.CurrentCell = TipBox.Rows[0].Cells[0];
+                    }
                 }
             }
             else if (e.KeyCode == Keys.Enter)
             {
-                if (TipBox.Visible && TipBox.SelectedIndex > -1)
+                if (TipBox.Visible && TipBox.CurrentCell !=null)
                 {
                     e.SuppressKeyPress = true;//取消输入
-                    ReplaceInputText((sender as TextBox), TipBox.Items[TipBox.SelectedIndex].ToString());
+                    //ReplaceInputText((sender as TextBox), TipBox.Items[TipBox.SelectedIndex].ToString());
+                    ReplaceInputText((sender as TextBox), TipBox.CurrentCell.Value.ToString());
                     TipBox.Visible = false;
                 }
             }

@@ -39,6 +39,7 @@ namespace TDEngineClient.Services
 
                     if (account.Version == 30)
                     {
+                        var ver32 = tempArr.Length == 9;//3.2版删掉了vgroup_id字段
                         var dbItem = new TableDto
                         {
                             table_name = tempArr[0]?.ToString(),
@@ -47,10 +48,11 @@ namespace TDEngineClient.Services
                             columns = tempArr[3] == null ? 0 : (Int32)tempArr[3],
                             stable_name = tempArr[4]?.ToString(),
                             uid = tempArr[5] == null ? 0 : (Int64)tempArr[5],
-                            vgroup_id = tempArr[6] == null ? 0 : (Int32)tempArr[6],
-                            ttl = tempArr[7] == null ? 0 : (Int32)tempArr[7],
-                            table_comment = tempArr[8]?.ToString(),
-                            type = tempArr[9]?.ToString()
+
+                            vgroup_id = ver32?0:( tempArr[6] == null ? 0 : (Int32)tempArr[6]),
+                            ttl = tempArr[ver32 ? 6:7] == null ? 0 : (Int32)tempArr[ver32? 6:7],
+                            table_comment = tempArr[ver32?7: 8]?.ToString(),
+                            type = tempArr[ver32 ?8: 9]?.ToString()
                         };
                         dto.Add(dbItem);
                     }

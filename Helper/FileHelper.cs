@@ -69,7 +69,14 @@ namespace TDEngineClient.Helper
                     string info = Read("server" + i.ToString(), "info", "", filePath);
                     string savepass = Read("server" + i.ToString(), "savepass", "", filePath);
                     Server account = new Server();
-                    account.Url = $"http://{server}:{port}/rest/sql";
+                    if (string.IsNullOrEmpty(user))
+                    {
+                        account.Url = $"https://{server}/rest/sql?token={pass}"; //token模式
+                    }
+                    else
+                    {
+                        account.Url = $"http://{server}:{port}/rest/sql"; //用户名模式
+                    }
                     account.Username = user;
                     account.Password = pass;
                     account.IP = server;

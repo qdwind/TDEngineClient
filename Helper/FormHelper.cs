@@ -98,7 +98,7 @@ namespace TDEngineClient.Helper
         /// </summary>
         /// <param name="textBox1"></param>
         /// <returns></returns>
-        public static Point GetCursorPos(this TextBox textBox1)
+        public static Point GetCursorPos(this RichBox textBox1)
         {
             Graphics gc = textBox1.CreateGraphics();
             int wd = (int)gc.MeasureString("x", textBox1.Font).Width;

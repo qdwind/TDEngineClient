@@ -13,12 +13,15 @@ namespace TDEngineClient.Entity
 
         public string Remark { get; set; }
         public string Keywords { get; set; }
+        public bool Colored { get; set; }
 
-        public Tip(string text,string remark,TipType type)
+
+        public Tip(string text, string remark, TipType type, bool colored=true)
         {
             Text = text;
             Remark = remark;
             Type = type;
+            Colored = colored;
         }
 
         public override string ToString()

@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TDEngineClient.Entity;
@@ -209,6 +211,7 @@ namespace TDEngineClient
         {
             if (db == null) return;
             var caption = $"{db.Name}@{(string.IsNullOrEmpty(db.Account.AliasName) ? db.Account.IP : db.Account.AliasName)}{CAPTION_QUERY}";
+
             string[] text = new string[] { };
 
             if (db != null && table != null)
@@ -333,8 +336,13 @@ namespace TDEngineClient
         /// <param name="text"></param>
         private void AddTabWindow(Server account, string caption,string[] text)
         {
-            //if (db == null) return;
-            var tab = new TabPage(caption);
+            while (tabControl1.TabPages.ContainsKey(caption))
+            {
+                caption = caption + "0";//避免重复名字
+            }
+
+            var tab = new TabPage($"{caption}");
+            tab.Name = caption;
             tabControl1.TabPages.Add(tab);
             tabControl1.SelectedTab = tab;
             tab.AutoScroll = true;
@@ -345,22 +353,25 @@ namespace TDEngineClient
             qbox.DbDict.AddRange(account.GetTipNames()); //添加数据库表名称列表
             qbox.Caption = $"{account.IP}{(string.IsNullOrEmpty(account.AliasName) ? "" : "(" + account.AliasName + ")")}";
 
-            var myText = new TextBox();
+            var myText = new RichBox();
             myText.Multiline = true;
             myText.MaxLength = 655360;
             myText.Height = 400;
             myText.Font = new Font(FontFamily.GenericSansSerif, 12);
             myText.ImeMode = ImeMode.Off;
-            myText.ScrollBars = ScrollBars.Vertical;
+            myText.ScrollBars = RichTextBoxScrollBars.Vertical;
             myText.Dock = DockStyle.Top;
             myText.Lines = text;
             myText.HideSelection = false;
+
 
             myText.Tag = qbox; //保存设置项
             myText.MouseClick += new MouseEventHandler(this.TextBoxMouseClick);
             myText.MouseDoubleClick += new MouseEventHandler(this.TextBoxMouseDoubleClick);
             myText.KeyDown += new KeyEventHandler(this.TextBoxKeyDown);
             myText.KeyUp += new KeyEventHandler(this.TextBoxKeyUp);
+            RefreshColors(myText);
+
             myText.ContextMenuStrip = menuText;
             ts2.Text = "Press F5 to Run SQL";
             tab.Controls.Add(myText);
@@ -457,12 +468,16 @@ namespace TDEngineClient
         private void ExcuteQuery(Server account, string sql, DataGridView dgv)
         {
             dgv.Rows.Clear();
+
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
             var result = MyService.ExcuteSql(account, sql);
+            stopWatch.Stop();
             if (result != null)
             {
                 AddRecords(dgv, result);
                 //ShowRecordCount(result, account.IP, 1, PageSize);
-                ts3.Text = result.RecordList.Count.ToString() + " Records";
+                ts3.Text = $"{result.RecordList.Count} Records,{stopWatch.ElapsedMilliseconds/1000f}s";
                 ts2.Text = sql;
             }
 
@@ -478,16 +493,16 @@ namespace TDEngineClient
             if (tp == null) return;
             Server account = null;
             DataGridView dgv = null;
-            TextBox tbox = null;
+            RichBox tbox = null;
             foreach (var ctl in tp.Controls)
             {
                 if (ctl is DataGridView)
                 {
                     dgv = (ctl as DataGridView);
                 }
-                else if (ctl is TextBox)
+                else if (ctl is RichBox)
                 {
-                    tbox = (ctl as TextBox);
+                    tbox = (ctl as RichBox);
                     if (tbox.Tag is QueryBox)
                     {
                         account = (tbox.Tag as QueryBox).Server;
@@ -517,12 +532,12 @@ namespace TDEngineClient
         {
             var tp = tabControl1.SelectedTab;
             if (tp == null) return;
-            TextBox tbox = null;
+            RichBox tbox = null;
             foreach (var ctl in tp.Controls)
             {
-                if (ctl is TextBox)
+                if (ctl is RichBox)
                 {
-                    tbox = (ctl as TextBox);
+                    tbox = (ctl as RichBox);
                     break;
                 }
             }
@@ -812,15 +827,125 @@ namespace TDEngineClient
         }
 
         /// <summary>
+        /// 设置关键字颜色
+        /// </summary>
+        /// <param name="textBox"></param>
+        /// <param name="keyStr"></param>
+        /// <param name="text"></param>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        private int SetColorKey(RichBox textBox, string keyStr, Color color)
+        {
+            //int currentIndex = textBox.SelectionStart;
+            //int currentLine = textBox.GetLineFromCharIndex(currentIndex);
+            //int lineStart = textBox.GetFirstCharIndexFromLine(currentLine);
+            //int lineEnd = textBox.GetFirstCharIndexFromLine(currentLine + 1) - 1;
+
+            int cnt = 0;
+            int M = keyStr.Length;
+            int N = textBox.Text.Length;
+            char[] ss = textBox.Text.ToCharArray(), pp = keyStr.ToCharArray();
+            if (M > N) return 0;
+
+
+            for (int i = 0; i < N - M + 1; i++)
+            {
+                int j;
+                for (j = 0; j < M; j++)
+                {
+                    if (ss[i + j] != pp[j]) break;
+                }
+                if (j == keyStr.Length)
+                {
+                    textBox.Select(i, keyStr.Length);
+                    if(textBox.SelectionColor!= Color.Red)//红色保持不变
+                        textBox.SelectionColor = color;
+                    cnt++;
+                }
+            }
+
+            return cnt;
+        }
+
+        private void SetColorQuote(RichBox textBox)
+        {
+            int index = textBox.SelectionStart;    //记录修改的位置
+            int len = textBox.SelectionLength;//记录原来的选择
+
+            textBox.Select(0, textBox.Text.Length);      
+            textBox.SelectionColor = Color.Black;//还原颜色
+
+            //int currentIndex = textBox.SelectionStart;
+            //int currentLine = textBox.GetLineFromCharIndex(currentIndex);
+
+            string pattern1 = "\"([^\"]+)\""; // 正则表达式，用于匹配双引号内的文本
+            string pattern2 = "\'([^\']+)\'";
+
+            //for (int i = 0; i < textBox.Lines.Length; i++)
+            //{
+                //if (i != currentLine) continue;
+                string line = textBox.Text;
+                MatchCollection matches = Regex.Matches(line, pattern1);
+                foreach (Match match in matches)
+                {
+                    if (match.Groups.Count > 1) // 确保有一个捕获的组
+                    {
+                        textBox.Select(match.Index, match.Length);
+                        textBox.SelectionColor = Color.Red;
+                    }
+                }
+                matches = Regex.Matches(line, pattern2);
+                foreach (Match match in matches)
+                {
+                    if (match.Groups.Count > 1) // 确保有一个捕获的组
+                    {
+                        textBox.Select(match.Index, match.Length);
+                        textBox.SelectionColor = Color.Red;
+                    }
+                }
+            //}
+            textBox.Select(index, len);     //返回修改的位置
+            textBox.SelectionColor = Color.Black;//还原颜色
+        }
+
+        private void SetColorKeys(RichBox textBox, List<string> keys, Color color)
+        {
+            int index = textBox.SelectionStart;    //记录修改的位置
+            int len = textBox.SelectionLength;//记录原来的选择
+
+            for (int i = 0; i < keys.Count; i++)
+                this.SetColorKey(textBox, keys[i], color);
+
+            textBox.Select(index, len);     //返回修改的位置
+            textBox.SelectionColor = Color.Black;//还原颜色
+        }
+
+        /// <summary>
+        /// 刷新字体颜色显示
+        /// </summary>
+        /// <param name="textBox"></param>
+        private void RefreshColors(RichBox textBox)
+        {
+            textBox.BeginUpdate();
+
+            SetColorQuote(textBox);
+            SetColorKeys(textBox, MyConst.TipsPublicDict.Where(t => t.Colored && t.Type == TipType.Standard).Select(t => t.Text).ToList(), Color.Blue);
+            SetColorKeys(textBox, MyConst.TipsPublicDict.Where(t => t.Colored && t.Type == TipType.Functions).Select(t => t.Text).ToList(), Color.Green);
+
+            textBox.EndUpdate();
+        }
+
+
+        /// <summary>
         /// 获取用户输入的词
         /// </summary>
         /// <param name="txtBox"></param>
         /// <returns></returns>
-        private string GetInputText(TextBox txtBox)
+        private string GetInputText(RichBox txtBox)
         {
             //捕获键入字符
             var leftPos = txtBox.GetFirstCharIndexOfCurrentLine();
-            var line = txtBox.GetLineFromCharIndex(leftPos);
+            //var line = txtBox.GetLineFromCharIndex(leftPos);
             var lastPos = txtBox.SelectionStart;
             var text = "";
             try
@@ -844,7 +969,7 @@ namespace TDEngineClient
         /// </summary>
         /// <param name="txtBox"></param>
         /// <param name="txt"></param>
-        private void ReplaceInputText(TextBox txtBox, string txt)
+        private void ReplaceInputText(RichBox txtBox, string txt)
         {
             var leftPos = txtBox.GetFirstCharIndexOfCurrentLine();
             var line = txtBox.GetLineFromCharIndex(leftPos);
@@ -861,7 +986,7 @@ namespace TDEngineClient
         /// 显示提示框
         /// </summary>
         /// <param name="txtBox"></param>
-        private void ShowTipBox(TextBox txtBox,Keys key)
+        private void ShowTipBox(RichBox txtBox,Keys key)
         {
             if ((key < Keys.D0 || key > Keys.Z) && key != Keys.Back && key != Keys.OemPeriod) //合法字符：0..8,A..Z,esc,.
             {
@@ -896,17 +1021,27 @@ namespace TDEngineClient
 
                 if (found.Count > 0)
                 {
-                    //捕获光标位置
-                    var p = FormHelper.GetCursorPos(txtBox);
-                    TipBox.Rows.Clear();
+                    List<DataGridViewRow> dgs = new List<DataGridViewRow>();
                     for (int i = 0; i < found.Count; i++)
                     {
-                        TipBox.Rows.Add(found[i].Text);
-                        TipBox.Rows[i].Cells[1].Value = found[i].Remark;
+                        var dg = new DataGridViewRow();
+                        dg.Cells.Add(new DataGridViewTextBoxCell() {  Value= found[i].Text });
+                        dg.Cells.Add(new DataGridViewTextBoxCell() { Value = found[i].Remark });
+                        dgs.Add(dg);
                     }
+
+                    TipBox.Rows.Clear();
+                    TipBox.Rows.AddRange(dgs.ToArray());
+
+
+
+                    //捕获光标位置
+                    var p = FormHelper.GetCursorPos(txtBox);
+
+
                     //TipBox.Items.AddRange(found);
 
-                    if (TipBox.CurrentRow == null)
+                    if (TipBox.CurrentRow == null && TipBox.Rows.Count>0)
                     {
                         TipBox.Rows[0].Selected = true;
                     }

@@ -117,8 +117,8 @@ namespace TDEngineClient
             // 
             // spMain.Panel1
             // 
-            this.spMain.Panel1.Controls.Add(this.psBar);
             this.spMain.Panel1.Controls.Add(this.treeView1);
+            this.spMain.Panel1.Controls.Add(this.psBar);
             // 
             // spMain.Panel2
             // 

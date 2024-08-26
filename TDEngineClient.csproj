@@ -59,6 +59,9 @@
     <Compile Include="Entity\NodeItem.cs" />
     <Compile Include="Entity\QueryBox.cs" />
     <Compile Include="Entity\RecordDto.cs" />
+    <Compile Include="Entity\RichBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Entity\SqlCommandType.cs" />
     <Compile Include="Entity\SqlValueDataType.cs" />
     <Compile Include="Entity\SqlValueItem.cs" />

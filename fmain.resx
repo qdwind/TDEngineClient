@@ -125,31 +125,6 @@
   <data name="spMain.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
-  <data name="psBar.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <data name="psBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 377</value>
-  </data>
-  <data name="psBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 23</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="psBar.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;psBar.Name" xml:space="preserve">
-    <value>psBar</value>
-  </data>
-  <data name="&gt;&gt;psBar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;psBar.Parent" xml:space="preserve">
-    <value>spMain.Panel1</value>
-  </data>
-  <data name="&gt;&gt;psBar.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="menuTree.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>455, 14</value>
   </metadata>
@@ -294,6 +269,7 @@
   <data name="treeView1.Font" type="System.Drawing.Font, System.Drawing">
     <value>宋体, 10.8pt</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="treeView1.ImageIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -305,7 +281,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAC+
-        DAAAAk1TRnQBSQFMAgEBCAEAAcQBAQHEAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        DAAAAk1TRnQBSQFMAgEBCAEAAcwBAQHMAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAATADAAEBAQABCAYAAQwYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -372,7 +348,7 @@
     <value>0</value>
   </data>
   <data name="treeView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 400</value>
+    <value>300, 377</value>
   </data>
   <data name="treeView1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -387,6 +363,30 @@
     <value>spMain.Panel1</value>
   </data>
   <data name="&gt;&gt;treeView1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="psBar.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="psBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 377</value>
+  </data>
+  <data name="psBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 23</value>
+  </data>
+  <data name="psBar.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;psBar.Name" xml:space="preserve">
+    <value>psBar</value>
+  </data>
+  <data name="&gt;&gt;psBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;psBar.Parent" xml:space="preserve">
+    <value>spMain.Panel1</value>
+  </data>
+  <data name="&gt;&gt;psBar.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="&gt;&gt;spMain.Panel1.Name" xml:space="preserve">
@@ -681,7 +681,7 @@
     <value>False</value>
   </data>
   <data name="ts3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>5101, 486</value>
+    <value>5119, 486</value>
   </data>
   <data name="ts3.Text" xml:space="preserve">
     <value>page</value>
@@ -705,7 +705,7 @@
     <value>1, 0, 10, 0</value>
   </data>
   <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>5762, 491</value>
+    <value>5780, 491</value>
   </data>
   <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

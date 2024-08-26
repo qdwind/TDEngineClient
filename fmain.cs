@@ -79,8 +79,8 @@ namespace TDEngineClient
                 if (TipBox.Visible && TipBox.CurrentCell !=null)
                 {
                     e.SuppressKeyPress = true;//取消输入
-                    //ReplaceInputText((sender as TextBox), TipBox.Items[TipBox.SelectedIndex].ToString());
-                    ReplaceInputText((sender as TextBox), TipBox.CurrentCell.Value.ToString());
+                    //ReplaceInputText((sender as RichBox), TipBox.Items[TipBox.SelectedIndex].ToString());
+                    ReplaceInputText((sender as RichBox), TipBox.CurrentCell.Value.ToString());
                     TipBox.Visible = false;
                 }
             }
@@ -90,26 +90,28 @@ namespace TDEngineClient
             }
             else
             {
-                ts3.Text = "Text Length " + (sender as TextBox).Text.Length.ToString();
+                ts3.Text = "Text Length " + (sender as RichBox).Text.Length.ToString();
             }
         }
 
 
         private void TextBoxKeyUp(object sender, KeyEventArgs e)
         {
-            ShowTipBox(sender as TextBox,e.KeyCode); //显示智能提示框
+            ShowTipBox(sender as RichBox, e.KeyCode); //显示智能提示框
+
+            RefreshColors(sender as RichBox);
         }
 
         private void TextBoxClick(object sender, KeyEventArgs e)
         {
-            ShowTipBox(sender as TextBox,e.KeyCode); //显示智能提示框
+            ShowTipBox(sender as RichBox, e.KeyCode); //显示智能提示框
         }
 
         private void TextBoxMouseClick(object sender, MouseEventArgs e)
         {
-            if ((DateTime.Now - LastDbClickTime).TotalMilliseconds < 1000 && sender is TextBox)//触发三连击事件
+            if ((DateTime.Now - LastDbClickTime).TotalMilliseconds < 1000 && sender is RichBox)//触发三连击事件
             {
-                var tbox = sender as TextBox;
+                var tbox = sender as RichBox;
                 var txt = tbox.Text;
                 if (txt.Length == 0) return;
                 var pos = tbox.SelectionStart;
@@ -220,12 +222,12 @@ namespace TDEngineClient
         {
             var tp = tabControl1.SelectedTab;
             if (tp == null) return;
-            TextBox tbox = null;
+            RichBox tbox = null;
             foreach (var ctl in tp.Controls)
             {
-                if (ctl is TextBox)
+                if (ctl is RichBox)
                 {
-                    tbox = (ctl as TextBox);
+                    tbox = (ctl as RichBox);
                     break;
                 }
             }
@@ -279,14 +281,14 @@ namespace TDEngineClient
                     
                     foreach (var ctl in (tab as TabPage).Controls)
                     {
-                        if (ctl is TextBox)
+                        if (ctl is RichBox)
                         {
-                            if ((ctl as TextBox).Tag is QueryBox)
+                            if ((ctl as RichBox).Tag is QueryBox)
                             {
-                                tabText.AccountServer = ((ctl as TextBox).Tag as QueryBox).Server.IP;
+                                tabText.AccountServer = ((ctl as RichBox).Tag as QueryBox).Server.IP;
                             }
                             string sTxt = "";
-                            foreach (string s in (ctl as TextBox).Lines)
+                            foreach (string s in (ctl as RichBox).Lines)
                             {
                                 sTxt = sTxt + s + "\\r\\n";//每行末尾都加一个回车 \r\n
                             }
@@ -460,12 +462,12 @@ namespace TDEngineClient
             var tp = tabControl1.SelectedTab;
             if (tp == null) return;
 
-            TextBox tbox = null;
+            RichBox tbox = null;
             foreach (var ctl in tp.Controls)
             {
-                if (ctl is TextBox)
+                if (ctl is RichBox)
                 {
-                    tbox = (ctl as TextBox);
+                    tbox = (ctl as RichBox);
                     break;
                 }
             }
@@ -480,12 +482,12 @@ namespace TDEngineClient
             var tp = tabControl1.SelectedTab;
             if (tp == null) return;
 
-            TextBox tbox = null;
+            RichBox tbox = null;
             foreach (var ctl in tp.Controls)
             {
-                if (ctl is TextBox)
+                if (ctl is RichBox)
                 {
-                    tbox = (ctl as TextBox);
+                    tbox = (ctl as RichBox);
                     break;
                 }
             }
@@ -498,12 +500,12 @@ namespace TDEngineClient
             var tp = tabControl1.SelectedTab;
             if (tp == null) return;
 
-            TextBox tbox = null;
+            RichBox tbox = null;
             foreach (var ctl in tp.Controls)
             {
-                if (ctl is TextBox)
+                if (ctl is RichBox)
                 {
-                    tbox = (ctl as TextBox);
+                    tbox = (ctl as RichBox);
                     break;
                 }
             }
@@ -515,12 +517,12 @@ namespace TDEngineClient
             var tp = tabControl1.SelectedTab;
             if (tp == null) return;
 
-            TextBox tbox = null;
+            RichBox tbox = null;
             foreach (var ctl in tp.Controls)
             {
-                if (ctl is TextBox)
+                if (ctl is RichBox)
                 {
-                    tbox = (ctl as TextBox);
+                    tbox = (ctl as RichBox);
                     break;
                 }
             }
@@ -533,12 +535,12 @@ namespace TDEngineClient
             var tp = tabControl1.SelectedTab;
             if (tp == null) return;
 
-            TextBox tbox = null;
+            RichBox tbox = null;
             foreach (var ctl in tp.Controls)
             {
-                if (ctl is TextBox)
+                if (ctl is RichBox)
                 {
-                    tbox = (ctl as TextBox);
+                    tbox = (ctl as RichBox);
                     tbox.SelectAll();
                     break;
                 }

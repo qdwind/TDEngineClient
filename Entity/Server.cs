@@ -25,6 +25,10 @@ namespace TDEngineClient.Entity
 
         public bool Connected { get; set; } = false;
 
+        /// <summary>
+        /// 获取所有数据库名/表名/超级表名
+        /// </summary>
+        /// <returns></returns>
         public List<Tip> GetTipNames()
         {
             var tips = new List<Tip>();

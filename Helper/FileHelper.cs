@@ -93,7 +93,10 @@ namespace TDEngineClient.Helper
                 if (int.TryParse(Read("system", "language", "", filePath), out int lanCode))
                 {
                     myconfig.System.Language = lanCode;
+                   
                 }
+                myconfig.System.ColoredKey = Read("system", "coloredkey", "", filePath) == "true";
+                myconfig.System.ShowTip = Read("system", "showtip", "", filePath) == "true";
 
             }
             return myconfig;
@@ -132,6 +135,11 @@ namespace TDEngineClient.Helper
         public static void SaveServers(List<Server> servers)
         {
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.ini");//在当前程序路径创建
+            if (!File.Exists(filePath))
+            {
+                File.WriteAllText(filePath, "");
+            }
+
             if (File.Exists(filePath))
             {
                 for (int i = 1; i < SERVERCOUNT +1; i++)
@@ -164,6 +172,8 @@ namespace TDEngineClient.Helper
             if (File.Exists(filePath))
             {
                 Write("system", "language", sysConfig.Language.ToString(), filePath);
+                Write("system", "coloredkey", sysConfig.ColoredKey?"true":"false", filePath);
+                Write("system", "showtip", sysConfig.ShowTip?"true":"false", filePath);
             }
         }
 

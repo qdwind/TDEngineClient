@@ -11,7 +11,7 @@ namespace TDEngineClient.Services
     public static partial class MyService
     {
 
-        public static Server GetServerDetail(Server account)
+        public static  Server GetServerDetail(Server account)
         {
             account.Connected = false;
             var dblist = new List<DataBaseDto>();
@@ -79,7 +79,7 @@ namespace TDEngineClient.Services
                 account.Connected = true;
             }
 
-            return account;
+            return  account;
         }
 
     }

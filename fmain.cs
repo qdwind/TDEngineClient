@@ -29,7 +29,7 @@ namespace TDEngineClient
         private void Form1_Load(object sender, EventArgs e)
         {
             InitailForm();
-
+            bk1.RunWorkerAsync();
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo(MyConfig.System.Language);//多语言设置
             SetLanguage(MyConfig.System.Language);//设置语言
         }
@@ -46,7 +46,7 @@ namespace TDEngineClient
             }
             else if (e.KeyCode == Keys.Up)
             {
-                if (TipBox.Visible)
+                if (TipBox.Visible && TipBox.CurrentCell!=null)
                 {
                     e.SuppressKeyPress = true;//取消输入
                     if (TipBox.CurrentCell.RowIndex > 0)
@@ -61,7 +61,7 @@ namespace TDEngineClient
             }
             else if (e.KeyCode == Keys.Down)
             {
-                if (TipBox.Visible)
+                if (TipBox.Visible && TipBox.CurrentCell != null)
                 {
                     e.SuppressKeyPress = true;//取消输入
                     if (TipBox.CurrentCell.RowIndex < TipBox.Rows.Count - 1)
@@ -86,7 +86,7 @@ namespace TDEngineClient
             }
             else if(e.KeyCode ==Keys.F1)//帮助
             {
-                System.Diagnostics.Process.Start("explorer.exe", "https://docs.taosdata.com/taos-sql");
+                System.Diagnostics.Process.Start("explorer.exe", "https://docs.taosdata.com/reference/");
             }
             else
             {
@@ -99,7 +99,11 @@ namespace TDEngineClient
         {
             ShowTipBox(sender as RichBox, e.KeyCode); //显示智能提示框
 
-            RefreshColors(sender as RichBox);
+        }
+
+        private void TextBoxTextChanged(object sender, EventArgs e)
+        {
+            RefreshColors(sender as RichBox); //
         }
 
         private void TextBoxClick(object sender, KeyEventArgs e)
@@ -596,6 +600,64 @@ namespace TDEngineClient
             m_en.Checked = false;
             m_cn.Checked = true;
             SetLanguage(1);//中文
+        }
+
+        private void m_beauti_Click(object sender, EventArgs e)
+        {
+            var tp = tabControl1.SelectedTab;
+            if (tp == null) return;
+            RichBox tbox = null;
+            foreach (var ctl in tp.Controls)
+            {
+                if (ctl is RichBox)
+                {
+                    tbox = (ctl as RichBox);
+                    break;
+                }
+            }
+            if (tbox != null && !string.IsNullOrEmpty(tbox.SelectedText))
+            {
+                var text = BeautiSql(tbox.SelectedText);
+                tbox.SelectedText = text;
+            }
+            RefreshColors(tbox);//刷新字体显示
+        }
+
+        private void m_notbeauti_Click(object sender, EventArgs e)
+        {
+            var tp = tabControl1.SelectedTab;
+            if (tp == null) return;
+            RichBox tbox = null;
+            foreach (var ctl in tp.Controls)
+            {
+                if (ctl is RichBox)
+                {
+                    tbox = (ctl as RichBox);
+                    break;
+                }
+            }
+            if (tbox != null && !string.IsNullOrEmpty(tbox.SelectedText))
+            {
+                var text = BeautiSql(tbox.SelectedText,true);
+                tbox.SelectedText = text;
+            }
+            RefreshColors(tbox);//刷新字体显示
+        }
+
+        private void bk1_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var opForm = new foption(MyConfig.System);
+            if (opForm.ShowDialog() == DialogResult.OK)
+            {
+                MyConfig.System = opForm.Options;
+
+                FileHelper.SaveSystemConfig(MyConfig.System);//保存到配置文件
+            }
         }
     }
 }

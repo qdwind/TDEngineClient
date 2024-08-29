@@ -32,7 +32,6 @@ namespace TDEngineClient
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmain));
             this.spMain = new System.Windows.Forms.SplitContainer();
-            this.psBar = new System.Windows.Forms.ProgressBar();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.menuTree = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.m_newsvr = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +58,7 @@ namespace TDEngineClient
             this.sp4 = new System.Windows.Forms.ToolStripSeparator();
             this.m_query = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.psBar = new System.Windows.Forms.ProgressBar();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -77,6 +77,14 @@ namespace TDEngineClient
             this.explorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stableFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sQLFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.m_lan = new System.Windows.Forms.ToolStripMenuItem();
             this.m_en = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,10 +101,14 @@ namespace TDEngineClient
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.m_ucase = new System.Windows.Forms.ToolStripMenuItem();
             this.m_lcase = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.m_beauti = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_notbeauti = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.m_copy = new System.Windows.Forms.ToolStripMenuItem();
             this.m_paste = new System.Windows.Forms.ToolStripMenuItem();
             this.m_imports = new System.Windows.Forms.ToolStripMenuItem();
+            this.bk1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.spMain)).BeginInit();
             this.spMain.Panel1.SuspendLayout();
             this.spMain.Panel2.SuspendLayout();
@@ -123,11 +135,6 @@ namespace TDEngineClient
             // spMain.Panel2
             // 
             this.spMain.Panel2.Controls.Add(this.tabControl1);
-            // 
-            // psBar
-            // 
-            resources.ApplyResources(this.psBar, "psBar");
-            this.psBar.Name = "psBar";
             // 
             // treeView1
             // 
@@ -320,6 +327,11 @@ namespace TDEngineClient
             this.imageList1.Images.SetKeyName(6, "dbopen.ico");
             this.imageList1.Images.SetKeyName(7, "run.ico");
             // 
+            // psBar
+            // 
+            resources.ApplyResources(this.psBar, "psBar");
+            this.psBar.Name = "psBar";
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -348,6 +360,7 @@ namespace TDEngineClient
             this.editToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.windowToolStripMenuItem,
+            this.toolToolStripMenuItem,
             this.helpToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
@@ -446,6 +459,59 @@ namespace TDEngineClient
             resources.ApplyResources(this.newQueryToolStripMenuItem, "newQueryToolStripMenuItem");
             this.newQueryToolStripMenuItem.Click += new System.EventHandler(this.newQueryToolStripMenuItem_Click);
             // 
+            // toolToolStripMenuItem
+            // 
+            this.toolToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportToolStripMenuItem,
+            this.importToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.optionsToolStripMenuItem});
+            this.toolToolStripMenuItem.Name = "toolToolStripMenuItem";
+            resources.ApplyResources(this.toolToolStripMenuItem, "toolToolStripMenuItem");
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            resources.ApplyResources(this.exportToolStripMenuItem, "exportToolStripMenuItem");
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.m_export_Click);
+            // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tableFilesToolStripMenuItem,
+            this.stableFileToolStripMenuItem,
+            this.sQLFileToolStripMenuItem});
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            resources.ApplyResources(this.importToolStripMenuItem, "importToolStripMenuItem");
+            // 
+            // tableFilesToolStripMenuItem
+            // 
+            this.tableFilesToolStripMenuItem.Name = "tableFilesToolStripMenuItem";
+            resources.ApplyResources(this.tableFilesToolStripMenuItem, "tableFilesToolStripMenuItem");
+            this.tableFilesToolStripMenuItem.Click += new System.EventHandler(this.m_impor_tables_Click);
+            // 
+            // stableFileToolStripMenuItem
+            // 
+            this.stableFileToolStripMenuItem.Name = "stableFileToolStripMenuItem";
+            resources.ApplyResources(this.stableFileToolStripMenuItem, "stableFileToolStripMenuItem");
+            this.stableFileToolStripMenuItem.Click += new System.EventHandler(this.m_impor_stable_Click);
+            // 
+            // sQLFileToolStripMenuItem
+            // 
+            this.sQLFileToolStripMenuItem.Name = "sQLFileToolStripMenuItem";
+            resources.ApplyResources(this.sQLFileToolStripMenuItem, "sQLFileToolStripMenuItem");
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -524,6 +590,9 @@ namespace TDEngineClient
             this.toolStripSeparator1,
             this.m_ucase,
             this.m_lcase,
+            this.toolStripSeparator3,
+            this.m_beauti,
+            this.m_notbeauti,
             this.toolStripSeparator2,
             this.m_copy,
             this.m_paste});
@@ -559,6 +628,23 @@ namespace TDEngineClient
             resources.ApplyResources(this.m_lcase, "m_lcase");
             this.m_lcase.Click += new System.EventHandler(this.m_case_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            // 
+            // m_beauti
+            // 
+            this.m_beauti.Name = "m_beauti";
+            resources.ApplyResources(this.m_beauti, "m_beauti");
+            this.m_beauti.Click += new System.EventHandler(this.m_beauti_Click);
+            // 
+            // m_notbeauti
+            // 
+            this.m_notbeauti.Name = "m_notbeauti";
+            resources.ApplyResources(this.m_notbeauti, "m_notbeauti");
+            this.m_notbeauti.Click += new System.EventHandler(this.m_notbeauti_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -580,6 +666,10 @@ namespace TDEngineClient
             // 
             this.m_imports.Name = "m_imports";
             resources.ApplyResources(this.m_imports, "m_imports");
+            // 
+            // bk1
+            // 
+            this.bk1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bk1_DoWork);
             // 
             // fmain
             // 
@@ -677,6 +767,18 @@ namespace TDEngineClient
         private System.Windows.Forms.ToolStripMenuItem m_lan;
         private System.Windows.Forms.ToolStripMenuItem m_en;
         private System.Windows.Forms.ToolStripMenuItem m_cn;
+        private System.Windows.Forms.ToolStripMenuItem m_beauti;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem m_notbeauti;
+        private System.Windows.Forms.ToolStripMenuItem toolToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tableFilesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stableFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sQLFileToolStripMenuItem;
+        private System.ComponentModel.BackgroundWorker bk1;
     }
 }
 

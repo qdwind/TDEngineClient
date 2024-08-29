@@ -49,7 +49,7 @@ namespace TDEngineClient
             // txtServer
             // 
             this.txtServer.Location = new System.Drawing.Point(95, 57);
-            this.txtServer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtServer.Margin = new System.Windows.Forms.Padding(2);
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(145, 21);
             this.txtServer.TabIndex = 0;
@@ -77,7 +77,7 @@ namespace TDEngineClient
             // txtPort
             // 
             this.txtPort.Location = new System.Drawing.Point(95, 93);
-            this.txtPort.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPort.Margin = new System.Windows.Forms.Padding(2);
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(145, 21);
             this.txtPort.TabIndex = 2;
@@ -86,7 +86,7 @@ namespace TDEngineClient
             // txtUser
             // 
             this.txtUser.Location = new System.Drawing.Point(95, 127);
-            this.txtUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtUser.Margin = new System.Windows.Forms.Padding(2);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(145, 21);
             this.txtUser.TabIndex = 0;
@@ -105,7 +105,7 @@ namespace TDEngineClient
             // txtPass
             // 
             this.txtPass.Location = new System.Drawing.Point(95, 163);
-            this.txtPass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPass.Margin = new System.Windows.Forms.Padding(2);
             this.txtPass.Name = "txtPass";
             this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(128, 21);
@@ -125,7 +125,7 @@ namespace TDEngineClient
             // btnView
             // 
             this.btnView.Location = new System.Drawing.Point(223, 162);
-            this.btnView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnView.Margin = new System.Windows.Forms.Padding(2);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(18, 22);
             this.btnView.TabIndex = 4;
@@ -148,7 +148,7 @@ namespace TDEngineClient
             // txtAlias
             // 
             this.txtAlias.Location = new System.Drawing.Point(95, 25);
-            this.txtAlias.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAlias.Margin = new System.Windows.Forms.Padding(2);
             this.txtAlias.Name = "txtAlias";
             this.txtAlias.Size = new System.Drawing.Size(145, 21);
             this.txtAlias.TabIndex = 5;
@@ -157,19 +157,18 @@ namespace TDEngineClient
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.Location = new System.Drawing.Point(142, 234);
-            this.btnOk.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(2);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(80, 30);
             this.btnOk.TabIndex = 7;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(232, 233);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(76, 31);
             this.btnCancel.TabIndex = 8;
@@ -179,7 +178,7 @@ namespace TDEngineClient
             // btnTest
             // 
             this.btnTest.Location = new System.Drawing.Point(20, 235);
-            this.btnTest.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTest.Margin = new System.Windows.Forms.Padding(2);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(76, 29);
             this.btnTest.TabIndex = 9;
@@ -193,7 +192,7 @@ namespace TDEngineClient
             this.chkSavePass.Checked = true;
             this.chkSavePass.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSavePass.Location = new System.Drawing.Point(95, 188);
-            this.chkSavePass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkSavePass.Margin = new System.Windows.Forms.Padding(2);
             this.chkSavePass.Name = "chkSavePass";
             this.chkSavePass.Size = new System.Drawing.Size(102, 16);
             this.chkSavePass.TabIndex = 10;
@@ -224,7 +223,7 @@ namespace TDEngineClient
             this.Controls.Add(this.lblServer);
             this.Controls.Add(this.txtServer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "fserver";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Server Config";

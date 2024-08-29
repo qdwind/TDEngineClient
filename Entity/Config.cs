@@ -16,5 +16,7 @@ namespace TDEngineClient.Entity
     public class SystemConfig
     {
         public int Language { get; set; } = 0;
+        public bool ColoredKey { get; set; }
+        public bool ShowTip { get; set; }
     }
 }

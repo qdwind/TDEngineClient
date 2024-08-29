@@ -88,7 +88,13 @@
     <Compile Include="fmain.Designer.cs">
       <DependentUpon>fmain.cs</DependentUpon>
     </Compile>
-    <Compile Include="fmainFunc.cs">
+    <Compile Include="foption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="foption.Designer.cs">
+      <DependentUpon>foption.cs</DependentUpon>
+    </Compile>
+    <Compile Include="func\fmainFunc.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="fpass.cs">
@@ -108,6 +114,12 @@
     </Compile>
     <Compile Include="ftool.Designer.cs">
       <DependentUpon>ftool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="func\ioFunc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="func\textFunc.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\FormHelper.cs" />
@@ -137,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fmain.resx">
       <DependentUpon>fmain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="foption.resx">
+      <DependentUpon>foption.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fpass.resx">
       <DependentUpon>fpass.cs</DependentUpon>

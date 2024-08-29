@@ -42,6 +42,14 @@ namespace TDEngineClient
             windowToolStripMenuItem.Text = lanCode == 0 ? "Window" : "窗口";
             newQueryToolStripMenuItem.Text = lanCode == 0 ? "New Query" : "新建查询";
 
+            toolToolStripMenuItem.Text = lanCode == 0 ? "Tool" : "工具";
+            exportToolStripMenuItem.Text = lanCode == 0 ? "Export..." : "导出...";
+            importToolStripMenuItem.Text = lanCode == 0 ? "Import..." : "导入...";
+            tableFilesToolStripMenuItem.Text = lanCode == 0 ? "Table Files" : "表";
+            stableFileToolStripMenuItem.Text = lanCode == 0 ? "Stable File" : "超级表";
+            sQLFileToolStripMenuItem.Text = lanCode == 0 ? "SQL File" : "SQL文件";
+            optionsToolStripMenuItem.Text = lanCode == 0 ? "Options" : "选项";
+
             helpToolStripMenuItem.Text = lanCode == 0 ? "Help" : "帮助";
             m_lan.Text = lanCode == 0 ? "Language" : "语言";
             m_about.Text = lanCode == 0 ? "About" : "关于";
@@ -74,7 +82,8 @@ namespace TDEngineClient
             m_lcase.Text = lanCode == 0 ? "To Lower Case" : "转小写";
             m_copy.Text = lanCode == 0 ? "Copy" : "复制";
             m_paste.Text = lanCode == 0 ? "Paste" : "粘贴";
-
+            m_beauti.Text = lanCode == 0 ? "Beautiful SQL" : "美化SQL";
+            m_notbeauti.Text = lanCode == 0 ? "Zip SQL" : "压缩SQL";
         }
 
 

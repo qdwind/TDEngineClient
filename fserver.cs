@@ -69,15 +69,17 @@ namespace TDEngineClient
             {
                 Server.Password = "";
             }
-            
+            if (string.IsNullOrEmpty(Server.Username))
+            {
+                Server.Url = $"https://{Server.IP}/rest/sql?token={Server.Password}"; //token模式
+            }
+            else
+            {
+                Server.Url = $"http://{Server.IP}:{Server.Port}/rest/sql"; //用户名模式
+            }
         }
 
 
-
-        private void btnOk_Click(object sender, EventArgs e)
-        {
-            
-        }
 
         private void fserver_FormClosed(object sender, FormClosedEventArgs e)
         {

@@ -135,6 +135,29 @@ namespace TDEngineClient
 
         }
 
+        /// <summary>
+        /// 刷新数据库
+        /// </summary>
+        private void RefreshDB()
+        {
+            var item = GetNodeItem(treeView1.SelectedNode);
+
+            var account = item.Server; 
+
+            var svrInfo = MyService.GetDbDetail(account,item.Db);
+            if (svrInfo.Connected)
+            {
+                var db = svrInfo.DbList.Where(t => t.Name == item.Db.Name).FirstOrDefault();
+                RefreshDbNodes(db, treeView1.SelectedNode);//将数据库表添加到节点上
+               
+            }
+            else
+            {
+                MessageBox.Show("无法连接到服务器" + account.Url + "!", "Error", MessageBoxButtons.OK);
+            }
+
+
+        }
 
         /// <summary>
         /// 设置服务器节点
@@ -199,6 +222,52 @@ namespace TDEngineClient
             dbNode.Expand();
             dbNode.ImageIndex = 5;
             dbNode.SelectedImageIndex = 5;
+        }
+
+        private void RefreshDbNodes(DataBaseDto db, TreeNode dbNode)
+        {
+            dbNode.Nodes.Clear();//清空数据库下的子节点
+
+            foreach (var ms in db.Stables)//添加超级表
+            {
+                var stabItem = new TreeNode();
+                foreach (var mt in ms.Tables)
+                {
+                    var tabItem = new TreeNode();
+                    tabItem.Tag = mt;
+                    tabItem.Text = $"{mt.table_name}";
+                    tabItem.ImageIndex = 3;
+                    tabItem.SelectedImageIndex = 3;
+                    stabItem.Nodes.Add(tabItem);
+                }
+                stabItem.Tag = ms;
+                stabItem.Text = $"{ms.stable_name}({ms.Tables.Count.ToString()})";
+                stabItem.ImageIndex = 2;
+                stabItem.SelectedImageIndex = 2;
+                dbNode.Nodes.Add(stabItem);
+            }
+
+            foreach (var tab in db.SysTables)//系统表
+            {
+                var tabItem = new TreeNode();
+                tabItem.Tag = tab;
+                tabItem.Text = $"{tab.table_name}";
+                tabItem.ImageIndex = 4;
+                tabItem.SelectedImageIndex = 4;
+                dbNode.Nodes.Add(tabItem);
+            }
+
+            foreach (var tab in db.Tables)//普通表
+            {
+                var tabItem = new TreeNode();
+                tabItem.Tag = tab;
+                tabItem.Text = $"{tab.table_name}";
+                tabItem.ImageIndex = 3;
+                tabItem.SelectedImageIndex = 3;
+                dbNode.Nodes.Add(tabItem);
+            }
+
+            dbNode.Expand();
         }
 
 
@@ -804,6 +873,7 @@ namespace TDEngineClient
             m_createsuper.Visible = false;
             m_createtable.Visible = false;
             m_droptable.Visible = false;
+            m_refresh.Visible = false;
             m_query.Visible = false;
             m_export.Visible = false;
             m_import.Visible = false;

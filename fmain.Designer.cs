@@ -109,6 +109,7 @@ namespace TDEngineClient
             this.m_paste = new System.Windows.Forms.ToolStripMenuItem();
             this.m_imports = new System.Windows.Forms.ToolStripMenuItem();
             this.bk1 = new System.ComponentModel.BackgroundWorker();
+            this.m_refresh = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.spMain)).BeginInit();
             this.spMain.Panel1.SuspendLayout();
             this.spMain.Panel2.SuspendLayout();
@@ -165,6 +166,7 @@ namespace TDEngineClient
             this.m_createsuper,
             this.m_createtable,
             this.m_droptable,
+            this.m_refresh,
             this.sp3,
             this.m_export,
             this.m_import,
@@ -671,6 +673,12 @@ namespace TDEngineClient
             // 
             this.bk1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bk1_DoWork);
             // 
+            // m_refresh
+            // 
+            this.m_refresh.Name = "m_refresh";
+            resources.ApplyResources(this.m_refresh, "m_refresh");
+            this.m_refresh.Click += new System.EventHandler(this.m_refresh_Click);
+            // 
             // fmain
             // 
             resources.ApplyResources(this, "$this");
@@ -779,6 +787,7 @@ namespace TDEngineClient
         private System.Windows.Forms.ToolStripMenuItem stableFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sQLFileToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker bk1;
+        private System.Windows.Forms.ToolStripMenuItem m_refresh;
     }
 }
 

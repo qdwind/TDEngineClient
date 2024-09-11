@@ -68,6 +68,7 @@ namespace TDEngineClient
             m_createsuper.Text = lanCode == 0 ? "Create SuperTable" : "新建超级表";
             m_createtable.Text = lanCode == 0 ? "Create Table" : "新建表";
             m_droptable.Text = lanCode == 0 ? "Drop Table" : "删除表";
+            m_refresh.Text = lanCode == 0 ? "Refresh Database" : "刷新数据库";
             m_export.Text = lanCode == 0 ? "Export..." : "导出...";
             m_import.Text = lanCode == 0 ? "Import" : "导入";
             m_import_tables.Text = lanCode == 0 ? "Table Files" : "表";

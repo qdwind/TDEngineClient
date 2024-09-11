@@ -327,7 +327,7 @@ namespace TDEngineClient
                 }
                 else if (node.Tag is DataBaseDto)//数据库
                 {
-                    SetMenu(new List<ToolStripMenuItem> { m_dropdb,m_createsuper,m_createtable, m_point,m_query },new List<ToolStripSeparator> { sp2,sp4});
+                    SetMenu(new List<ToolStripMenuItem> { m_dropdb,m_createsuper,m_createtable, m_point,m_refresh, m_query },new List<ToolStripSeparator> { sp2,sp4});
                 }
                 else if (node.Tag is StableDto)//超级表
                 {
@@ -424,10 +424,10 @@ namespace TDEngineClient
         private void m_impor_tables_Click(object sender, EventArgs e)
         {
             var item = GetNodeItem(treeView1.SelectedNode);
-            var dlg = new OpenFileDialog();
+            var dlg = new FolderBrowserDialog();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                ImportStable(item, dlg.FileName);
+                ImportTable(item, dlg.SelectedPath);
             }
         }
 
@@ -439,10 +439,10 @@ namespace TDEngineClient
         private void m_impor_stable_Click(object sender, EventArgs e)
         {
             var item = GetNodeItem(treeView1.SelectedNode);
-            var dlg = new FolderBrowserDialog();
+            var dlg = new OpenFileDialog();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                ImportTable(item, dlg.SelectedPath);
+                ImportStable(item, dlg.FileName);
             }
         }
 
@@ -657,6 +657,15 @@ namespace TDEngineClient
                 MyConfig.System = opForm.Options;
 
                 FileHelper.SaveSystemConfig(MyConfig.System);//保存到配置文件
+            }
+        }
+
+        private void m_refresh_Click(object sender, EventArgs e)
+        {
+            var node = treeView1.SelectedNode;
+            if (node?.Tag is DataBaseDto)
+            {
+                RefreshDB();
             }
         }
     }

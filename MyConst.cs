@@ -54,6 +54,8 @@ namespace TDEngineClient
             new Tip("between","", TipType.Standard),
             new Tip("contains","", TipType.Standard),
             new Tip("match","", TipType.Standard),
+            new Tip("join","", TipType.Standard),
+            new Tip("->","", TipType.Standard),
 
             new Tip("by","", TipType.Standard,true,false),
             new Tip("case","", TipType.Standard,true,false),

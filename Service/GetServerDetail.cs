@@ -82,5 +82,38 @@ namespace TDEngineClient.Services
             return  account;
         }
 
+        public static Server GetDbDetail(Server account, DataBaseDto db)
+        {
+            if (account.Version == 30)
+            {
+                var tabs = GetTables(new DataBaseDto { Account = account });
+                var stabs = GetStables(new DataBaseDto { Account = account });
+
+                var mystabs = stabs.Where(t => t.db_name == db.Name).ToList();//添加超级表
+                db.Stables.Clear();
+                foreach (var ms in mystabs)
+                {
+                    ms.Tables = tabs.Where(t => t.db_name == db.Name && t.stable_name == ms.stable_name).ToList();//超级表下的子表
+                    db.Stables.Add(ms);
+                }
+                db.SysTables = tabs.Where(t => t.db_name == db.Name && t.type == TableType.SYSTEM_TABLE.ToString()).ToList();//系统表
+                db.Tables = tabs.Where(t => t.db_name == db.Name && t.type == TableType.NORMAL_TABLE.ToString()).ToList();//普通表
+
+            }
+            else
+            {
+                var tabs = MyService.GetTables(db);//所有表
+                var mystabs = MyService.GetStables(db);//添加超级表
+                db.Stables.Clear();
+                foreach (var ms in mystabs)
+                {
+                    ms.Tables = tabs.Where(t => t.db_name == db.Name && t.stable_name == ms.stable_name).ToList();//超级表下的子表
+                    db.Stables.Add(ms);
+                }
+                db.Tables = tabs.Where(t => t.db_name == db.Name && t.stable_name == "").ToList();//普通表
+            }
+
+            return account;
+        }
     }
 }

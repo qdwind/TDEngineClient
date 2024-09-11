@@ -128,8 +128,140 @@
   <metadata name="menuTree.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>455, 14</value>
   </metadata>
+  <data name="m_newsvr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_newsvr.Text" xml:space="preserve">
+    <value>New Server...</value>
+  </data>
+  <data name="m_editsvr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_editsvr.Text" xml:space="preserve">
+    <value>Edit Server</value>
+  </data>
+  <data name="m_deletesvr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_deletesvr.Text" xml:space="preserve">
+    <value>Remove Server</value>
+  </data>
+  <data name="sp1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 6</value>
+  </data>
+  <data name="m_opensvr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_opensvr.Text" xml:space="preserve">
+    <value>Connect Server</value>
+  </data>
+  <data name="m_closesvr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_closesvr.Text" xml:space="preserve">
+    <value>Close Server</value>
+  </data>
+  <data name="m_createdb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_createdb.Text" xml:space="preserve">
+    <value>Create Database</value>
+  </data>
+  <data name="m_dropdb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_dropdb.Text" xml:space="preserve">
+    <value>Drop Database</value>
+  </data>
+  <data name="sp2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 6</value>
+  </data>
+  <data name="m_table.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_table.Text" xml:space="preserve">
+    <value>Show Tables</value>
+  </data>
+  <data name="m_field.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_field.Text" xml:space="preserve">
+    <value>Show Fields</value>
+  </data>
+  <data name="m_point.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_point.Text" xml:space="preserve">
+    <value>Measuring Points</value>
+  </data>
+  <data name="m_createsuper.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_createsuper.Text" xml:space="preserve">
+    <value>Create SuperTable</value>
+  </data>
+  <data name="m_createtable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_createtable.Text" xml:space="preserve">
+    <value>Create Table</value>
+  </data>
+  <data name="m_droptable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_droptable.Text" xml:space="preserve">
+    <value>Drop Table</value>
+  </data>
+  <data name="m_refresh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_refresh.Text" xml:space="preserve">
+    <value>Refresh Database</value>
+  </data>
+  <data name="sp3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 6</value>
+  </data>
+  <data name="m_export.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_export.Text" xml:space="preserve">
+    <value>Export...</value>
+  </data>
+  <data name="m_import_tables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 22</value>
+  </data>
+  <data name="m_import_tables.Text" xml:space="preserve">
+    <value>Table Files</value>
+  </data>
+  <data name="m_import_stable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 22</value>
+  </data>
+  <data name="m_import_stable.Text" xml:space="preserve">
+    <value>Stable File</value>
+  </data>
+  <data name="m_import_sql.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 22</value>
+  </data>
+  <data name="m_import_sql.Text" xml:space="preserve">
+    <value>SQL File</value>
+  </data>
+  <data name="m_import.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_import.Text" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="sp4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 6</value>
+  </data>
+  <data name="m_query.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="m_query.Text" xml:space="preserve">
+    <value>New Query</value>
+  </data>
   <data name="menuTree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 380</value>
+    <value>185, 424</value>
   </data>
   <data name="&gt;&gt;menuTree.Name" xml:space="preserve">
     <value>menuTree</value>
@@ -155,7 +287,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAC+
-        DAAAAk1TRnQBSQFMAgEBCAEAAewBAQHsAQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        DAAAAk1TRnQBSQFMAgEBCAEAAfQBAQH0AQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAATADAAEBAQABCAYAAQwYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -275,6 +407,24 @@
   <data name="&gt;&gt;spMain.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>396, 206</value>
+  </data>
+  <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
   <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
     <value>tabPage1</value>
   </data>
@@ -286,6 +436,24 @@
   </data>
   <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>396, 206</value>
+  </data>
+  <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
     <value>tabPage2</value>
@@ -359,200 +527,56 @@
   <data name="&gt;&gt;spMain.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="m_newsvr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_newsvr.Text" xml:space="preserve">
-    <value>New Server...</value>
-  </data>
-  <data name="m_editsvr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_editsvr.Text" xml:space="preserve">
-    <value>Edit Server</value>
-  </data>
-  <data name="m_deletesvr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_deletesvr.Text" xml:space="preserve">
-    <value>Remove Server</value>
-  </data>
-  <data name="sp1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
-  </data>
-  <data name="m_opensvr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_opensvr.Text" xml:space="preserve">
-    <value>Connect Server</value>
-  </data>
-  <data name="m_closesvr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_closesvr.Text" xml:space="preserve">
-    <value>Close Server</value>
-  </data>
-  <data name="m_createdb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_createdb.Text" xml:space="preserve">
-    <value>Create Database</value>
-  </data>
-  <data name="m_dropdb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_dropdb.Text" xml:space="preserve">
-    <value>Drop Database</value>
-  </data>
-  <data name="sp2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
-  </data>
-  <data name="m_table.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_table.Text" xml:space="preserve">
-    <value>Show Tables</value>
-  </data>
-  <data name="m_field.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_field.Text" xml:space="preserve">
-    <value>Show Fields</value>
-  </data>
-  <data name="m_point.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_point.Text" xml:space="preserve">
-    <value>Measuring Points</value>
-  </data>
-  <data name="m_createsuper.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_createsuper.Text" xml:space="preserve">
-    <value>Create SuperTable</value>
-  </data>
-  <data name="m_createtable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_createtable.Text" xml:space="preserve">
-    <value>Create Table</value>
-  </data>
-  <data name="m_droptable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_droptable.Text" xml:space="preserve">
-    <value>Drop Table</value>
-  </data>
-  <data name="sp3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
-  </data>
-  <data name="m_export.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_export.Text" xml:space="preserve">
-    <value>Export...</value>
-  </data>
-  <data name="m_import.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_import.Text" xml:space="preserve">
-    <value>Import</value>
-  </data>
-  <data name="m_import_tables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="m_import_tables.Text" xml:space="preserve">
-    <value>Table Files</value>
-  </data>
-  <data name="m_import_stable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="m_import_stable.Text" xml:space="preserve">
-    <value>Stable File</value>
-  </data>
-  <data name="m_import_sql.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="m_import_sql.Text" xml:space="preserve">
-    <value>SQL File</value>
-  </data>
-  <data name="sp4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
-  </data>
-  <data name="m_query.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_query.Text" xml:space="preserve">
-    <value>New Query</value>
-  </data>
-  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>396, 206</value>
-  </data>
-  <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
-  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
-  <data name="&gt;&gt;tabPage1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPage2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>396, 206</value>
-  </data>
-  <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>13, 14</value>
   </metadata>
+  <data name="newConnectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="newConnectionToolStripMenuItem.Text" xml:space="preserve">
+    <value>New Connection</value>
+  </data>
+  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 6</value>
+  </data>
+  <data name="closeServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="closeServerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Close Server</value>
+  </data>
+  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exit</value>
+  </data>
   <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 21</value>
   </data>
   <data name="fileToolStripMenuItem.Text" xml:space="preserve">
     <value>File</value>
+  </data>
+  <data name="copyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="copyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="pasteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="pasteToolStripMenuItem.Text" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 6</value>
+  </data>
+  <data name="selectAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="selectAllToolStripMenuItem.Text" xml:space="preserve">
+    <value>Select All</value>
   </data>
   <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 21</value>
@@ -560,11 +584,23 @@
   <data name="editToolStripMenuItem.Text" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="explorerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="explorerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Explorer</value>
+  </data>
   <data name="viewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 21</value>
   </data>
   <data name="viewToolStripMenuItem.Text" xml:space="preserve">
     <value>View</value>
+  </data>
+  <data name="newQueryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 22</value>
+  </data>
+  <data name="newQueryToolStripMenuItem.Text" xml:space="preserve">
+    <value>New Query</value>
   </data>
   <data name="windowToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 21</value>
@@ -573,22 +609,40 @@
     <value>Window</value>
   </data>
   <data name="exportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>131, 22</value>
   </data>
   <data name="exportToolStripMenuItem.Text" xml:space="preserve">
     <value>Export...</value>
   </data>
+  <data name="tableFilesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 22</value>
+  </data>
+  <data name="tableFilesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Table Files</value>
+  </data>
+  <data name="stableFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 22</value>
+  </data>
+  <data name="stableFileToolStripMenuItem.Text" xml:space="preserve">
+    <value>Stable File</value>
+  </data>
+  <data name="sQLFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 22</value>
+  </data>
+  <data name="sQLFileToolStripMenuItem.Text" xml:space="preserve">
+    <value>SQL File</value>
+  </data>
   <data name="importToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>131, 22</value>
   </data>
   <data name="importToolStripMenuItem.Text" xml:space="preserve">
     <value>Import</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>128, 6</value>
   </data>
   <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>131, 22</value>
   </data>
   <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Options...</value>
@@ -598,6 +652,30 @@
   </data>
   <data name="toolToolStripMenuItem.Text" xml:space="preserve">
     <value>Tool</value>
+  </data>
+  <data name="m_en.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 22</value>
+  </data>
+  <data name="m_en.Text" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="m_cn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 22</value>
+  </data>
+  <data name="m_cn.Text" xml:space="preserve">
+    <value>中文</value>
+  </data>
+  <data name="m_lan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="m_lan.Text" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="m_about.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="m_about.Text" xml:space="preserve">
+    <value>About</value>
   </data>
   <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 21</value>
@@ -632,107 +710,44 @@
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="newConnectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
-  </data>
-  <data name="newConnectionToolStripMenuItem.Text" xml:space="preserve">
-    <value>New Connection</value>
-  </data>
-  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 6</value>
-  </data>
-  <data name="closeServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
-  </data>
-  <data name="closeServerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Close Server</value>
-  </data>
-  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
-  </data>
-  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
-    <value>Exit</value>
-  </data>
-  <data name="copyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 22</value>
-  </data>
-  <data name="copyToolStripMenuItem.Text" xml:space="preserve">
-    <value>Copy</value>
-  </data>
-  <data name="pasteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 22</value>
-  </data>
-  <data name="pasteToolStripMenuItem.Text" xml:space="preserve">
-    <value>Paste</value>
-  </data>
-  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 6</value>
-  </data>
-  <data name="selectAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 22</value>
-  </data>
-  <data name="selectAllToolStripMenuItem.Text" xml:space="preserve">
-    <value>Select All</value>
-  </data>
-  <data name="explorerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
-  </data>
-  <data name="explorerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Explorer</value>
-  </data>
-  <data name="newQueryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
-  </data>
-  <data name="newQueryToolStripMenuItem.Text" xml:space="preserve">
-    <value>New Query</value>
-  </data>
-  <data name="tableFilesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="tableFilesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Table Files</value>
-  </data>
-  <data name="stableFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="stableFileToolStripMenuItem.Text" xml:space="preserve">
-    <value>Stable File</value>
-  </data>
-  <data name="sQLFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="sQLFileToolStripMenuItem.Text" xml:space="preserve">
-    <value>SQL File</value>
-  </data>
-  <data name="m_lan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 22</value>
-  </data>
-  <data name="m_lan.Text" xml:space="preserve">
-    <value>Language</value>
-  </data>
-  <data name="m_en.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 22</value>
-  </data>
-  <data name="m_en.Text" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="m_cn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 22</value>
-  </data>
-  <data name="m_cn.Text" xml:space="preserve">
-    <value>中文</value>
-  </data>
-  <data name="m_about.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 22</value>
-  </data>
-  <data name="m_about.Text" xml:space="preserve">
-    <value>About</value>
-  </data>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>127, 14</value>
   </metadata>
   <data name="statusStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
+  </data>
+  <data name="ts2.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ts2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 486</value>
+  </data>
+  <data name="ts2.Text" xml:space="preserve">
+    <value>info</value>
+  </data>
+  <data name="ts2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="ts3.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ts3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>5987, 486</value>
+  </data>
+  <data name="ts3.Text" xml:space="preserve">
+    <value>page</value>
+  </data>
+  <data name="ts3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="ts1.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ts1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 486</value>
+  </data>
+  <data name="ts1.Text" xml:space="preserve">
+    <value>ok</value>
   </data>
   <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>70, 500</value>
@@ -741,7 +756,7 @@
     <value>1, 0, 10, 0</value>
   </data>
   <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6235, 491</value>
+    <value>6648, 491</value>
   </data>
   <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -760,39 +775,6 @@
   </data>
   <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="ts2.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="ts2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 486</value>
-  </data>
-  <data name="ts2.Text" xml:space="preserve">
-    <value>info</value>
-  </data>
-  <data name="ts2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="ts3.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="ts3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>5574, 486</value>
-  </data>
-  <data name="ts3.Text" xml:space="preserve">
-    <value>page</value>
-  </data>
-  <data name="ts3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="ts1.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="ts1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 486</value>
-  </data>
-  <data name="ts1.Text" xml:space="preserve">
-    <value>ok</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -827,15 +809,6 @@
   <metadata name="menuText.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>563, 15</value>
   </metadata>
-  <data name="menuText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 198</value>
-  </data>
-  <data name="&gt;&gt;menuText.Name" xml:space="preserve">
-    <value>menuText</value>
-  </data>
-  <data name="&gt;&gt;menuText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="m_run.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 22</value>
   </data>
@@ -892,6 +865,15 @@
   </data>
   <data name="m_paste.Text" xml:space="preserve">
     <value>Paste</value>
+  </data>
+  <data name="menuText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 198</value>
+  </data>
+  <data name="&gt;&gt;menuText.Name" xml:space="preserve">
+    <value>menuText</value>
+  </data>
+  <data name="&gt;&gt;menuText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="m_imports.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 22</value>
@@ -1321,6 +1303,12 @@
   </data>
   <data name="&gt;&gt;bk1.Type" xml:space="preserve">
     <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_refresh.Name" xml:space="preserve">
+    <value>m_refresh</value>
+  </data>
+  <data name="&gt;&gt;m_refresh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>fmain</value>

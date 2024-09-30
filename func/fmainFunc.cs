@@ -622,82 +622,6 @@ namespace TDEngineClient
             }
         }
 
-        private void ComputingMesuringPoints(Server account)
-        {
-            string sql = "";
-
-            //StableDto stable = null;
-            //DataBaseDto db = null;
-
-            var tab = new TabPage($"{account.IP}{CAPTION_POINT }");
-            tabControl1.TabPages.Add(tab);
-            tabControl1.SelectedTab = tab;
-            tab.AutoScroll = true;
-            var dgv = new DataGridView();
-            dgv.Dock = DockStyle.Fill;
-            //dgv.Dock = DockStyle.None;
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            //dgv.ReadOnly = true;
-            tab.Controls.Add(dgv);
-            dgv.Columns.Add("Database", "Database");
-            dgv.Columns.Add("Tables", "Tables");
-            dgv.Columns.Add("Fields", "Fields");
-            dgv.Columns.Add("Points", "Points");
-
-            if (account.Version == 30)
-            {
-                //TODO
-            }
-            else
-            {
-                sql = $"show databases";
-                var result1 = MyService.ExcuteSql(account, sql);
-                if (result1 != null)
-                {
-                    int totalTb = 0;
-                    int totalFd = 0;
-                    int totalPt = 0;
-
-                    foreach (var rec in result1.RecordList)
-                    {
-                        var row = new DataGridViewRow();
-                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = rec[0] }); //库名
-                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = rec[2] }); //表个数
-                        totalTb += int.Parse(rec[2]);
-
-                        var fieldNum = "0";
-                        sql = $"show {rec[0]}.stables";
-                        var result2 = MyService.ExcuteSql(account, sql);
-                        if (result2 == null || result2.RecordList.Count == 0) continue;
-
-                        fieldNum = result2.RecordList[0][2];
-                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = fieldNum }); //字段个数
-                        totalFd += int.Parse(fieldNum);
-
-                        if (int.TryParse(rec[2], out int x) && int.TryParse(fieldNum, out int y))
-                        {
-                            var pt = x * (y - 1);
-                            row.Cells.Add(new DataGridViewTextBoxCell() { Value = pt }); //测点个数(不含ts)
-                            totalPt += pt;
-                        }
-
-                        dgv.Rows.Add(row);
-                    }
-                    //统计行
-                    var row1 = new DataGridViewRow();
-                    row1.Cells.Add(new DataGridViewTextBoxCell() { Value = "[Total]" });
-                    row1.Cells.Add(new DataGridViewTextBoxCell() { Value = totalTb });
-                    row1.Cells.Add(new DataGridViewTextBoxCell() { Value = totalFd });
-                    row1.Cells.Add(new DataGridViewTextBoxCell() { Value = totalPt });
-                    dgv.Rows.Add(row1);
-                }
-                ts3.Text = result1.RecordList.Count.ToString() + " Records";
-            }
-
-        }
-
-
 
         private NodeItem GetNodeItem(TreeNode node)
         {
@@ -869,7 +793,6 @@ namespace TDEngineClient
             m_dropdb.Visible = false;
             m_table.Visible = false;
             m_field.Visible = false;
-            m_point.Visible = false;
             m_createsuper.Visible = false;
             m_createtable.Visible = false;
             m_droptable.Visible = false;

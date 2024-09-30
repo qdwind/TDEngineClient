@@ -29,7 +29,6 @@ namespace TDEngineClient
         private void Form1_Load(object sender, EventArgs e)
         {
             InitailForm();
-            bk1.RunWorkerAsync();
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo(MyConfig.System.Language);//多语言设置
             SetLanguage(MyConfig.System.Language);//设置语言
         }
@@ -103,6 +102,7 @@ namespace TDEngineClient
 
         private void TextBoxTextChanged(object sender, EventArgs e)
         {
+            if (DisableTextChanged) return;
             RefreshColors(sender as RichBox); //
         }
 
@@ -250,29 +250,6 @@ namespace TDEngineClient
         }
 
 
-
-        private void m_point_Click(object sender, EventArgs e)
-        {
-            Server account = null;
-            var node = treeView1.SelectedNode;
-            if (node.Tag is Server)
-            {
-                account = (node.Tag as Server);
-            }
-            else if (node.Tag is StableDto)
-            {
-                if (node.Parent != null && node.Parent.Tag is DataBaseDto)
-                {
-                    var svrNode = node.Parent.Parent;
-                    if (svrNode != null && svrNode.Tag is Server)
-                        account = (svrNode.Tag as Server);
-                }
-            }
-            if (account == null) return;
-
-            ComputingMesuringPoints(account);
-        }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             var mylist = new List<TQueryBox>();
@@ -327,7 +304,7 @@ namespace TDEngineClient
                 }
                 else if (node.Tag is DataBaseDto)//数据库
                 {
-                    SetMenu(new List<ToolStripMenuItem> { m_dropdb,m_createsuper,m_createtable, m_point,m_refresh, m_query },new List<ToolStripSeparator> { sp2,sp4});
+                    SetMenu(new List<ToolStripMenuItem> { m_dropdb,m_createsuper,m_createtable, m_refresh, m_query },new List<ToolStripSeparator> { sp2,sp4});
                 }
                 else if (node.Tag is StableDto)//超级表
                 {
@@ -642,11 +619,6 @@ namespace TDEngineClient
                 tbox.SelectedText = text;
             }
             RefreshColors(tbox);//刷新字体显示
-        }
-
-        private void bk1_DoWork(object sender, DoWorkEventArgs e)
-        {
-
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)

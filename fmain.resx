@@ -188,12 +188,6 @@
   <data name="m_field.Text" xml:space="preserve">
     <value>Show Fields</value>
   </data>
-  <data name="m_point.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="m_point.Text" xml:space="preserve">
-    <value>Measuring Points</value>
-  </data>
   <data name="m_createsuper.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 22</value>
   </data>
@@ -261,7 +255,7 @@
     <value>New Query</value>
   </data>
   <data name="menuTree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 424</value>
+    <value>185, 402</value>
   </data>
   <data name="&gt;&gt;menuTree.Name" xml:space="preserve">
     <value>menuTree</value>
@@ -287,7 +281,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAC+
-        DAAAAk1TRnQBSQFMAgEBCAEAAfQBAQH0AQEBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        DAAAAk1TRnQBSQFMAgEBCAEAAQQBAgEEAQIBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAATADAAEBAQABCAYAAQwYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -531,22 +525,22 @@
     <value>13, 14</value>
   </metadata>
   <data name="newConnectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="newConnectionToolStripMenuItem.Text" xml:space="preserve">
     <value>New Connection</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>168, 6</value>
   </data>
   <data name="closeServerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="closeServerToolStripMenuItem.Text" xml:space="preserve">
     <value>Close Server</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
@@ -558,22 +552,22 @@
     <value>File</value>
   </data>
   <data name="copyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>128, 22</value>
   </data>
   <data name="copyToolStripMenuItem.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="pasteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>128, 22</value>
   </data>
   <data name="pasteToolStripMenuItem.Text" xml:space="preserve">
     <value>Paste</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>125, 6</value>
   </data>
   <data name="selectAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>128, 22</value>
   </data>
   <data name="selectAllToolStripMenuItem.Text" xml:space="preserve">
     <value>Select All</value>
@@ -585,7 +579,7 @@
     <value>Edit</value>
   </data>
   <data name="explorerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="explorerToolStripMenuItem.Text" xml:space="preserve">
     <value>Explorer</value>
@@ -732,7 +726,7 @@
     <value>False</value>
   </data>
   <data name="ts3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>5987, 486</value>
+    <value>6019, 486</value>
   </data>
   <data name="ts3.Text" xml:space="preserve">
     <value>page</value>
@@ -756,7 +750,7 @@
     <value>1, 0, 10, 0</value>
   </data>
   <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6648, 491</value>
+    <value>6680, 491</value>
   </data>
   <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -881,9 +875,6 @@
   <data name="m_imports.Text" xml:space="preserve">
     <value>Import Stable</value>
   </data>
-  <metadata name="bk1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>673, 15</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -968,12 +959,6 @@
   <data name="&gt;&gt;m_field.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;m_point.Name" xml:space="preserve">
-    <value>m_point</value>
-  </data>
-  <data name="&gt;&gt;m_point.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;m_createsuper.Name" xml:space="preserve">
     <value>m_createsuper</value>
   </data>
@@ -990,6 +975,12 @@
     <value>m_droptable</value>
   </data>
   <data name="&gt;&gt;m_droptable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;m_refresh.Name" xml:space="preserve">
+    <value>m_refresh</value>
+  </data>
+  <data name="&gt;&gt;m_refresh.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;sp3.Name" xml:space="preserve">
@@ -1296,18 +1287,6 @@
     <value>m_imports</value>
   </data>
   <data name="&gt;&gt;m_imports.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bk1.Name" xml:space="preserve">
-    <value>bk1</value>
-  </data>
-  <data name="&gt;&gt;bk1.Type" xml:space="preserve">
-    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;m_refresh.Name" xml:space="preserve">
-    <value>m_refresh</value>
-  </data>
-  <data name="&gt;&gt;m_refresh.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

@@ -101,6 +101,7 @@ namespace TDEngineClient.Helper
 
                 byte[] buffer = encoding.GetBytes(sql);
                 request.ContentLength = buffer.Length;
+                //request.MaximumResponseHeadersLength = 1024*1024;
                 request.GetRequestStream().Write(buffer, 0, buffer.Length);
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))

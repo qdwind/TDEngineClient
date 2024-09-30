@@ -45,10 +45,10 @@ namespace TDEngineClient
             this.sp2 = new System.Windows.Forms.ToolStripSeparator();
             this.m_table = new System.Windows.Forms.ToolStripMenuItem();
             this.m_field = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_point = new System.Windows.Forms.ToolStripMenuItem();
             this.m_createsuper = new System.Windows.Forms.ToolStripMenuItem();
             this.m_createtable = new System.Windows.Forms.ToolStripMenuItem();
             this.m_droptable = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_refresh = new System.Windows.Forms.ToolStripMenuItem();
             this.sp3 = new System.Windows.Forms.ToolStripSeparator();
             this.m_export = new System.Windows.Forms.ToolStripMenuItem();
             this.m_import = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,8 +108,6 @@ namespace TDEngineClient
             this.m_copy = new System.Windows.Forms.ToolStripMenuItem();
             this.m_paste = new System.Windows.Forms.ToolStripMenuItem();
             this.m_imports = new System.Windows.Forms.ToolStripMenuItem();
-            this.bk1 = new System.ComponentModel.BackgroundWorker();
-            this.m_refresh = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.spMain)).BeginInit();
             this.spMain.Panel1.SuspendLayout();
             this.spMain.Panel2.SuspendLayout();
@@ -162,7 +160,6 @@ namespace TDEngineClient
             this.sp2,
             this.m_table,
             this.m_field,
-            this.m_point,
             this.m_createsuper,
             this.m_createtable,
             this.m_droptable,
@@ -241,12 +238,6 @@ namespace TDEngineClient
             resources.ApplyResources(this.m_field, "m_field");
             this.m_field.Click += new System.EventHandler(this.m_field_Click);
             // 
-            // m_point
-            // 
-            this.m_point.Name = "m_point";
-            resources.ApplyResources(this.m_point, "m_point");
-            this.m_point.Click += new System.EventHandler(this.m_point_Click);
-            // 
             // m_createsuper
             // 
             this.m_createsuper.Name = "m_createsuper";
@@ -267,6 +258,12 @@ namespace TDEngineClient
             resources.ApplyResources(this.m_droptable, "m_droptable");
             this.m_droptable.Tag = "6";
             this.m_droptable.Click += new System.EventHandler(this.m_command_Click);
+            // 
+            // m_refresh
+            // 
+            this.m_refresh.Name = "m_refresh";
+            resources.ApplyResources(this.m_refresh, "m_refresh");
+            this.m_refresh.Click += new System.EventHandler(this.m_refresh_Click);
             // 
             // sp3
             // 
@@ -669,16 +666,6 @@ namespace TDEngineClient
             this.m_imports.Name = "m_imports";
             resources.ApplyResources(this.m_imports, "m_imports");
             // 
-            // bk1
-            // 
-            this.bk1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bk1_DoWork);
-            // 
-            // m_refresh
-            // 
-            this.m_refresh.Name = "m_refresh";
-            resources.ApplyResources(this.m_refresh, "m_refresh");
-            this.m_refresh.Click += new System.EventHandler(this.m_refresh_Click);
-            // 
             // fmain
             // 
             resources.ApplyResources(this, "$this");
@@ -729,7 +716,6 @@ namespace TDEngineClient
         private System.Windows.Forms.ToolStripMenuItem m_record;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ToolStripMenuItem m_run;
-        private System.Windows.Forms.ToolStripMenuItem m_point;
         private System.Windows.Forms.ToolStripSeparator sp2;
         private System.Windows.Forms.ToolStripMenuItem m_createdb;
         private System.Windows.Forms.ToolStripMenuItem m_dropdb;
@@ -786,7 +772,6 @@ namespace TDEngineClient
         private System.Windows.Forms.ToolStripMenuItem tableFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stableFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sQLFileToolStripMenuItem;
-        private System.ComponentModel.BackgroundWorker bk1;
         private System.Windows.Forms.ToolStripMenuItem m_refresh;
     }
 }

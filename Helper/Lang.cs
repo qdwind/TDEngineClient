@@ -64,7 +64,6 @@ namespace TDEngineClient
             m_dropdb.Text = lanCode == 0 ? "Drop Database" : "删除数据库";
             m_table.Text = lanCode == 0 ? "Show Tables" : "显示表";
             m_field.Text = lanCode == 0 ? "Show Fields" : "显示字段";
-            m_point.Text = lanCode == 0 ? "Measuring Points" : "测点";
             m_createsuper.Text = lanCode == 0 ? "Create SuperTable" : "新建超级表";
             m_createtable.Text = lanCode == 0 ? "Create Table" : "新建表";
             m_droptable.Text = lanCode == 0 ? "Drop Table" : "删除表";

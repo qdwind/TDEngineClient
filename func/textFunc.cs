@@ -22,7 +22,7 @@ namespace TDEngineClient
         private Color COLOR_FUNCTION_KEY = Color.Green;
         private Color COLOR_STRING = Color.IndianRed;
 
-
+        private bool DisableTextChanged = false;//禁用触发文本改变事件
 
         /// <summary>
         /// 获取用户输入的词
@@ -237,6 +237,7 @@ namespace TDEngineClient
         private void RefreshColors(RichBox textBox)
         {
             if (!MyConfig.System.ColoredKey) return;
+            DisableTextChanged = true;//防止文本改变时触发事件
             textBox.BeginUpdate();
             int index = textBox.SelectionStart;    //记录修改的位置
             int len = textBox.SelectionLength;//记录原来的选择
@@ -250,6 +251,7 @@ namespace TDEngineClient
             textBox.SelectionColor = Color.Black;//还原颜色
 
             textBox.EndUpdate();
+            DisableTextChanged = false;
         }
 
         /// <summary>
